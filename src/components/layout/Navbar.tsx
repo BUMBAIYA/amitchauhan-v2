@@ -18,22 +18,23 @@ type NavbarProps = {
 export default function Navbar(props: NavbarProps) {
   const pathName = usePathname();
   return (
-    <div className="flex gap-2 rounded-full px-2 shadow-md ring-1 ring-zinc-200 backdrop-blur-sm">
+    <div className="flex gap-2 rounded-full px-2 py-2 shadow-md ring-1 ring-zinc-200 backdrop-blur-md">
       <ul className="hidden gap-2 text-sm font-medium sm:flex">
         {props.pages.map((_link, index) => {
           return (
-            <Link
-              key={index}
-              href={_link.href}
-              className={classNames(
-                pathName === _link.href
-                  ? "bg-tera-500 text-white hover:scale-[1.05] hover:bg-tera-500/80"
-                  : "hover:scale-[1.15] hover:text-tera-500",
-                "m-3 rounded-full px-3 py-2 transition-transform duration-100",
-              )}
-            >
-              {_link.name}
-            </Link>
+            <li key={index} className="my-3">
+              <Link
+                href={_link.href}
+                className={classNames(
+                  pathName === _link.href
+                    ? "bg-tera-500 text-white hover:scale-[1.05] hover:bg-tera-500/80"
+                    : "hover:scale-[1.15] hover:text-tera-500",
+                  "mx-3 rounded-full px-3 py-2 transition-transform duration-100",
+                )}
+              >
+                {_link.name}
+              </Link>
+            </li>
           );
         })}
       </ul>
