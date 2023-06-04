@@ -158,7 +158,7 @@ export function cursorTrail({ ref }: { ref: RefObject<HTMLCanvasElement> }) {
   }
 
   function resizeCanvas() {
-    ctx.canvas.width = window.innerWidth - 12;
+    ctx.canvas.width = window.innerWidth - 20;
     ctx.canvas.height = window.innerHeight;
   }
 
