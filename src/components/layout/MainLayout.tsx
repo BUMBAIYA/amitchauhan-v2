@@ -1,9 +1,11 @@
 import { ReactNode } from "react";
-import { Inter } from "next/font/google";
+import { Open_Sans } from "next/font/google";
 import { classNames } from "../utility/classNames";
-import Link from "next/link";
+import Navbar, { LINKS } from "./Navbar";
 
-const inter = Inter({ subsets: ["latin"] });
+const openSans = Open_Sans({
+  subsets: ["latin"],
+});
 
 type MainLayoutProps = {
   children: ReactNode;
@@ -12,16 +14,20 @@ type MainLayoutProps = {
 export default function MainLayout(props: MainLayoutProps) {
   return (
     <>
-      <header className="bg-teal sticky top-0 px-8 py-4">
-        <div className="flex gap-6">
-          <Link href="/">Home</Link>
-          <Link href="/demo">Demo</Link>
-        </div>
-      </header>
-      <main className={classNames("min-h-screen", inter.className)}>
-        {props.children}
-      </main>
-      <footer className="bg-teal-600 px-4 py-2 text-zinc-100">
+      <div className={classNames("min-h-screen", openSans.className)}>
+        <header className="sticky top-0 flex items-center justify-end px-8 py-8">
+          <Navbar pages={LINKS} />
+        </header>
+        <main
+          className={classNames(
+            "px-6 py-16 sm:p-8 md:px-16 md:py-20",
+            openSans.className,
+          )}
+        >
+          {props.children}
+        </main>
+      </div>
+      <footer className="bg-tera-500 px-4 py-2 text-zinc-100">
         Amit Chauhan @2023
       </footer>
     </>

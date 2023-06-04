@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --cursor-trail-color: hsla(183, 64%, 27%, 0.4);
+}

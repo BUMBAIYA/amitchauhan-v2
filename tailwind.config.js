@@ -5,6 +5,14 @@ module.exports = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  theme: {},
+  theme: {
+    extend: {
+      colors: {
+        tera: {
+          500: "#156064",
+        },
+      },
+    },
+  },
   plugins: [],
 };
