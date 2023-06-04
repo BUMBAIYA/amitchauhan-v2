@@ -15,7 +15,10 @@ export function cursorTrail({ ref }: { ref: RefObject<HTMLCanvasElement> }) {
     y: 0,
   };
 
+  let cursorYOffset = 0;
+
   let running = true;
+
   class NewNode {
     x: number;
     y: number;
@@ -135,16 +138,16 @@ export function cursorTrail({ ref }: { ref: RefObject<HTMLCanvasElement> }) {
     function move(event: MouseEvent | TouchEvent) {
       !(event instanceof MouseEvent)
         ? ((cursorPosition.x = event.touches[0].pageX),
-          (cursorPosition.y = event.touches[0].pageY))
+          (cursorPosition.y = event.touches[0].pageY + cursorYOffset))
         : ((cursorPosition.x = event.clientX),
-          (cursorPosition.y = event.clientY));
+          (cursorPosition.y = event.clientY + cursorYOffset));
       event.preventDefault();
     }
 
     function createLine(event: TouchEvent) {
       event.touches.length === 1 &&
         ((cursorPosition.x = event.touches[0].pageX),
-        (cursorPosition.y = event.touches[0].pageY));
+        (cursorPosition.y = event.touches[0].pageY + cursorYOffset));
     }
 
     document.removeEventListener("mousemove", onMouseMove);
@@ -162,11 +165,20 @@ export function cursorTrail({ ref }: { ref: RefObject<HTMLCanvasElement> }) {
     ctx.canvas.height = window.innerHeight;
   }
 
+  function trackYScroll() {
+    let yOffet =
+      window.pageYOffset ||
+      (document.documentElement || document.body.parentNode || document.body)
+        .scrollTop;
+    cursorYOffset = Math.floor(yOffet);
+  }
+
   function renderTrailCursor() {
     document.addEventListener("mousemove", onMouseMove);
     document.addEventListener("touchstart", onMouseMove);
     document.body.addEventListener("orientationchange", resizeCanvas);
     window.addEventListener("resize", resizeCanvas);
+    window.addEventListener("scroll", trackYScroll);
     window.addEventListener("focus", () => {
       if (!running) {
         running = true;
