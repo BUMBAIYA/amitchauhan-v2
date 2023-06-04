@@ -1,0 +1,7 @@
+yarn.lock
+package-lock.json
+package.json
+node_modules
+.next
+.vscode
+public
