@@ -17,7 +17,7 @@ export default function Home() {
       />
       <canvas
         ref={refCanvas}
-        className="pointer-events-none absolute inset-0"
+        className="pointer-events-none absolute inset-0 -z-10"
       ></canvas>
       <div className="mx-auto max-w-5xl">
         <div className="max-w-2xl">
