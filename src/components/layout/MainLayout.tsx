@@ -2,6 +2,8 @@ import { ReactNode } from "react";
 import { Open_Sans } from "next/font/google";
 import { classNames } from "../utility/classNames";
 import Navbar, { LINKS } from "./Navbar";
+import Link from "next/link";
+import Image from "next/image";
 
 const openSans = Open_Sans({
   subsets: ["latin"],
@@ -15,12 +17,10 @@ export default function MainLayout(props: MainLayoutProps) {
   return (
     <>
       <div className={classNames("min-h-screen", openSans.className)}>
-        <header className="sticky top-0 flex items-center justify-end px-8 py-8">
-          <Navbar pages={LINKS} />
-        </header>
+        <Navbar pages={LINKS} />
         <main
           className={classNames(
-            "px-6 py-16 sm:p-8 md:px-16 md:py-20",
+            "px-6 pt-20 sm:px-8 sm:py-24 md:px-16",
             openSans.className,
           )}
         >
