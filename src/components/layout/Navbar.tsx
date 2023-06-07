@@ -1,6 +1,7 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { classNames } from "../utility/classNames";
+import { AnimatedLogo } from "../animation/AnimatedLogo";
 
 type tabLink = { name: string; href: string };
 
@@ -25,14 +26,9 @@ export default function Navbar(props: NavbarProps) {
           className="flex items-center justify-center"
           aria-label="Return to home page"
         >
-          <svg
-            viewBox="0 0 10 10"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-10 fill-teal-600 md:w-12"
-          >
-            <path d="M3.78711 3.17969L5 0.841797L9.74609 10H7.22656L3.78711 3.17969ZM4.6543 6.29688L2.77344 10H0.253906L3.42969 3.87109L4.6543 6.29688Z" />
-          </svg>
+          <div className="h-12 w-12 sm:h-16 sm:w-16">
+            <AnimatedLogo />
+          </div>
         </Link>
         <div className="flex gap-2 rounded-full px-2 py-2 shadow-md ring-1 ring-zinc-200 backdrop-blur-md">
           <ul className="hidden gap-2 text-sm font-medium md:flex">
