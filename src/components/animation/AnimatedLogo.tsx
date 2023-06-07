@@ -3,12 +3,10 @@ import { AnimatePresence, Variants, motion } from "framer-motion";
 export function AnimatedLogo() {
   const iconVariant: Variants = {
     hidden: {
-      opacity: 0,
       pathLength: 0,
       fill: "rgba(0, 0, 0, 0)",
     },
     visible: {
-      opacity: 1,
       pathLength: 1,
       fill: "#14b8a6",
     },
