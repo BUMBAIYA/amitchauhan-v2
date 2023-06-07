@@ -116,8 +116,11 @@ export function cursorTrail({ ref }: { ref: RefObject<HTMLCanvasElement> }) {
       ctx.strokeStyle = getColor();
       ctx.lineWidth = 1;
       for (let x: Line, t = 0; t < AnimationFeature.trails; t++) {
-        (x = newLines[t]).update();
-        x.draw();
+        if (newLines[t] !== undefined) {
+          x = newLines[t];
+          x.update();
+          x.draw();
+        }
       }
       window.requestAnimationFrame(renderAnimation);
     }
