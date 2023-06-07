@@ -2,10 +2,8 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { classNames } from "../utility/classNames";
 import { AnimatedLogo } from "../animation/AnimatedLogo";
-import MobileNavbar from "./MobileNavbar";
-import { AnimatePresence } from "framer-motion";
 
-export type tabLink = { name: string; href: string };
+type tabLink = { name: string; href: string };
 
 export const LINKS: tabLink[] = [
   { name: "Home", href: "/" },
@@ -32,8 +30,8 @@ export default function Navbar(props: NavbarProps) {
             <AnimatedLogo />
           </div>
         </Link>
-        <div className="hidden gap-2 rounded-full px-2 py-2 shadow-md ring-1 ring-zinc-200 backdrop-blur-md md:flex">
-          <ul className="flex gap-2 text-sm font-medium">
+        <div className="flex gap-2 rounded-full px-2 py-2 shadow-md ring-1 ring-zinc-200 backdrop-blur-md">
+          <ul className="hidden gap-2 text-sm font-medium md:flex">
             {props.pages.map((_link, index) => {
               return (
                 <li
@@ -55,10 +53,23 @@ export default function Navbar(props: NavbarProps) {
               );
             })}
           </ul>
+          <button className="mx-3 flex items-center gap-1 py-1 font-semibold md:hidden">
+            Menu
+            <svg
+              stroke="currentColor"
+              fill="currentColor"
+              strokeWidth="0"
+              viewBox="0 0 24 24"
+              height="100%"
+              width="100%"
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-5"
+            >
+              <path fill="none" d="M0 0h24v24H0V0z"></path>
+              <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"></path>
+            </svg>
+          </button>
         </div>
-        <AnimatePresence>
-          <MobileNavbar />
-        </AnimatePresence>
       </div>
     </header>
   );
