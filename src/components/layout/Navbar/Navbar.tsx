@@ -32,7 +32,7 @@ export default function Navbar(props: Navbar) {
   const pathName = usePathname();
   return (
     <header className="sticky top-0 px-6 py-8 sm:px-8 md:px-16">
-      <div className="mx-auto flex max-w-5xl justify-between">
+      <div className="mx-auto flex max-w-5xl items-center justify-between">
         <Link
           href="/"
           className="flex items-center justify-center"
@@ -79,16 +79,14 @@ export default function Navbar(props: Navbar) {
             })}
           </ul>
         </nav>
-        <div className="flex h-12 w-12 items-center justify-center rounded-full p-3 shadow-md ring-1 ring-zinc-200 backdrop-blur-md md:hidden">
-          <AnimatePresence>
-            <MenuLogo open={isModalOpen} toggle={toggleModal} />
-          </AnimatePresence>
-        </div>
+        <AnimatePresence>
+          <MenuLogo open={isModalOpen} toggle={toggleModal} />
+        </AnimatePresence>
       </div>
       <motion.div
         variants={modalVariants}
         animate={isModalOpen ? "open" : "close"}
-        className="fixed left-1/2 top-96 z-50 flex min-w-[90vw] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-between rounded-xl bg-tera-500/90 py-16 backdrop-blur-md sm:min-w-[70vw] sm:py-20 md:hidden"
+        className="fixed left-1/2 top-96 z-50 flex min-w-[90vw] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-between rounded-xl bg-tera-500 py-16 backdrop-blur-md sm:min-w-[70vw] sm:py-20 md:hidden"
       >
         <nav>
           <ul className="flex flex-col gap-4 text-center">
@@ -99,7 +97,7 @@ export default function Navbar(props: Navbar) {
                   <span
                     className={classNames(
                       pathName === link.href ? "w-full" : "w-0",
-                      "absolute -bottom-1 left-0 h-1 bg-white transition-[width] duration-200 group-hover:w-full",
+                      "absolute -bottom-1 left-0 h-1 bg-white transition-[width] duration-300 group-hover:w-full",
                     )}
                   ></span>
                 </Link>
