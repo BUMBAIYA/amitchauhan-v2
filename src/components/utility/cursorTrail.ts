@@ -188,7 +188,7 @@ export function cursorTrail(props: CursorTrail) {
   function renderTrailCursor() {
     document.addEventListener("mousemove", onMouseMove);
     document.addEventListener("touchstart", onMouseMove);
-    document.body.addEventListener("orientationchange", resizeCanvas);
+    window.addEventListener("orientationchange", resizeCanvas);
     window.addEventListener("resize", resizeCanvas);
     window.addEventListener("scroll", trackYScroll);
     window.addEventListener("focus", startAnimation);
@@ -202,7 +202,7 @@ export function cursorTrail(props: CursorTrail) {
     document.removeEventListener("touchstart", createLine);
     document.removeEventListener("mousemove", onMouseMove);
     document.removeEventListener("touchstart", onMouseMove);
-    document.body.removeEventListener("orientationchange", resizeCanvas);
+    window.removeEventListener("orientationchange", resizeCanvas);
     window.removeEventListener("resize", resizeCanvas);
     window.removeEventListener("scroll", trackYScroll);
     window.removeEventListener("focus", startAnimation);
