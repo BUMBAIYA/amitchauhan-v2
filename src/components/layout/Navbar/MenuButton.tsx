@@ -24,7 +24,7 @@ export default function MenuLogo(props: MenuLogo) {
         width="100%"
         height="100%"
         viewBox="0 0 23 23"
-        className="stroke-teal-600"
+        className="stroke-tera-500"
         animate={props.open ? "open" : "close"}
       >
         <Path

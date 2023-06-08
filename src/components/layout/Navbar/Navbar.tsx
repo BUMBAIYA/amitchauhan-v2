@@ -69,7 +69,7 @@ export default function Navbar(props: Navbar) {
                             },
                           },
                         }}
-                        className="absolute inset-0 -z-10 rounded-full bg-teal-600 group-hover:bg-teal-500"
+                        className="absolute inset-0 -z-10 rounded-full bg-tera-500 group-hover:bg-tera-500/80"
                       ></motion.span>
                     )}
                     {_link.title}
@@ -88,7 +88,7 @@ export default function Navbar(props: Navbar) {
       <motion.div
         variants={modalVariants}
         animate={isModalOpen ? "open" : "close"}
-        className="fixed left-1/2 top-96 z-50 flex min-w-[90vw] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-between rounded-xl bg-teal-600/80 py-16 backdrop-blur-md sm:min-w-[70vw] sm:py-20 md:hidden"
+        className="fixed left-1/2 top-96 z-50 flex min-w-[90vw] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-between rounded-xl bg-tera-500/90 py-16 backdrop-blur-md sm:min-w-[70vw] sm:py-20 md:hidden"
       >
         <nav>
           <ul className="flex flex-col gap-4 text-center">
