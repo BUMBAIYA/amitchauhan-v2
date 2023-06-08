@@ -8,7 +8,12 @@ export default function Home() {
   const refCanvas = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    cursorTrail({ ref: refCanvas });
+    const { cleanUp, renderTrailCursor } = cursorTrail({ ref: refCanvas });
+    renderTrailCursor();
+
+    return () => {
+      cleanUp();
+    };
   }, []);
 
   return (
