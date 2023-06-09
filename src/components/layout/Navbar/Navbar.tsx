@@ -5,6 +5,7 @@ import { AnimatedLogo } from "../../animation/AnimatedLogo";
 import { AnimatePresence, Variants, motion, useCycle } from "framer-motion";
 import MenuLogo from "./MenuButton";
 import { NavbarRoutes } from "@/components/routes/navigationRoutes";
+import ThemeSwitch from "./ThemeSwitch";
 
 const modalVariants: Variants = {
   close: {
@@ -42,7 +43,7 @@ export default function Navbar(props: Navbar) {
             <AnimatedLogo />
           </div>
         </Link>
-        <nav className="hidden items-center gap-2 rounded-full px-2 py-2 shadow-md ring-1 ring-zinc-200 backdrop-blur-md md:flex">
+        <nav className="hidden items-center gap-2 rounded-full px-2 py-2 shadow-md ring-1 ring-zinc-200 backdrop-blur-md dark:ring-teal-600/50 md:flex">
           <ul className="flex gap-2 text-sm font-medium">
             {props.routes.map((_link, index) => {
               return (
@@ -53,8 +54,10 @@ export default function Navbar(props: Navbar) {
                   <Link
                     href={_link.href}
                     className={classNames(
-                      pathName === _link.href ? "text-white " : "",
-                      "group relative mx-3 rounded-full px-3 py-2 transition-colors duration-100",
+                      pathName === _link.href
+                        ? "font-semibold text-white dark:text-zinc-900 dark:hover:text-white"
+                        : "",
+                      "group relative mx-3 rounded-full px-3 py-2 transition-colors duration-200",
                     )}
                   >
                     {_link.href === pathName && (
@@ -69,7 +72,7 @@ export default function Navbar(props: Navbar) {
                             },
                           },
                         }}
-                        className="absolute inset-0 -z-10 rounded-full bg-tera-500 group-hover:bg-tera-500/80"
+                        className="absolute inset-0 -z-10 rounded-full bg-tera-500 group-hover:bg-tera-500/80 dark:bg-teal-400 dark:group-hover:bg-teal-500"
                       ></motion.span>
                     )}
                     {_link.title}
@@ -78,6 +81,7 @@ export default function Navbar(props: Navbar) {
               );
             })}
           </ul>
+          <ThemeSwitch />
         </nav>
         <AnimatePresence>
           <MenuLogo open={isModalOpen} toggle={toggleModal} />
@@ -86,10 +90,10 @@ export default function Navbar(props: Navbar) {
       <motion.div
         variants={modalVariants}
         animate={isModalOpen ? "open" : "close"}
-        className="fixed left-1/2 top-96 z-50 flex min-w-[90vw] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-between rounded-xl bg-tera-500 py-16 backdrop-blur-md sm:min-w-[70vw] sm:py-20 md:hidden"
+        className="fixed left-1/2 top-96 z-[99999] flex min-w-[90vw] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-between rounded-xl bg-tera-500 py-16 dark:bg-teal-500 sm:min-w-[70vw] sm:py-20 md:hidden"
       >
         <nav>
-          <ul className="flex flex-col gap-4 text-center">
+          <ul className="flex flex-col items-center gap-4 text-center">
             {props.routes.map((link, i) => (
               <li key={i} className="py-2 text-3xl font-medium text-white">
                 <Link href={link.href} className="group relative">
@@ -103,9 +107,10 @@ export default function Navbar(props: Navbar) {
                 </Link>
               </li>
             ))}
+            <ThemeSwitch />
           </ul>
         </nav>
-        <div className="mt-20 text-white">@2023 Amit Chauhan</div>
+        <div className="mt-16 text-white">@2023 Amit Chauhan</div>
       </motion.div>
     </header>
   );

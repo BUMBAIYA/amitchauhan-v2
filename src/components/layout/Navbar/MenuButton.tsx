@@ -18,13 +18,13 @@ export default function MenuLogo(props: MenuLogo) {
   return (
     <button
       onClick={props.toggle}
-      className="flex h-12 w-12 select-none items-center gap-1 rounded-full p-3 py-1 font-semibold shadow-md ring-1 ring-zinc-200 backdrop-blur-md md:hidden"
+      className="flex h-12 w-12 select-none items-center gap-1 rounded-full p-3 py-1 font-semibold shadow-md ring-1 ring-zinc-200 backdrop-blur-md dark:ring-teal-600/50 md:hidden"
     >
       <motion.svg
         width="100%"
         height="100%"
         viewBox="0 0 23 23"
-        className="mt-1 stroke-tera-500"
+        className="mt-1 stroke-tera-500 dark:stroke-teal-400"
         animate={props.open ? "open" : "close"}
       >
         <Path

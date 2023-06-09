@@ -6,7 +6,7 @@ export default function Document() {
       <Head>
         <link rel="icon" href="/icon.svg" type="image/image+xml" />
       </Head>
-      <body className="bg-zinc-100 text-zinc-950 antialiased">
+      <body className="bg-zinc-100 text-zinc-950 antialiased dark:bg-zinc-900 dark:text-white">
         <Main />
         <NextScript />
       </body>
