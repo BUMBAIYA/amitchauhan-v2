@@ -1,34 +1,19 @@
 import { PageSEO } from "@/components/PageSEO";
 import FadeUp from "@/components/animation/FadeUp";
-import { cursorTrail } from "@/components/utility/cursorTrail";
+import CursorTrailCanvas from "@/components/hero/CursorTrailCanvas";
 import { AnimatePresence } from "framer-motion";
-import { useEffect, useRef } from "react";
 
 export default function Home() {
-  const refCanvas = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const { cleanUp, renderTrailCursor } = cursorTrail({
-      ref: refCanvas,
-      color: "hsla(183, 64%, 27%, 0.4)",
-    });
-    renderTrailCursor();
-
-    return () => {
-      cleanUp();
-    };
-  }, []);
-
   return (
     <>
       <PageSEO
         title="Amit Chauhan | Home"
         description="Homepage of Amit Chauhan's portfolio"
       />
-      <canvas
-        ref={refCanvas}
+      <CursorTrailCanvas
+        color="hsla(183, 64%, 27%, 0.4)"
         className="pointer-events-none absolute inset-0 -z-10 h-full w-full"
-      ></canvas>
+      />
       <div className="mx-auto max-w-5xl">
         <div className="max-w-3xl">
           <AnimatePresence>

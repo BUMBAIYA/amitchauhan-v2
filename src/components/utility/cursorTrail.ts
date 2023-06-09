@@ -209,5 +209,5 @@ export function cursorTrail(props: CursorTrail) {
     window.removeEventListener("blur", stopAnimation);
   }
 
-  return { cleanUp, renderTrailCursor };
+  return { cleanUp, renderTrailCursor, stopAnimation, startAnimation };
 }
