@@ -15,14 +15,14 @@ type MainLayoutProps = {
 export default function MainLayout(props: MainLayoutProps) {
   return (
     <>
-      <div className={classNames("min-h-screen", openSans.className)}>
+      <div
+        className={classNames(
+          "min-h-screen px-6 sm:px-14 md:px-20",
+          openSans.className,
+        )}
+      >
         <Navbar routes={routes} />
-        <main
-          className={classNames(
-            "px-6 pt-20 sm:px-8 sm:py-24 md:px-16",
-            openSans.className,
-          )}
-        >
+        <main className={classNames("pt-20 sm:py-24", openSans.className)}>
           {props.children}
         </main>
       </div>

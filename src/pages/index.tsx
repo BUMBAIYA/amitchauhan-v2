@@ -14,7 +14,7 @@ export default function Home() {
         color="hsla(183, 64%, 27%, 0.4)"
         className="pointer-events-none absolute inset-0 -z-10 h-full w-full"
       />
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-7xl">
         <div className="max-w-3xl">
           <AnimatePresence>
             <FadeUp key="title-main" duration={0.6}>

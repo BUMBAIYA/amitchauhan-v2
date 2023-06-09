@@ -31,8 +31,8 @@ export default function Navbar(props: Navbar) {
   const [isModalOpen, toggleModal] = useCycle(false, true);
   const pathName = usePathname();
   return (
-    <header className="sticky top-0 px-6 py-8 sm:px-8 md:px-16">
-      <div className="mx-auto flex max-w-5xl items-center justify-between">
+    <header className="sticky top-0 py-8">
+      <div className="mx-auto flex items-center justify-between lg:max-w-7xl">
         <Link
           href="/"
           className="flex items-center justify-center"
