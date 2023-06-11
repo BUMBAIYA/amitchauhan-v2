@@ -1,8 +1,8 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { classNames } from "../../utility/classNames";
 import { AnimatedLogo } from "../../animation/AnimatedLogo";
 import { AnimatePresence, Variants, motion, useCycle } from "framer-motion";
+import { classNames } from "../../utility/classNames";
 import MenuLogo from "./MenuButton";
 import { NavbarRoutes } from "@/components/routes/navigationRoutes";
 import ThemeSwitch from "./ThemeSwitch";
@@ -32,7 +32,7 @@ export default function Navbar(props: Navbar) {
   const [isModalOpen, toggleModal] = useCycle(false, true);
   const pathName = usePathname();
   return (
-    <header className="sticky top-0 py-8">
+    <header className="sticky top-0 z-50 py-8">
       <div className="mx-auto flex items-center justify-between lg:max-w-7xl">
         <Link
           href="/"
@@ -90,7 +90,7 @@ export default function Navbar(props: Navbar) {
       <motion.div
         variants={modalVariants}
         animate={isModalOpen ? "open" : "close"}
-        className="fixed left-1/2 top-96 z-[99999] flex min-w-[90vw] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-between rounded-xl bg-tera-500 py-16 dark:bg-teal-500 sm:min-w-[70vw] sm:py-20 md:hidden"
+        className="fixed left-1/2 top-96 z-50 flex min-w-[90vw] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-between rounded-xl bg-tera-500 py-16 dark:bg-teal-500 sm:min-w-[70vw] sm:py-20 md:hidden"
       >
         <nav>
           <ul className="flex flex-col items-center gap-4 text-center">

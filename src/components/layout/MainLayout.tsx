@@ -22,11 +22,8 @@ export default function MainLayout(props: MainLayoutProps) {
         )}
       >
         <Navbar routes={routes} />
-        <main className="pb-32">{props.children}</main>
+        <main className="">{props.children}</main>
       </div>
-      {/* <footer className="bg-tera-500 px-4 py-2 text-zinc-100">
-        Amit Chauhan @2023
-      </footer> */}
     </>
   );
 }

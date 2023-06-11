@@ -1,8 +1,8 @@
 import type { AppProps } from "next/app";
-import MainLayout from "@/components/layout/MainLayout";
-import { AnimatePresence } from "framer-motion";
-import "@/styles/globals.css";
 import { ThemeProvider } from "next-themes";
+import { AnimatePresence } from "framer-motion";
+import MainLayout from "@/components/layout/MainLayout";
+import "@/styles/globals.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
