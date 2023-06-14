@@ -36,10 +36,10 @@ export default function Navbar(props: Navbar) {
       <div className="mx-auto flex items-center justify-between lg:max-w-7xl">
         <Link
           href="/"
-          className="flex items-center justify-center"
+          className="flex items-center justify-center drop-shadow-teralight"
           aria-label="Return to home page"
         >
-          <div className="h-12 w-12 sm:h-14 sm:w-14">
+          <div className="relative h-12 w-12 sm:h-14 sm:w-14">
             <AnimatedLogo />
           </div>
         </Link>

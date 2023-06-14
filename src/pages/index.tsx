@@ -5,7 +5,7 @@ import CursorTrailCanvas from "@/components/CursorTrailCanvas";
 
 export default function Home() {
   return (
-    <>
+    <section>
       <PageSEO
         title="Amit Chauhan | Home"
         description="Homepage of Amit Chauhan's portfolio"
@@ -18,7 +18,7 @@ export default function Home() {
         <div className="max-w-7xl">
           <AnimatePresence>
             <FadeUp key="title-main" duration={0.6}>
-              <h1 className="mx-auto bg-gradient-to-r from-teal-500 to-tera-500 bg-clip-text text-5xl font-bold text-transparent dark:from-teal-200 dark:to-teal-500 sm:text-6xl md:text-8xl">
+              <h1 className="mx-auto bg-gradient-to-r from-teal-500 to-tera-500 bg-clip-text text-5xl font-bold text-transparent dark:from-teal-200 dark:to-teal-500 sm:text-6xl md:text-7xl xl:text-8xl">
                 Creative frontend developer
               </h1>
             </FadeUp>
@@ -33,6 +33,6 @@ export default function Home() {
           </AnimatePresence>
         </div>
       </div>
-    </>
+    </section>
   );
 }

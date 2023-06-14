@@ -103,7 +103,7 @@ export default function ShowCaseList(props: ShowCaseList) {
       <div ref={ref} className="relative w-full md:mx-auto md:w-[80%]">
         <motion.div
           style={{ scaleY: scrollYProgress }}
-          className="absolute left-9 top-5 h-full w-[5px] origin-top bg-teal-600 dark:bg-teal-400"
+          className="absolute left-9 top-5 h-full w-[5px] origin-top rounded-lg bg-teal-600 dark:bg-teal-400"
         ></motion.div>
         <ul className="ml-4 w-full items-center">
           {props.details.map((_details, index) => (

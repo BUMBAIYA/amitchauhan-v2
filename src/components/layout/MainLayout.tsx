@@ -22,7 +22,7 @@ export default function MainLayout(props: MainLayoutProps) {
         )}
       >
         <Navbar routes={routes} />
-        <main className="">{props.children}</main>
+        <main className="pb-32">{props.children}</main>
       </div>
     </>
   );

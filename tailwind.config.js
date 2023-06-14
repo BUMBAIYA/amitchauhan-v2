@@ -15,6 +15,9 @@ module.exports = {
       screens: {
         xs: "360px",
       },
+      dropShadow: {
+        teralight: "0 0 1em rgb(45,212,191)",
+      },
     },
   },
   plugins: [],
