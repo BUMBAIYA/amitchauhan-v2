@@ -8,7 +8,10 @@ export type ProjectCard = {
   title: string;
   date: string;
   description: string;
-  imageUrl: string | StaticImageData;
+  image: {
+    url: string | StaticImageData;
+    alt: string;
+  };
   darkImageUrl?: string | StaticImageData;
   websiteLink?: string;
   caseStudyLink?: string;
@@ -28,8 +31,8 @@ export default function ProjectCard(props: ProjectCard) {
     >
       <div className="relative flex items-center lg:col-span-1 xl:col-span-2">
         <Image
-          alt="covidTracker image"
-          src={props.imageUrl}
+          alt={props.image.alt}
+          src={props.image.url}
           width={20}
           height={20}
           className={classNames(
@@ -40,7 +43,7 @@ export default function ProjectCard(props: ProjectCard) {
         />
         {props.darkImageUrl && (
           <Image
-            alt="covidTracker image"
+            alt={props.image.alt}
             src={props.darkImageUrl}
             width={20}
             height={20}

@@ -13,7 +13,10 @@ export const PROJECTS: ProjectCard[] = [
     date: "October, 2021",
     description:
       "Get all stats related to covid-19 through this applicaiton made using Reactjs and Material UI. It shows geographical impact of covid-19 using a map powered by React leaflet.",
-    imageUrl: covidTracker,
+    image: {
+      url: covidTracker,
+      alt: "Covid Tracker Image",
+    },
     sourceCode: "https://github.com/BUMBAIYA/CovidTracker",
     websiteLink: "https://bumbaiya.github.io/CovidTracker",
   },
@@ -23,7 +26,10 @@ export const PROJECTS: ProjectCard[] = [
     date: "Feb, 2022",
     description:
       "Kanban board that help keep track of your projects and tasks made usign Reactja and Tailwindcss. Fully responsive and keyboard assecible made using Reactjs and React-beautifull-dnd library",
-    imageUrl: kanbanBoardLight,
+    image: {
+      url: kanbanBoardLight,
+      alt: "Kanban board Image",
+    },
     darkImageUrl: kanbanBoardDark,
     sourceCode: "https://github.com/BUMBAIYA/kanban",
     websiteLink: "https://kannban-board.vercel.app/",
@@ -34,7 +40,10 @@ export const PROJECTS: ProjectCard[] = [
     date: "June, 2022",
     description:
       "Game engine from scratch using Java and Opengl. I learn new languages by making engaging and coersive project that always have my interest. This engine includes 3D model loading, shaders, water rendering, shadow rendering, skybox and text rendering.",
-    imageUrl: ThreeDView,
+    image: {
+      url: ThreeDView,
+      alt: "3D View Image",
+    },
     sourceCode: "https://github.com/BUMBAIYA/3DView",
   },
   {
@@ -43,7 +52,10 @@ export const PROJECTS: ProjectCard[] = [
     date: "March, 2023",
     description:
       "Website made using Reactjs, tailwindcss and Scss. Many small word and puzzle games are hosted on this website. This project demanded very high programming skills and countless hours of debugging as there were many edge cases in the games.",
-    imageUrl: manyGamesLight,
+    image: {
+      url: manyGamesLight,
+      alt: "Many games Image",
+    },
     darkImageUrl: manyGamesDark,
     sourceCode: "https://github.com/BUMBAIYA/manygames",
     websiteLink: "https://manygames.vercel.app/",
