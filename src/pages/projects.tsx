@@ -13,7 +13,7 @@ export default function Projects() {
         {PROJECTS.map((project, index) => (
           <ProjectCard key={index} {...project} />
         ))}
-        <div className="mx-auto mt-16 max-w-5xl text-center">
+        <div className="mx-auto my-16 max-w-5xl text-center">
           <span className="text-xl font-bold md:text-2xl">
             I am currently building new projects and learning backend
             development to expand my skill set beyond frontend.

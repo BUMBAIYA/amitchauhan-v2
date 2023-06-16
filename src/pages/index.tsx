@@ -23,7 +23,7 @@ export default function Home() {
               </h1>
             </FadeUp>
             <FadeUp key="description" duration={0.6} delay={0.2}>
-              <p className="text-md mt-8 max-w-3xl font-medium text-zinc-900 dark:text-zinc-200 md:text-lg">
+              <p className="mt-8 max-w-3xl text-sm font-medium text-zinc-900 dark:text-zinc-200 sm:text-base md:text-lg">
                 I&apos;m Amit Chauhan, a frontend developer based in Mumbai,
                 India. I turn vision into reality with code and design.As a
                 skilled frontend developer, I am dedicated to turning ideas into

@@ -3,6 +3,7 @@ import { Montserrat } from "next/font/google";
 import { classNames } from "../utility/classNames";
 import Navbar from "./Navbar/Navbar";
 import { routes } from "../routes/navigationRoutes";
+import Footer from "./Footer";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -22,8 +23,9 @@ export default function MainLayout(props: MainLayoutProps) {
         )}
       >
         <Navbar routes={routes} />
-        <main className="pb-32">{props.children}</main>
+        <main className="">{props.children}</main>
       </div>
+      <Footer />
     </>
   );
 }
