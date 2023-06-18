@@ -9,7 +9,7 @@ export default function Projects() {
         title="Amit Chauhan | Projects"
         description="Project showcase of Amit Chauhan's portfolio"
       />
-      <div className="mx-auto my-16 flex max-w-7xl flex-col gap-20">
+      <div className="mx-auto my-16 flex max-w-7xl flex-col gap-20 px-6 pt-20 sm:px-14 md:px-20">
         {PROJECTS.map((project, index) => (
           <ProjectCard key={index} {...project} />
         ))}

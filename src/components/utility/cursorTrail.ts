@@ -129,16 +129,16 @@ export function cursorTrail(props: CursorTrail) {
   function move(event: MouseEvent | TouchEvent) {
     !(event instanceof MouseEvent)
       ? ((cursorPosition.x = event.touches[0].pageX),
-        (cursorPosition.y = event.touches[0].pageY + cursorYOffset))
+        (cursorPosition.y = event.touches[0].pageY))
       : ((cursorPosition.x = event.clientX),
-        (cursorPosition.y = event.clientY + cursorYOffset));
+        (cursorPosition.y = event.clientY));
     event.preventDefault();
   }
 
   function createLine(event: TouchEvent) {
     event.touches.length === 1 &&
       ((cursorPosition.x = event.touches[0].pageX),
-      (cursorPosition.y = event.touches[0].pageY + cursorYOffset));
+      (cursorPosition.y = event.touches[0].pageY));
   }
 
   function onMouseMove(e: MouseEvent | TouchEvent) {
@@ -166,6 +166,7 @@ export function cursorTrail(props: CursorTrail) {
     ctx.canvas.height = window.innerHeight;
   }
 
+  // Only needed when canvas is not set to full screen height
   function trackYScroll() {
     let yOffet =
       window.pageYOffset ||
@@ -190,7 +191,7 @@ export function cursorTrail(props: CursorTrail) {
     document.addEventListener("touchstart", onMouseMove);
     window.addEventListener("orientationchange", resizeCanvas);
     window.addEventListener("resize", resizeCanvas);
-    window.addEventListener("scroll", trackYScroll);
+    // window.addEventListener("scroll", trackYScroll);
     window.addEventListener("focus", startAnimation);
     window.addEventListener("blur", stopAnimation);
     resizeCanvas();
@@ -204,7 +205,7 @@ export function cursorTrail(props: CursorTrail) {
     document.removeEventListener("touchstart", onMouseMove);
     window.removeEventListener("orientationchange", resizeCanvas);
     window.removeEventListener("resize", resizeCanvas);
-    window.removeEventListener("scroll", trackYScroll);
+    // window.removeEventListener("scroll", trackYScroll);
     window.removeEventListener("focus", startAnimation);
     window.removeEventListener("blur", stopAnimation);
   }

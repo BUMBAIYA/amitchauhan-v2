@@ -16,14 +16,9 @@ type MainLayoutProps = {
 export default function MainLayout(props: MainLayoutProps) {
   return (
     <>
-      <div
-        className={classNames(
-          "min-h-screen px-6 sm:px-14 md:px-20",
-          montserrat.className,
-        )}
-      >
+      <div className={classNames("min-h-screen", montserrat.className)}>
         <Navbar routes={routes} />
-        <main className="">{props.children}</main>
+        <main>{props.children}</main>
       </div>
       <Footer />
     </>
