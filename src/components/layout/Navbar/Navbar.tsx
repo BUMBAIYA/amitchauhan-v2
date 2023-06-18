@@ -95,31 +95,33 @@ export default function Navbar(props: Navbar) {
           <MenuLogo open={isModalOpen} toggle={toggleModal} />
         </AnimatePresence>
       </div>
-      <motion.div
-        variants={modalVariants}
-        animate={isModalOpen ? "open" : "close"}
-        className="fixed left-1/2 top-96 z-50 flex min-w-[90vw] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-between rounded-xl bg-tera-500 py-16 dark:bg-teal-500 sm:min-w-[70vw] sm:py-20 md:hidden"
-      >
-        <div className="flex flex-col items-center gap-4 text-center">
-          {props.routes.map((link, i) => (
-            <button
-              key={i}
-              className="group relative py-2 text-3xl font-medium text-white"
-              onClick={() => handleClick(link.href)}
-            >
-              <span
-                className={classNames(
-                  pathName === link.href ? "w-full" : "w-0",
-                  "absolute -bottom-1 left-0 h-1 rounded-lg bg-white transition-[width] duration-300 group-hover:w-full",
-                )}
-              ></span>
-              {link.title}
-            </button>
-          ))}
-          <ThemeSwitch />
-        </div>
-        <div className="mt-16 text-white">©2023 Amit Chauhan</div>
-      </motion.div>
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.div
+          variants={modalVariants}
+          animate={isModalOpen ? "open" : "close"}
+          className="fixed left-1/2 top-96 z-50 flex min-w-[90vw] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-between rounded-xl bg-tera-500 py-16 dark:bg-teal-500 sm:min-w-[70vw] sm:py-20 md:hidden"
+        >
+          <div className="flex flex-col items-center gap-4 text-center">
+            {props.routes.map((link, i) => (
+              <button
+                key={i}
+                className="group relative py-2 text-3xl font-medium text-white"
+                onClick={() => handleClick(link.href)}
+              >
+                <span
+                  className={classNames(
+                    pathName === link.href ? "w-full" : "w-0",
+                    "absolute -bottom-1 left-0 h-1 rounded-lg bg-white transition-[width] duration-300 group-hover:w-full",
+                  )}
+                ></span>
+                {link.title}
+              </button>
+            ))}
+            <ThemeSwitch />
+          </div>
+          <div className="mt-16 text-white">©2023 Amit Chauhan</div>
+        </motion.div>
+      </AnimatePresence>
     </header>
   );
 }

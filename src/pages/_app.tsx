@@ -3,15 +3,17 @@ import { ThemeProvider } from "next-themes";
 import { AnimatePresence } from "framer-motion";
 import MainLayout from "@/components/layout/MainLayout";
 import "@/styles/globals.css";
+import { useRouter } from "next/router";
 
 export default function App({ Component, pageProps }: AppProps) {
+  const router = useRouter();
   return (
     <ThemeProvider attribute="class" defaultTheme="light">
-      <AnimatePresence mode="wait" initial={false}>
-        <MainLayout>
-          <Component {...pageProps} />
-        </MainLayout>
-      </AnimatePresence>
+      <MainLayout>
+        <AnimatePresence mode="wait" initial={false}>
+          <Component key={router.asPath} {...pageProps} />
+        </AnimatePresence>
+      </MainLayout>
     </ThemeProvider>
   );
 }
