@@ -6,18 +6,18 @@ import { classNames } from "../../utility/classNames";
 import MenuLogo from "./MenuButton";
 import { NavbarRoutes } from "@/components/routes/navigationRoutes";
 import ThemeSwitch from "./ThemeSwitch";
+import { useRouter } from "next/router";
 
 const modalVariants: Variants = {
   close: {
     scale: 0,
     opacity: 0,
-    transformOrigin: "top left",
+    x: "-50%",
+    y: "-50%",
   },
   open: {
     scale: 1,
     opacity: 1,
-    translateX: "-50%",
-    translateY: "-50%",
     transition: {
       duration: 0.2,
     },
@@ -29,10 +29,18 @@ type Navbar = {
 };
 
 export default function Navbar(props: Navbar) {
-  const [isModalOpen, toggleModal] = useCycle(false, true);
   const pathName = usePathname();
+  const router = useRouter();
+
+  const [isModalOpen, toggleModal] = useCycle(false, true);
+
+  const handleClick = (href: string) => {
+    toggleModal();
+    router.push(href);
+  };
+
   return (
-    <header className="sticky top-0 z-50 py-8">
+    <header className="sticky top-0 z-50 px-6 py-8 sm:px-14 md:px-20">
       <div className="mx-auto flex items-center justify-between lg:max-w-7xl">
         <Link
           href="/"
@@ -92,24 +100,24 @@ export default function Navbar(props: Navbar) {
         animate={isModalOpen ? "open" : "close"}
         className="fixed left-1/2 top-96 z-50 flex min-w-[90vw] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-between rounded-xl bg-tera-500 py-16 dark:bg-teal-500 sm:min-w-[70vw] sm:py-20 md:hidden"
       >
-        <nav>
-          <ul className="flex flex-col items-center gap-4 text-center">
-            {props.routes.map((link, i) => (
-              <li key={i} className="py-2 text-3xl font-medium text-white">
-                <Link href={link.href} className="group relative">
-                  {link.title}
-                  <span
-                    className={classNames(
-                      pathName === link.href ? "w-full" : "w-0",
-                      "absolute -bottom-1 left-0 h-1 bg-white transition-[width] duration-300 group-hover:w-full",
-                    )}
-                  ></span>
-                </Link>
-              </li>
-            ))}
-            <ThemeSwitch />
-          </ul>
-        </nav>
+        <div className="flex flex-col items-center gap-4 text-center">
+          {props.routes.map((link, i) => (
+            <button
+              key={i}
+              className="group relative py-2 text-3xl font-medium text-white"
+              onClick={() => handleClick(link.href)}
+            >
+              <span
+                className={classNames(
+                  pathName === link.href ? "w-full" : "w-0",
+                  "absolute -bottom-1 left-0 h-1 rounded-lg bg-white transition-[width] duration-300 group-hover:w-full",
+                )}
+              ></span>
+              {link.title}
+            </button>
+          ))}
+          <ThemeSwitch />
+        </div>
         <div className="mt-16 text-white">@2023 Amit Chauhan</div>
       </motion.div>
     </header>
