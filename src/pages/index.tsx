@@ -2,6 +2,8 @@ import { PageSEO } from "@/components/PageSEO";
 import CursorTrailCanvas from "@/components/CursorTrailCanvas";
 import Hero from "@/components/Hero";
 import TransitionPage from "@/components/TransitionPage";
+import Project from "@/components/Project";
+import { PROJECT_LIST } from "@/components/data/projects";
 
 export default function Home() {
   return (
@@ -16,6 +18,7 @@ export default function Home() {
       />
       <TransitionPage />
       <Hero />
+      <Project projects={PROJECT_LIST} />
     </>
   );
 }

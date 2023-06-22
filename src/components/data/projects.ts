@@ -2,9 +2,10 @@ import covidTracker from "../../../public/images/projects/covidTracker.webp";
 import kanbanBoardLight from "../../../public/images/projects/kanbanLight.webp";
 import kanbanBoardDark from "../../../public/images/projects/kanbanDark.webp";
 import ThreeDView from "../../../public/images/projects/3DView.webp";
-import manyGamesLight from "../../../public/images/projects/ManyGamesLight.webp";
+import manyGamesLight from "../../../public/images/projects/manyGamesLight.webp";
 import manyGamesDark from "../../../public/images/projects/manyGamesDark.webp";
 import { ProjectCard } from "../ProjectCard";
+import { ProjectData } from "../ProjectList";
 
 export const PROJECTS: ProjectCard[] = [
   {
@@ -59,5 +60,45 @@ export const PROJECTS: ProjectCard[] = [
     darkImageUrl: manyGamesDark,
     sourceCode: "https://github.com/BUMBAIYA/manygames",
     websiteLink: "https://manygames.vercel.app/",
+  },
+];
+
+export const PROJECT_LIST: ProjectData[] = [
+  {
+    index: 0,
+    title: "Many Games",
+    href: "#",
+    tags: [
+      "React",
+      "Vite",
+      "Tainwindcss",
+      "Fully responsive",
+      "API",
+      "SCSS",
+      "Redux",
+      "React Router",
+    ],
+    image: "/images/projects/manyGamesLight.webp",
+  },
+  {
+    index: 1,
+    title: "Kanban",
+    href: "#",
+    tags: ["Nextjs", "Vite", "Tailwindcss", "Fully responsive", "React DND"],
+    image: "/images/projects/kanbanLight.webp",
+  },
+  {
+    index: 2,
+    title: "Covid Tracker",
+    href: "#",
+    tags: [
+      "React",
+      "Styled Component",
+      "Fully responsive",
+      "API",
+      "MUI",
+      "Map",
+    ],
+    image: "/images/projects/covidTracker.webp",
   },
 ];
