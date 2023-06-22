@@ -2,7 +2,7 @@ import covidTracker from "../../../public/images/projects/covidTracker.webp";
 import kanbanBoardLight from "../../../public/images/projects/kanbanLight.webp";
 import kanbanBoardDark from "../../../public/images/projects/kanbanDark.webp";
 import ThreeDView from "../../../public/images/projects/3DView.webp";
-import manyGamesLight from "../../../public/images/projects/manyGamesLight.webp";
+import manyGamesLight from "../../../public/images/projects/manyGames.webp";
 import manyGamesDark from "../../../public/images/projects/manyGamesDark.webp";
 import { ProjectCard } from "../ProjectCard";
 import { ProjectData } from "../ProjectList";
@@ -78,7 +78,7 @@ export const PROJECT_LIST: ProjectData[] = [
       "Redux",
       "React Router",
     ],
-    image: "/images/projects/manyGamesLight.webp",
+    image: "/images/projects/manyGames.webp",
   },
   {
     index: 1,
