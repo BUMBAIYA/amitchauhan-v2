@@ -24,13 +24,13 @@ export default function Hero() {
   }, []);
 
   return (
-    <motion.div
+    <motion.section
       animate={{
         transform: `translateY(${progress * 20}vh)`,
       }}
       transition={{ type: "spring", stiffness: 100 }}
       ref={ref}
-      className="flex h-[calc(100vh-112px)] items-center px-6 sm:px-14 md:px-20"
+      className="pointer-events-none flex h-[calc(100vh-112px)] items-center px-6 sm:px-14 md:px-20"
     >
       <div className="mx-auto -mt-[112px] max-w-7xl">
         <div className="max-w-7xl">
@@ -56,6 +56,6 @@ export default function Hero() {
           </AnimatePresence>
         </div>
       </div>
-    </motion.div>
+    </motion.section>
   );
 }
