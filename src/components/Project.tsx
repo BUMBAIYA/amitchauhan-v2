@@ -59,7 +59,7 @@ export default function Project(props: Project) {
           </AnimatePresence>
         </div>
         <h2 className="text-lg font-semibold sm:text-2xl">My projects</h2>
-        <div className="flex flex-col gap-6 py-14 sm:gap-8 sm:py-20 md:gap-10">
+        <div className="hidden flex-col gap-6 py-14 sm:gap-8 sm:py-20 md:gap-10 lg:flex">
           {props.projects.map((proj, index) => (
             <ProjectList
               activeProject={currentImage}
@@ -67,6 +67,32 @@ export default function Project(props: Project) {
               data={proj}
               key={index}
             />
+          ))}
+        </div>
+        <div className="flex flex-col gap-4 py-14 sm:gap-8 sm:py-20 md:gap-10 lg:hidden">
+          {props.projects.map((proj, index) => (
+            <Link
+              key={proj.title}
+              href={proj.href}
+              className="flex flex-col gap-1"
+            >
+              <div className="flex gap-2">
+                <span className="text-3xl font-semibold text-teal-600 transition-colors duration-300 dark:text-teal-400 sm:text-4xl md:text-5xl lg:hidden">
+                  {proj.index + 1}.
+                </span>
+                <span
+                  key={proj.title}
+                  className="-underline-offset-1 text-3xl font-semibold text-teal-600 underline transition-colors duration-300 dark:text-teal-400 sm:text-4xl md:text-5xl lg:hidden"
+                >
+                  {proj.title}
+                </span>
+              </div>
+              <p className="flex max-w-xl flex-wrap gap-2 text-base font-semibold text-zinc-800 dark:text-zinc-100 sm:text-lg">
+                {proj.tags.map((tag, index) => (
+                  <span key={index}>#{tag}</span>
+                ))}
+              </p>
+            </Link>
           ))}
         </div>
         <Link
