@@ -1,7 +1,6 @@
 import { PageSEO } from "@/components/PageSEO";
 import CursorTrailCanvas from "@/components/CursorTrailCanvas";
 import Hero from "@/components/Hero";
-import TransitionPage from "@/components/TransitionPage";
 import Project from "@/components/Project";
 import { PROJECT_LIST } from "@/components/data/projects";
 
@@ -16,7 +15,6 @@ export default function Home() {
         title="Amit Chauhan | Home"
         description="Homepage of Amit Chauhan's portfolio"
       />
-      <TransitionPage />
       <Hero />
       <Project projects={PROJECT_LIST} />
     </>
