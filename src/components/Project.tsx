@@ -16,7 +16,7 @@ type Project = {
 export default function Project(props: Project) {
   const [currentImage, setCurrentImage] = useState<number>(0);
 
-  const [images, setImages] = useState<string[]>(
+  const [images, setImages] = useState<ProjectData["image"][]>(
     generateImageData(props.projects),
   );
 
@@ -31,7 +31,7 @@ export default function Project(props: Project) {
         <div className="relative right-0 top-0 hidden lg:block">
           <AnimatePresence>
             <motion.div
-              key={images[currentImage]}
+              key={props.projects[currentImage].title}
               initial={{ x: "100%", opacity: 0 }}
               animate={{
                 x: "55%",
@@ -48,13 +48,23 @@ export default function Project(props: Project) {
               className="absolute right-0 top-0 -z-50"
             >
               <Image
-                src={images[currentImage]}
+                src={images[currentImage].LIGHT}
                 unoptimized
                 width={100}
                 height={100}
-                className="h-auto w-1/2 rounded-lg border border-zinc-300 shadow-lg dark:border-teal-400/50"
+                className="h-auto w-1/2 rounded-lg border border-zinc-300 shadow-lg dark:hidden dark:border-teal-400/50"
                 alt={`project ${currentImage}`}
               />
+              {images[currentImage].DARK !== undefined && (
+                <Image
+                  src={images[currentImage].DARK!}
+                  unoptimized
+                  width={100}
+                  height={100}
+                  className="hidden h-auto w-1/2 rounded-lg border border-zinc-300 shadow-lg dark:inline-block dark:border-teal-400/20 dark:shadow-lg dark:shadow-emerald-400/5"
+                  alt={`project ${currentImage}`}
+                />
+              )}
             </motion.div>
           </AnimatePresence>
         </div>

@@ -7,7 +7,10 @@ export type ProjectData = {
   title: string;
   href: string;
   tags: string[];
-  image: string;
+  image: {
+    LIGHT: string;
+    DARK?: string;
+  };
 };
 
 export type ProjectList = {
