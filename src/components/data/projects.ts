@@ -82,8 +82,8 @@ export const PROJECT_LIST: ProjectData[] = [
       "Vercel",
     ],
     image: {
-      LIGHT: "/images/projects/manygamesLight.webp",
-      DARK: "/images/projects/manygamesDark.webp",
+      LIGHT: "/images/projects/manyGamesLight.webp",
+      DARK: "/images/projects/manyGamesDark.webp",
     },
   },
   {
@@ -93,7 +93,7 @@ export const PROJECT_LIST: ProjectData[] = [
     tags: ["Reactjs", "Vite", "Tailwindcss", "Vercel", "Zustand", "React DND"],
     image: {
       LIGHT: "/images/projects/kanbanLight.webp",
-      DARK: "/images/projects/KanbanDark.webp",
+      DARK: "/images/projects/kanbanDark.webp",
     },
   },
 ];
