@@ -37,7 +37,7 @@ export default function Hero() {
           <AnimatePresence>
             <FadeUp key="title-main" duration={0.6}>
               <h1 className="mx-auto bg-gradient-to-r from-teal-500 to-tera-500 bg-clip-text text-5xl font-bold text-transparent dark:from-teal-200 dark:to-teal-500 sm:text-6xl md:text-7xl xl:text-8xl">
-                Creative frontend developer
+                React.js application developer
               </h1>
             </FadeUp>
             <FadeUp key="description" duration={0.6} delay={0.2}>

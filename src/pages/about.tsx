@@ -40,15 +40,15 @@ export default function About() {
             <FadeUp key="description-1" duration={0.6} delay={0.2}>
               <p className="mt-8 text-base font-medium text-zinc-900 dark:text-zinc-300 sm:text-lg md:text-lg">
                 I turn vision into reality with code. Whether I&apos;m working
-                on a website, mobile app, or other digital product, I bring my
-                commitment to design excellence and user-centered thinking to
-                every project I work on.
+                on a website or any digital product, I bring my commitment to
+                design excellence and user-centered thinking to every project I
+                work on.
               </p>
             </FadeUp>
             <FadeUp key="description-2" duration={0.6} delay={0.4}>
               <p className="mt-8 text-base font-medium text-zinc-900 dark:text-zinc-300 sm:text-lg md:text-lg">
-                Explore my latest projects and blogs, showcasing my expertise in
-                Reactjs, Nextjs and web development.
+                Explore my latest projects showcasing my expertise in Reactjs,
+                Nextjs, Javascript, Typescript and web development.
               </p>
             </FadeUp>
             <FadeRight
