@@ -48,10 +48,10 @@ export const PROJECTS: ProjectCard[] = [
     description:
       "Website made using Reactjs, tailwindcss and Scss. Many small word and puzzle games are hosted on this website. This project demanded very high programming skills and countless hours of debugging as there were many edge cases in the games.",
     image: {
-      url: "/images/projects/manygamesLight.webp",
+      url: "/images/projects/manyGamesLight.webp",
       alt: "Many games Image",
     },
-    darkImageUrl: "/images/projects/manygamesDark.webp",
+    darkImageUrl: "/images/projects/manyGamesDark.webp",
     sourceCode: "https://github.com/BUMBAIYA/manygames",
     websiteLink: "https://manygames.vercel.app/",
   },
