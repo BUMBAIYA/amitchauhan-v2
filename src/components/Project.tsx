@@ -68,7 +68,7 @@ export default function Project(props: Project) {
             </motion.div>
           </AnimatePresence>
         </div>
-        <h2 className="text-lg font-semibold sm:text-2xl">My projects</h2>
+        <h2 className="text-xl font-semibold sm:text-3xl">My projects</h2>
         <div className="hidden flex-col gap-6 py-14 sm:gap-8 sm:py-20 md:gap-10 lg:flex">
           {props.projects.map((proj, index) => (
             <ProjectList

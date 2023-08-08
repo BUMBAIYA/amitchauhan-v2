@@ -5,21 +5,29 @@ interface Props {
   children: ReactNode;
   duration: number;
   delay?: number;
+  whileInView?: boolean;
 }
 
-export default function FadeUp({ children, duration, delay }: Props) {
+export default function FadeUp({
+  children,
+  duration,
+  delay,
+  whileInView = false,
+}: Props) {
+  const animation = {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration,
+      ease: "easeInOut",
+      delay,
+    },
+  };
   return (
     <motion.div
       initial={{ y: 200, opacity: 0 }}
-      animate={{
-        opacity: 1,
-        y: 0,
-        transition: {
-          duration,
-          ease: "easeInOut",
-          delay,
-        },
-      }}
+      whileInView={whileInView ? animation : {}}
+      animate={!whileInView ? animation : {}}
     >
       {children}
     </motion.div>
