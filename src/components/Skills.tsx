@@ -37,7 +37,7 @@ export default function Skills() {
                 <FadeRight
                   key={`lang-${index}`}
                   duration={0.4}
-                  delay={0.2 + index * 0.1}
+                  delay={0.1 + index * 0.1}
                   whileInView
                 >
                   <SkillPill {...pill} />
@@ -56,7 +56,7 @@ export default function Skills() {
                 <FadeRight
                   key={`lib-frame-${index}`}
                   duration={0.4}
-                  delay={0.2 + index * 0.1}
+                  delay={0.1 + index * 0.1}
                   whileInView
                 >
                   <SkillPill {...pill} />
@@ -73,7 +73,7 @@ export default function Skills() {
                 <FadeRight
                   key={`backend-${index}`}
                   duration={0.4}
-                  delay={0.2 + index * 0.1}
+                  delay={0.1 + index * 0.1}
                   whileInView
                 >
                   <SkillPill {...pill} />
@@ -92,7 +92,7 @@ export default function Skills() {
                 <FadeRight
                   key={`database-orm-${index}`}
                   duration={0.4}
-                  delay={0.2 + index * 0.1}
+                  delay={0.1 + index * 0.1}
                   whileInView
                 >
                   <SkillPill {...pill} />
@@ -111,7 +111,7 @@ export default function Skills() {
                 <FadeRight
                   key={`tools-techs-${index}`}
                   duration={0.4}
-                  delay={0.2 + index * 0.1}
+                  delay={0.1 + index * 0.1}
                   whileInView
                 >
                   <SkillPill {...pill} />
