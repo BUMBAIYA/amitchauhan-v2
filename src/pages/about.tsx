@@ -1,12 +1,12 @@
 import Image from "next/image";
 import { PageSEO } from "@/components/PageSEO";
-import FadeRight from "@/components/animation/FadeRight";
-import FadeUp from "@/components/animation/FadeUp";
+import FadeRight from "@/animation/FadeRight";
+import FadeUp from "@/animation/FadeUp";
 import { AnimatePresence } from "framer-motion";
 import ShowCaseList from "@/components/ShowCaseList";
-import { EXPERIENCE } from "@/components/data/experience";
-import { EDUCATION } from "@/components/data/education";
-import heroProfileImg from "../../public/images/heroProfile.png";
+import { EXPERIENCE } from "@/data/experience";
+import { EDUCATION } from "@/data/education";
+import heroProfileImg from "@/public/images/heroProfile.png";
 
 export default function About() {
   return (

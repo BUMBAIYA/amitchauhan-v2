@@ -1,5 +1,5 @@
-import { ProjectCard } from "../ProjectCard";
-import { ProjectData } from "../ProjectList";
+import { ProjectCard } from "@/components/ProjectCard";
+import { ProjectData } from "@/components/ProjectList";
 
 export const PROJECTS: ProjectCard[] = [
   {

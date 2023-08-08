@@ -1,9 +1,9 @@
-import Image from "next/image";
-import { ArrowTopRight } from "./Icons";
-import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
-import ProjectList, { ProjectData } from "./ProjectList";
 import Link from "next/link";
+import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowTopRight } from "@/components/Icons";
+import ProjectList, { ProjectData } from "@/components/ProjectList";
 
 const generateImageData = (proj: ProjectData[]) => {
   return proj.map((p) => p.image);

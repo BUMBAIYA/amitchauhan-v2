@@ -1,6 +1,6 @@
+import { RefObject, useRef } from "react";
 import Link from "next/link";
 import { motion, useScroll } from "framer-motion";
-import { RefObject, useRef } from "react";
 
 type ShowCaseLiIcon = {
   iconRef: RefObject<HTMLElement>;

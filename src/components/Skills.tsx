@@ -1,12 +1,12 @@
 import { AnimatePresence } from "framer-motion";
-import FadeRight from "@/components/animation/FadeRight";
+import FadeRight from "@/animation/FadeRight";
 import {
   BACKEND_PILL,
   DATABASE_ORM_PILL,
   LANGUAGES,
   LIBRARY_FRAMEWORK,
   TOOLS_TECHNOLOGIES,
-} from "@/components/data/skills";
+} from "@/data/skills";
 
 export type SkillPillProps = {
   name: string;

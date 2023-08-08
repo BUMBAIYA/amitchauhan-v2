@@ -1,6 +1,6 @@
-import { motion } from "framer-motion";
-import { classNames } from "./utility/classNames";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import { classNames } from "@/utility/classNames";
 
 export type ProjectData = {
   index: number;

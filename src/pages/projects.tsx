@@ -1,6 +1,6 @@
 import { PageSEO } from "@/components/PageSEO";
 import ProjectCard from "@/components/ProjectCard";
-import { PROJECTS } from "@/components/data/projects";
+import { PROJECTS } from "@/data/projects";
 
 export default function Projects() {
   return (

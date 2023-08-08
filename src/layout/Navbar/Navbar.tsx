@@ -1,12 +1,12 @@
 import { usePathname } from "next/navigation";
-import Link from "next/link";
-import { AnimatedLogo } from "../../animation/AnimatedLogo";
-import { AnimatePresence, Variants, motion, useCycle } from "framer-motion";
-import { classNames } from "../../utility/classNames";
-import MenuLogo from "./MenuButton";
-import { NavbarRoutes } from "@/components/routes/navigationRoutes";
-import ThemeSwitch from "./ThemeSwitch";
 import { useRouter } from "next/router";
+import Link from "next/link";
+import { AnimatePresence, Variants, motion, useCycle } from "framer-motion";
+import { AnimatedLogo } from "@/animation/AnimatedLogo";
+import { classNames } from "@/utility/classNames";
+import { NavbarRoutes } from "@/routes/navigationRoutes";
+import MenuLogo from "./MenuButton";
+import ThemeSwitch from "./ThemeSwitch";
 
 const modalVariants: Variants = {
   close: {

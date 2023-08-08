@@ -3,7 +3,7 @@ import CursorTrailCanvas from "@/components/CursorTrailCanvas";
 import Hero from "@/components/Hero";
 import Skills from "@/components/Skills";
 import Project from "@/components/Project";
-import { PROJECT_LIST } from "@/components/data/projects";
+import { PROJECT_LIST } from "@/data/projects";
 
 export default function Home() {
   return (
