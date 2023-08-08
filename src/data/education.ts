@@ -1,4 +1,4 @@
-import { ShowCaseListDetatils } from "../ShowCaseList";
+import { ShowCaseListDetatils } from "@/components/ShowCaseList";
 
 export const EDUCATION: ShowCaseListDetatils[] = [
   {

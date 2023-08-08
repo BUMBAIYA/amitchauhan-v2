@@ -1,6 +1,6 @@
-import { AnimatePresence, motion } from "framer-motion";
-import FadeUp from "./animation/FadeUp";
 import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import FadeUp from "@/animation/FadeUp";
 
 export default function Hero() {
   const [scrollY, setScrollY] = useState(0);

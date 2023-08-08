@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
 import { Montserrat } from "next/font/google";
-import { classNames } from "../utility/classNames";
+import { classNames } from "@/utility/classNames";
 import Navbar from "./Navbar/Navbar";
-import { routes } from "../routes/navigationRoutes";
+import { routes } from "@/routes/navigationRoutes";
 import Footer from "./Footer";
 
 const montserrat = Montserrat({

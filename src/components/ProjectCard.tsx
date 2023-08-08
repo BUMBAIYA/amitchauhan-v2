@@ -1,9 +1,9 @@
 import Link from "next/link";
 import Image, { StaticImageData } from "next/image";
 import { motion } from "framer-motion";
-import { classNames } from "./utility/classNames";
-import Tooltip from "./Tooltip";
-import { GithubIcon } from "./Icons";
+import { classNames } from "@/utility/classNames";
+import Tooltip from "@/components/Tooltip";
+import { GithubIcon } from "@/components/Icons";
 
 export type ProjectCard = {
   caption?: string;

@@ -1,12 +1,12 @@
-import { classNames } from "@/components/utility/classNames";
-import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import { useTheme } from "next-themes";
 
 export default function ThemeSwitch() {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme, resolvedTheme } = useTheme();
-  // When mounted on client, now we can show the UI
+
   useEffect(() => setMounted(true), []);
+
   return (
     <button
       type="button"

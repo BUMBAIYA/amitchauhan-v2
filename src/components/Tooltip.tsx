@@ -1,5 +1,5 @@
 import { CSSProperties, ReactNode, useEffect, useRef } from "react";
-import { classNames } from "./utility/classNames";
+import { classNames } from "@/utility/classNames";
 
 export type Tooltip = {
   className?: string;
