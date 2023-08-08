@@ -17,7 +17,7 @@ function SkillPill(props: SkillPillProps) {
   const { name, icon } = props;
 
   return (
-    <div className="-z-20 flex w-max items-center gap-2 overflow-hidden rounded-lg border border-tera-500/20 bg-white px-4 py-3 text-sm shadow-sm dark:bg-zinc-800 sm:text-base md:px-6 md:py-3 md:text-lg">
+    <div className="flex w-max items-center gap-2 overflow-hidden rounded-lg border border-tera-500/20 bg-white px-4 py-3 text-sm shadow-sm dark:bg-zinc-800 sm:text-base md:px-6 md:py-3 md:text-lg">
       {icon}
       <span className="font-medium">{name}</span>
     </div>
@@ -39,6 +39,7 @@ export default function Skills() {
                   duration={0.4}
                   delay={0.1 + index * 0.1}
                   whileInView
+                  className="-z-20"
                 >
                   <SkillPill {...pill} />
                 </FadeRight>
@@ -58,6 +59,7 @@ export default function Skills() {
                   duration={0.4}
                   delay={0.1 + index * 0.1}
                   whileInView
+                  className="-z-20"
                 >
                   <SkillPill {...pill} />
                 </FadeRight>
@@ -75,6 +77,7 @@ export default function Skills() {
                   duration={0.4}
                   delay={0.1 + index * 0.1}
                   whileInView
+                  className="-z-20"
                 >
                   <SkillPill {...pill} />
                 </FadeRight>
@@ -94,6 +97,7 @@ export default function Skills() {
                   duration={0.4}
                   delay={0.1 + index * 0.1}
                   whileInView
+                  className="-z-20"
                 >
                   <SkillPill {...pill} />
                 </FadeRight>
@@ -113,6 +117,7 @@ export default function Skills() {
                   duration={0.4}
                   delay={0.1 + index * 0.1}
                   whileInView
+                  className="-z-20"
                 >
                   <SkillPill {...pill} />
                 </FadeRight>

@@ -106,7 +106,7 @@ export default function Project(props: Project) {
           ))}
         </div>
         <Link
-          href="#"
+          href="/projects"
           className="group relative flex max-w-max items-center gap-4 text-base font-semibold sm:text-lg md:text-xl"
         >
           <div className="relative max-w-max">

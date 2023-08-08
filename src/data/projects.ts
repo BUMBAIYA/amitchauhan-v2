@@ -61,7 +61,7 @@ export const PROJECT_LIST: ProjectData[] = [
   {
     index: 0,
     title: "Json Tree",
-    href: "#",
+    href: "/projects",
     tags: ["Nextjs", "Tailwindcss", "Monaco Editor", "Vercel"],
     image: {
       LIGHT: "/images/projects/jsontreeLight.webp",
@@ -71,7 +71,7 @@ export const PROJECT_LIST: ProjectData[] = [
   {
     index: 1,
     title: "Many Games",
-    href: "#",
+    href: "/projects",
     tags: [
       "Reactjs",
       "Tailwindcss",
@@ -89,7 +89,7 @@ export const PROJECT_LIST: ProjectData[] = [
   {
     index: 2,
     title: "Kanban",
-    href: "#",
+    href: "/projects",
     tags: ["Reactjs", "Vite", "Tailwindcss", "Vercel", "Zustand", "React DND"],
     image: {
       LIGHT: "/images/projects/kanbanLight.webp",
