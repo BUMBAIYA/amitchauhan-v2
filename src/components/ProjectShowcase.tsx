@@ -3,20 +3,22 @@ import Link from "next/link";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowTopRight } from "@/components/Icons";
-import ProjectList, { ProjectData } from "@/components/ProjectList";
+import ProjectShowcaseList, {
+  ProjectShowcaseListProps,
+} from "@/components/ProjectShowcaseList";
 
-const generateImageData = (proj: ProjectData[]) => {
+const generateImageData = (proj: ProjectShowcaseListProps[]) => {
   return proj.map((p) => p.image);
 };
 
-type Project = {
-  projects: ProjectData[];
+type ProjectShowcase = {
+  projects: ProjectShowcaseListProps[];
 };
 
-export default function Project(props: Project) {
+export default function ProjectShowcase(props: ProjectShowcase) {
   const [currentImage, setCurrentImage] = useState<number>(0);
 
-  const [images, setImages] = useState<ProjectData["image"][]>(
+  const [images, setImages] = useState<ProjectShowcaseListProps["image"][]>(
     generateImageData(props.projects),
   );
 
@@ -71,7 +73,7 @@ export default function Project(props: Project) {
         <h2 className="text-xl font-semibold sm:text-3xl">My projects</h2>
         <div className="hidden flex-col gap-6 py-14 sm:gap-8 sm:py-20 md:gap-10 lg:flex">
           {props.projects.map((proj, index) => (
-            <ProjectList
+            <ProjectShowcaseList
               activeProject={currentImage}
               toggleList={handleAnimate}
               data={proj}

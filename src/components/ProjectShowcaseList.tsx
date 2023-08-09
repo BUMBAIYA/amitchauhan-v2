@@ -2,7 +2,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { classNames } from "@/utility/classNames";
 
-export type ProjectData = {
+export type ProjectShowcaseListProps = {
   index: number;
   title: string;
   href: string;
@@ -14,12 +14,12 @@ export type ProjectData = {
 };
 
 export type ProjectList = {
-  data: ProjectData;
+  data: ProjectShowcaseListProps;
   activeProject: number;
   toggleList: (index: number) => void;
 };
 
-export default function ProjectList(props: ProjectList) {
+export default function ProjectShowcaseList(props: ProjectList) {
   return (
     <motion.div
       className={classNames("group flex gap-4 ")}
