@@ -1,18 +1,29 @@
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 
-export default function ThemeSwitch() {
+type ThemeSwitchProps = {
+  setClose?: Dispatch<SetStateAction<boolean>>;
+};
+
+export default function ThemeSwitch(props: ThemeSwitchProps) {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme, resolvedTheme } = useTheme();
 
   useEffect(() => setMounted(true), []);
+
+  const handleThemeChange = () => {
+    if (props.setClose) {
+      props.setClose(false);
+    }
+    setTheme(resolvedTheme === "dark" ? "light" : "dark");
+  };
 
   return (
     <button
       type="button"
       aria-label="toggle theme"
       className="mt-4 h-10 w-10 rounded-full text-white transition-[scale] duration-200 hover:scale-[1.1] dark:text-white md:mr-4 md:mt-0 md:h-6 md:w-6 md:text-tera-500 md:dark:text-teal-400"
-      onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+      onClick={handleThemeChange}
     >
       {mounted &&
         (theme === "dark" || resolvedTheme === "dark" ? (

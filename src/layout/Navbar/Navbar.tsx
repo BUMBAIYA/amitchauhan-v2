@@ -1,7 +1,8 @@
+import { useState } from "react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/router";
-import Link from "next/link";
-import { AnimatePresence, Variants, motion, useCycle } from "framer-motion";
+import { AnimatePresence, Variants, motion } from "framer-motion";
 import { AnimatedLogo } from "@/animation/AnimatedLogo";
 import { classNames } from "@/utility/classNames";
 import { NavbarRoutes } from "@/routes/navigationRoutes";
@@ -32,7 +33,11 @@ export default function Navbar(props: Navbar) {
   const pathName = usePathname();
   const router = useRouter();
 
-  const [isModalOpen, toggleModal] = useCycle(false, true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const toggleModal = () => {
+    setIsModalOpen((prev) => !prev);
+  };
 
   const handleClick = (href: string) => {
     toggleModal();
@@ -117,7 +122,7 @@ export default function Navbar(props: Navbar) {
                 {link.title}
               </button>
             ))}
-            <ThemeSwitch />
+            <ThemeSwitch setClose={setIsModalOpen} />
           </div>
           <div className="mt-16 text-white">©2023 Amit Chauhan</div>
         </motion.div>
