@@ -7,6 +7,8 @@ import {
   LIBRARY_FRAMEWORK,
   TOOLS_TECHNOLOGIES,
 } from "@/data/skills";
+import { useScreenBreakpoint } from "@/hooks/useScreenBreakpoint";
+import { useDebounceValue } from "@/hooks/useDebounceValue";
 
 export type SkillPillProps = {
   name: string;
@@ -25,6 +27,8 @@ function SkillPill(props: SkillPillProps) {
 }
 
 export default function Skills() {
+  const isMobile = useScreenBreakpoint(640);
+  const isMobileDebonced = useDebounceValue(isMobile, 600);
   return (
     <section className="overflow-hidden px-6 py-32 sm:px-14 md:px-20">
       <div className="relative mx-auto max-w-7xl">
@@ -38,7 +42,7 @@ export default function Skills() {
                   key={`lang-${index}`}
                   duration={0.4}
                   delay={0.1 + index * 0.1}
-                  whileInView
+                  whileInView={!isMobileDebonced}
                   className="-z-20"
                 >
                   <SkillPill {...pill} />
@@ -58,7 +62,7 @@ export default function Skills() {
                   key={`lib-frame-${index}`}
                   duration={0.4}
                   delay={0.1 + index * 0.1}
-                  whileInView
+                  whileInView={!isMobileDebonced}
                   className="-z-20"
                 >
                   <SkillPill {...pill} />
@@ -76,7 +80,7 @@ export default function Skills() {
                   key={`backend-${index}`}
                   duration={0.4}
                   delay={0.1 + index * 0.1}
-                  whileInView
+                  whileInView={!isMobileDebonced}
                   className="-z-20"
                 >
                   <SkillPill {...pill} />
@@ -96,7 +100,7 @@ export default function Skills() {
                   key={`database-orm-${index}`}
                   duration={0.4}
                   delay={0.1 + index * 0.1}
-                  whileInView
+                  whileInView={!isMobileDebonced}
                   className="-z-20"
                 >
                   <SkillPill {...pill} />
@@ -116,7 +120,7 @@ export default function Skills() {
                   key={`tools-techs-${index}`}
                   duration={0.4}
                   delay={0.1 + index * 0.1}
-                  whileInView
+                  whileInView={!isMobileDebonced}
                   className="-z-20"
                 >
                   <SkillPill {...pill} />
