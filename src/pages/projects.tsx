@@ -9,7 +9,7 @@ export default function Projects() {
         title="Amit Chauhan | Projects"
         description="Project showcase of Amit Chauhan's portfolio"
       />
-      <div className="mx-auto mb-40 mt-6 max-w-7xl gap-20 px-6 sm:mt-12 sm:px-14 md:px-20">
+      <div className="mx-auto mb-40 mt-6 max-w-7xl gap-20 sm:mt-12">
         <h1 className="text-2xl font-semibold md:text-4xl">Projects</h1>
         <div className="my-2">
           <span className="text-sm">
