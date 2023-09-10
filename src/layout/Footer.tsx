@@ -2,8 +2,24 @@ import { GithubIcon, LinkedinIcon, TwitterIcon } from "@/components/Icons";
 
 export default function Footer() {
   return (
-    <footer className="flex h-20 w-full items-center bg-transparent px-6 sm:px-14 md:px-20">
-      <div className="flex w-full flex-col items-center justify-between gap-8 py-8 text-center  md:flex-row md:justify-between lg:mx-auto lg:max-w-7xl">
+    <footer className="my-8 flex w-full flex-col items-center gap-20 bg-transparent px-6 sm:px-14 md:px-20">
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 rounded-2xl bg-teal-600 p-8 text-zinc-100 dark:bg-teal-500 sm:p-12 md:gap-12 lg:p-20">
+        <div className="text-center">
+          <span className="inline-block rounded-full bg-zinc-100 px-3 py-1 text-xs font-semibold uppercase text-tera-500">
+            Get in touch
+          </span>
+        </div>
+        <a
+          href="mailto:amitchauhan263871@gmail.com"
+          target="_blank"
+          className="mb-6 cursor-pointer text-center text-2xl font-bold underline sm:text-4xl lg:text-7xl"
+        >
+          <span>amitchauhan263871@</span>
+          <br />
+          <span>gmail.com</span>
+        </a>
+      </div>
+      <div className="flex w-full flex-col items-center justify-between gap-8 text-center  md:flex-row md:justify-between lg:mx-auto lg:max-w-7xl">
         <span>©2023 Amit Chauhan</span>
         <div className="flex gap-8">
           <a
