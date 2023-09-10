@@ -23,7 +23,8 @@ export default function ProjectShowcaseList(props: ProjectList) {
   return (
     <motion.div
       className={classNames("group flex gap-4 ")}
-      onHoverStart={(e) => props.toggleList(props.data.index)}
+      onHoverStart={() => props.toggleList(props.data.index)}
+      onFocus={() => props.toggleList(props.data.index)}
     >
       <span
         className={classNames(

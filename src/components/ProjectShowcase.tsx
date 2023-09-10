@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
@@ -18,9 +18,9 @@ type ProjectShowcase = {
 export default function ProjectShowcase(props: ProjectShowcase) {
   const [currentImage, setCurrentImage] = useState<number>(0);
 
-  const [images, setImages] = useState<ProjectShowcaseListProps["image"][]>(
-    generateImageData(props.projects),
-  );
+  const images = useMemo(() => {
+    return generateImageData(props.projects);
+  }, [props.projects]);
 
   const handleAnimate = (index: number) => {
     if (index === currentImage) return;
