@@ -2,6 +2,7 @@ import { Fragment, useRef, useState, MouseEvent as RMouseEvent } from "react";
 import { useAutosizeTextArea } from "@/hooks/useAutoSizeTextarea";
 import { Transition, Dialog } from "@headlessui/react";
 import { MailIcon } from "@/components/Icons";
+import { verifyEmailAddress } from "@/utility/verifyEmail";
 
 type ContactFormData = {
   name: string;
@@ -69,14 +70,17 @@ export function ContactForm() {
   const handleSubmit = (e: RMouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     setErrors(handleValidation());
-    // TODO
     if (
       formData.name !== "" &&
       formData.email !== "" &&
       formData.subject !== "" &&
       formData.message
     ) {
-      // TODO: handle form submit
+      if (verifyEmailAddress(formData.email)) {
+        // TODO: handle form submit
+      } else {
+        setErrors((prev) => ({ ...prev, email: "invalid" }));
+      }
     }
   };
 
@@ -192,7 +196,9 @@ export function ContactForm() {
                     />
                     {errors.email && (
                       <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-bold text-red-400 md:text-sm">
-                        Required
+                        {errors.email === "invalid"
+                          ? "Invalid mail"
+                          : "Required"}
                       </span>
                     )}
                   </div>
