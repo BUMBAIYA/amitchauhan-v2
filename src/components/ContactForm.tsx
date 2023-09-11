@@ -1,8 +1,16 @@
-import { Fragment, useRef, useState, MouseEvent as RMouseEvent } from "react";
-import { useAutosizeTextArea } from "@/hooks/useAutoSizeTextarea";
+import {
+  Fragment,
+  useRef,
+  useState,
+  MouseEvent as RMouseEvent,
+  useEffect,
+} from "react";
 import { Transition, Dialog } from "@headlessui/react";
-import { MailIcon } from "@/components/Icons";
+import { useAutosizeTextArea } from "@/hooks/useAutoSizeTextarea";
+import { CheckIcon, DangerIcon, MailIcon } from "@/components/Icons";
 import { verifyEmailAddress } from "@/utility/verifyEmail";
+import { Toast } from "@/components/Toast";
+import { classNames } from "@/utility/classNames";
 
 type ContactFormData = {
   name: string;
@@ -36,11 +44,19 @@ type Fields = "name" | "email" | "subject" | "message";
 
 const fields: Fields[] = ["name", "email", "subject", "message"];
 
+type ToastType = "PASS" | "FAIL" | null;
+
 export function ContactForm() {
   const refTextArea = useRef<HTMLTextAreaElement>(null);
+  const abortController = useRef<AbortController | null>(null);
   const [formData, setFormData] = useState<ContactFormData>(initialFormData);
+  const [showToast, setShowToast] = useState<{
+    type: ToastType;
+    value: boolean;
+  }>({ type: null, value: false });
   useAutosizeTextArea(refTextArea, formData.message, "128px");
 
+  const [isSendingMail, setIsSendingMail] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
 
   const [errors, setErrors] = useState<ContactFormError>(initialError);
@@ -50,9 +66,13 @@ export function ContactForm() {
   };
 
   const handleCloseModal = () => {
+    if (abortController.current) {
+      abortController.current.abort();
+    }
     setIsOpenModal(false);
     setErrors(initialError);
     setFormData(initialFormData);
+    setIsSendingMail(false);
   };
 
   const handleValidation = () => {
@@ -67,7 +87,9 @@ export function ContactForm() {
     return newErrors;
   };
 
-  const handleSubmit = (e: RMouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleSubmit = async (
+    e: RMouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
     e.preventDefault();
     setErrors(handleValidation());
     if (
@@ -77,7 +99,37 @@ export function ContactForm() {
       formData.message
     ) {
       if (verifyEmailAddress(formData.email)) {
-        // TODO: handle form submit
+        setIsSendingMail(true);
+
+        const newAbortController = new AbortController();
+        abortController.current = newAbortController;
+
+        try {
+          const response = await fetch("/api/sendmail", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData),
+            signal: newAbortController.signal,
+          });
+
+          if (response) {
+            setErrors(initialError);
+            setFormData(initialFormData);
+            setIsSendingMail(false);
+            setShowToast({ type: "PASS", value: true });
+          } else {
+            setIsSendingMail(false);
+            setShowToast({ type: "FAIL", value: true });
+          }
+        } catch (error) {
+          if (error instanceof DOMException && error.name === "AbortError") {
+            // eslint-disable-next-line
+            console.warn("Aborted sending mail");
+          } else {
+            // eslint-disable-next-line
+            console.error("[Error]: Unable to send mail");
+          }
+        }
       } else {
         setErrors((prev) => ({ ...prev, email: "invalid" }));
       }
@@ -89,8 +141,41 @@ export function ContactForm() {
     setErrors(initialError);
   };
 
+  useEffect(() => {
+    return () => {
+      const controller = abortController.current;
+      if (controller) {
+        controller.abort();
+      }
+    };
+  }, []);
+
   return (
     <>
+      {showToast && (
+        <Toast
+          open={showToast.value}
+          duration={5000}
+          onClose={() => setShowToast((prev) => ({ ...prev, value: false }))}
+          className={classNames(
+            "fixed right-4 top-6 z-[9999] rounded-lg bg-teal-500 px-4 py-2 font-semibold text-white shadow-xl",
+            showToast.type === "PASS" ? "bg-teal-500" : "bg-red-600",
+          )}
+        >
+          <div className="flex w-full max-w-xs items-center gap-2">
+            {showToast.type === "PASS" ? (
+              <CheckIcon className="h-6 w-6 md:h-8 md:w-8" />
+            ) : (
+              <DangerIcon className="h-6 w-6 md:h-8 md:w-8" />
+            )}
+
+            <span className="text-sm md:text-xl">
+              {showToast.type === "PASS" ? "Mail sent" : "Mail failed"}
+            </span>
+          </div>
+        </Toast>
+      )}
+
       <div className="text-center">
         <button
           className="inline-flex items-center gap-2 rounded-md bg-zinc-100 px-3 py-2 text-teal-600 transition-transform duration-150 focus-within:scale-[1.05] hover:scale-[1.05] hover:bg-white"
@@ -237,10 +322,40 @@ export function ContactForm() {
 
                   <button
                     type="submit"
-                    className="mt-4 w-full rounded-full bg-teal-50 px-4 py-2 text-center text-lg font-semibold text-teal-900 transition-colors duration-150 hover:bg-teal-100"
+                    className="mt-4 w-full rounded-full bg-teal-50 px-4 py-3 text-center text-lg font-semibold text-teal-900 transition-colors duration-150 hover:bg-teal-100"
                     onClick={handleSubmit}
+                    disabled={isSendingMail}
                   >
-                    Submit
+                    {isSendingMail ? (
+                      <div className="inline-flex items-center gap-4">
+                        <span className="h-4 w-4">
+                          <svg
+                            stroke="currentColor"
+                            fill="currentColor"
+                            strokeWidth="0"
+                            viewBox="0 0 24 24"
+                            height="100%"
+                            width="100%"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path d="M12 22c5.421 0 10-4.579 10-10h-2c0 4.337-3.663 8-8 8s-8-3.663-8-8c0-4.336 3.663-8 8-8V2C6.579 2 2 6.58 2 12c0 5.421 4.579 10 10 10z">
+                              <animateTransform
+                                attributeName="transform"
+                                attributeType="XML"
+                                type="rotate"
+                                dur="1s"
+                                from="0 12 12"
+                                to="360 12 12"
+                                repeatCount="indefinite"
+                              />
+                            </path>
+                          </svg>
+                        </span>
+                        <span>Sending</span>
+                      </div>
+                    ) : (
+                      "Submit"
+                    )}
                   </button>
                 </form>
               </Dialog.Panel>
