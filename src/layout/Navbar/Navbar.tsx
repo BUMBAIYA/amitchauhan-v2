@@ -1,29 +1,14 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/router";
-import { AnimatePresence, Variants, motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { AnimatedLogo } from "@/animation/AnimatedLogo";
 import { classNames } from "@/utility/classNames";
 import { NavbarRoutes } from "@/routes/navigationRoutes";
 import MenuLogo from "./MenuButton";
 import ThemeSwitch from "./ThemeSwitch";
-
-const modalVariants: Variants = {
-  close: {
-    scale: 0,
-    opacity: 0,
-    x: "-50%",
-    y: "-50%",
-  },
-  open: {
-    scale: 1,
-    opacity: 1,
-    transition: {
-      duration: 0.2,
-    },
-  },
-};
+import { Dialog, Transition } from "@headlessui/react";
 
 type Navbar = {
   routes: NavbarRoutes;
@@ -100,33 +85,44 @@ export default function Navbar(props: Navbar) {
           <MenuLogo open={isModalOpen} toggle={toggleModal} />
         </AnimatePresence>
       </div>
-      <AnimatePresence mode="wait" initial={false}>
-        <motion.div
-          variants={modalVariants}
-          animate={isModalOpen ? "open" : "close"}
-          className="fixed left-1/2 top-96 z-50 flex min-w-[90vw] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-between rounded-xl bg-tera-500 py-16 dark:bg-teal-500 sm:min-w-[70vw] sm:py-20 md:hidden"
-        >
-          <div className="flex flex-col items-center gap-4 text-center">
-            {props.routes.map((link, i) => (
-              <button
-                key={i}
-                className="group relative py-2 text-3xl font-medium text-white"
-                onClick={() => handleClick(link.href)}
-              >
-                <span
-                  className={classNames(
-                    pathName === link.href ? "w-full" : "w-0",
-                    "absolute -bottom-1 left-0 h-1 rounded-lg bg-white transition-[width] duration-300 group-hover:w-full",
-                  )}
-                ></span>
-                {link.title}
-              </button>
-            ))}
-            <ThemeSwitch setClose={setIsModalOpen} />
+
+      <Transition show={isModalOpen} as={Fragment}>
+        <Dialog as="div" className="z-50" onClose={setIsModalOpen}>
+          <div className="fixed inset-0 flex items-center justify-center">
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0 bottom-full"
+              enterTo="opacity-100 bottom-[15%]"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100 bottom-[15%]"
+              leaveTo="opacity-0 bottom-full"
+            >
+              <Dialog.Panel className="pointer-events-none absolute flex min-h-[85%] w-full flex-col items-center justify-center overflow-y-auto rounded-b-2xl border-2 border-teal-100/20 border-teal-600 bg-zinc-100 px-6 py-8 text-teal-600 shadow-lg shadow-teal-200/10 dark:bg-teal-700 dark:text-zinc-100 md:px-10 md:py-16">
+                <div className="pointer-events-auto flex flex-col items-center gap-6 text-center">
+                  {props.routes.map((link, i) => (
+                    <button
+                      key={i}
+                      className="group relative py-2 text-3xl font-medium"
+                      onClick={() => handleClick(link.href)}
+                    >
+                      <span
+                        className={classNames(
+                          pathName === link.href ? "w-full" : "w-0",
+                          "absolute -bottom-1 left-0 h-1 rounded-lg bg-teal-600 transition-[width] duration-300 group-hover:w-full dark:bg-zinc-100",
+                        )}
+                      ></span>
+                      {link.title}
+                    </button>
+                  ))}
+                  <ThemeSwitch setClose={setIsModalOpen} />
+                </div>
+                <div className="absolute bottom-0 py-6">©2023 Amit Chauhan</div>
+              </Dialog.Panel>
+            </Transition.Child>
           </div>
-          <div className="mt-16 text-white">©2023 Amit Chauhan</div>
-        </motion.div>
-      </AnimatePresence>
+        </Dialog>
+      </Transition>
     </header>
   );
 }

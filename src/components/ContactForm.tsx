@@ -46,10 +46,18 @@ const fields: Fields[] = ["name", "email", "subject", "message"];
 
 type ToastType = "PASS" | "FAIL" | "RATE_LIMIT" | null;
 
+const options = {
+  root: null,
+  rootMargin: "100px",
+  threshold: 0.1,
+};
+
 export function ContactForm() {
   const refTextArea = useRef<HTMLTextAreaElement>(null);
+  const refSendBtn = useRef<HTMLButtonElement>(null);
   const abortController = useRef<AbortController | null>(null);
   const [formData, setFormData] = useState<ContactFormData>(initialFormData);
+  const [isBtnVisible, setIsBtnVisible] = useState<boolean>(false);
   const [showToast, setShowToast] = useState<{
     type: ToastType;
     value: boolean;
@@ -60,6 +68,11 @@ export function ContactForm() {
   const [isOpenModal, setIsOpenModal] = useState(false);
 
   const [errors, setErrors] = useState<ContactFormError>(initialError);
+
+  const observerCallback = (entries: IntersectionObserverEntry[]) => {
+    const [entry] = entries;
+    setIsBtnVisible(!entry.isIntersecting);
+  };
 
   const handleOpenModal = () => {
     setIsOpenModal(true);
@@ -150,6 +163,15 @@ export function ContactForm() {
   };
 
   useEffect(() => {
+    const btn = refSendBtn.current;
+    const observer = new IntersectionObserver(observerCallback, options);
+    if (btn) observer.observe(btn);
+    return () => {
+      if (btn) observer.unobserve(btn);
+    };
+  }, [refSendBtn]);
+
+  useEffect(() => {
     return () => {
       const controller = abortController.current;
       if (controller) {
@@ -192,8 +214,19 @@ export function ContactForm() {
         </Toast>
       )}
 
+      {isBtnVisible && !isOpenModal && (
+        <button
+          type="button"
+          className="fixed bottom-4 right-4 flex h-12 w-12 items-center justify-center rounded-full bg-teal-600 p-2 text-white transition-colors duration-150 hover:bg-teal-500 sm:bottom-8 sm:right-8 sm:h-14 sm:w-14 lg:h-16 lg:w-16"
+          onClick={() => setIsOpenModal(true)}
+        >
+          <MailIcon />
+        </button>
+      )}
+
       <div className="text-center">
         <button
+          ref={refSendBtn}
           className="inline-flex items-center gap-2 rounded-md bg-zinc-100 px-3 py-2 text-teal-600 transition-transform duration-150 focus-within:scale-[1.05] hover:scale-[1.05] hover:bg-white"
           onClick={handleOpenModal}
         >
