@@ -217,7 +217,7 @@ export function ContactForm() {
       {isBtnVisible && !isOpenModal && (
         <button
           type="button"
-          className="fixed bottom-4 right-4 flex h-12 w-12 items-center justify-center rounded-full bg-teal-600 p-2 text-white transition-colors duration-150 hover:bg-teal-500 sm:bottom-8 sm:right-8 sm:h-14 sm:w-14 lg:h-16 lg:w-16"
+          className="fixed bottom-4 right-4 flex h-12 w-12 items-center justify-center rounded-full bg-teal-600 p-2 text-white transition-colors duration-150 hover:bg-teal-500 sm:bottom-8 sm:right-8 sm:h-14 sm:w-14 sm:p-3 lg:h-16 lg:w-16"
           onClick={() => setIsOpenModal(true)}
         >
           <MailIcon />
