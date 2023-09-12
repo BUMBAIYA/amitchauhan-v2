@@ -132,6 +132,10 @@ export function ContactForm() {
           } else {
             // eslint-disable-next-line
             console.error("[Error]: Unable to send mail");
+            setShowToast({
+              type: "FAIL",
+              value: true,
+            });
           }
         }
       } else {
