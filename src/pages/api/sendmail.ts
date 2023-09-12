@@ -1,6 +1,28 @@
-import { verifyEmailAddress } from "@/utility/verifyEmail";
 import { NextApiRequest, NextApiResponse } from "next";
 import { createTransport } from "nodemailer";
+import { v4 } from "uuid";
+import { rateLimiterApi } from "@/utility/rateLimiter";
+import { verifyEmailAddress } from "@/utility/verifyEmail";
+
+const REQUEST_PER_HOUR = 5 as const;
+const RATELIMIT_DURATION = 3600000 as const;
+const MAX_USER_PER_SECOND = 100 as const;
+
+const limiter = rateLimiterApi({
+  interval: RATELIMIT_DURATION,
+  uniqueTokenPerInterval: MAX_USER_PER_SECOND,
+  getUserId: (req: NextApiRequest, res: NextApiResponse) => {
+    let userUuidToken = req.cookies.userUuid;
+    if (!userUuidToken) {
+      userUuidToken = v4();
+      res.setHeader(
+        "Set-Cookie",
+        `userUuid=${userUuidToken}; Max-Age=${60 * 60 * 24}; SameSite=Strict`,
+      );
+    }
+    return userUuidToken;
+  },
+});
 
 type MailRequestBody = {
   name: string;
@@ -49,8 +71,11 @@ const handler = async (
     const { method } = req;
     const data: MailRequestBody = req.body;
 
-    // Validate json body
+    const isRateLimited = await limiter.check(res, req, REQUEST_PER_HOUR);
+    if (isRateLimited.status !== 200) return;
+
     if (!data.name || !data.email || !data.subject || !data.message) {
+      // Validate json body
       res.status(400).json({
         status: 400,
         message: "Fill the entire form",
@@ -83,11 +108,15 @@ const handler = async (
         });
       }
     }
-  } catch (error) {
-    res.status(400).json({
-      status: 400,
-      message: "Failed to send mail",
-    });
+  } catch (error: any) {
+    if (error?.status === 429) {
+      res.status(429).json({ status: 429, message: "Rate limit exceeded" });
+    } else {
+      res.status(error.status || 500).json({
+        status: 500,
+        message: error.message || "Internal server error",
+      });
+    }
   }
 };
 

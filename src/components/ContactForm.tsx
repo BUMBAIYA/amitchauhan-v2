@@ -44,7 +44,7 @@ type Fields = "name" | "email" | "subject" | "message";
 
 const fields: Fields[] = ["name", "email", "subject", "message"];
 
-type ToastType = "PASS" | "FAIL" | null;
+type ToastType = "PASS" | "FAIL" | "RATE_LIMIT" | null;
 
 export function ContactForm() {
   const refTextArea = useRef<HTMLTextAreaElement>(null);
@@ -112,14 +112,17 @@ export function ContactForm() {
             signal: newAbortController.signal,
           });
 
-          if (response) {
+          if (response.ok) {
             setErrors(initialError);
             setFormData(initialFormData);
             setIsSendingMail(false);
             setShowToast({ type: "PASS", value: true });
           } else {
             setIsSendingMail(false);
-            setShowToast({ type: "FAIL", value: true });
+            setShowToast({
+              type: response.status === 429 ? "RATE_LIMIT" : "FAIL",
+              value: true,
+            });
           }
         } catch (error) {
           if (error instanceof DOMException && error.name === "AbortError") {
@@ -155,11 +158,15 @@ export function ContactForm() {
       {showToast && (
         <Toast
           open={showToast.value}
-          duration={5000}
+          duration={3000}
           onClose={() => setShowToast((prev) => ({ ...prev, value: false }))}
           className={classNames(
             "fixed right-4 top-6 z-[9999] rounded-lg bg-teal-500 px-4 py-2 font-semibold text-white shadow-xl",
-            showToast.type === "PASS" ? "bg-teal-500" : "bg-red-600",
+            showToast.type === "PASS"
+              ? "bg-teal-500"
+              : showToast.type === "RATE_LIMIT"
+              ? "bg-yellow-500"
+              : "bg-red-600",
           )}
         >
           <div className="flex w-full max-w-xs items-center gap-2">
@@ -170,7 +177,11 @@ export function ContactForm() {
             )}
 
             <span className="text-sm md:text-xl">
-              {showToast.type === "PASS" ? "Mail sent" : "Mail failed"}
+              {showToast.type === "PASS"
+                ? "Mail sent"
+                : showToast.type === "RATE_LIMIT"
+                ? "Only 5 mail per hour"
+                : "Mail failed"}
             </span>
           </div>
         </Toast>
