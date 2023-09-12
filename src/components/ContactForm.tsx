@@ -117,6 +117,7 @@ export function ContactForm() {
             setFormData(initialFormData);
             setIsSendingMail(false);
             setShowToast({ type: "PASS", value: true });
+            setIsOpenModal(false);
           } else {
             setIsSendingMail(false);
             setShowToast({
