@@ -216,6 +216,7 @@ export function ContactForm() {
 
       {isBtnVisible && !isOpenModal && (
         <button
+          aria-label="open send mail modal"
           type="button"
           className="fixed bottom-4 right-4 flex h-12 w-12 items-center justify-center rounded-full bg-teal-600 p-2 text-white transition-colors duration-150 hover:bg-teal-500 sm:bottom-8 sm:right-8 sm:h-14 sm:w-14 sm:p-3 lg:h-16 lg:w-16"
           onClick={() => setIsOpenModal(true)}
@@ -370,6 +371,7 @@ export function ContactForm() {
                   </div>
 
                   <button
+                    aria-label="open send mail modal"
                     type="submit"
                     className="mt-4 w-full rounded-full bg-teal-50 px-4 py-3 text-center text-lg font-semibold text-teal-900 transition-colors duration-150 hover:bg-teal-100"
                     onClick={handleSubmit}
