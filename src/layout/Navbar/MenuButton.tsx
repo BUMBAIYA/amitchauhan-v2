@@ -20,10 +20,8 @@ export default function MenuLogo(props: MenuLogo) {
     <button
       onClick={props.toggle}
       className={classNames(
-        "flex h-12 w-12 select-none items-center gap-1 rounded-full p-3 py-1 font-semibold shadow-md ring-1 ring-zinc-200 backdrop-blur-md dark:ring-teal-600/50 md:hidden",
-        props.open
-          ? "bg-teal-600 dark:bg-zinc-100"
-          : "bg-zinc-100 dark:bg-zinc-900",
+        "relative z-50 flex h-12 w-12 select-none items-center gap-1 rounded-full p-3 py-1 font-semibold shadow-md ring-1 ring-zinc-200 backdrop-blur-md dark:ring-teal-600/50 md:hidden",
+        props.open ? "hidden" : "bg-zinc-100 dark:bg-zinc-900",
       )}
     >
       <motion.svg
