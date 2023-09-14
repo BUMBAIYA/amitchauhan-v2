@@ -1,6 +1,7 @@
 import { PageSEO } from "@/components/PageSEO";
 import ProjectCard from "@/components/ProjectCard";
 import { PROJECTS_CARD } from "@/data/projects";
+import { siteMetadata } from "@/data/siteMetaData";
 
 export default function Projects() {
   return (
@@ -8,6 +9,8 @@ export default function Projects() {
       <PageSEO
         title="Amit Chauhan | Projects"
         description="Project showcase of Amit Chauhan's portfolio"
+        ogType="website"
+        ogImage={siteMetadata.image}
       />
       <section className="mx-auto mb-40 mt-6 w-full gap-20 px-6 sm:mt-12 sm:px-14 md:px-20">
         <div className="mx-auto max-w-7xl">

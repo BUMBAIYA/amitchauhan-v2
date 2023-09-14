@@ -4,6 +4,7 @@ import Hero from "@/components/Hero";
 import Skills from "@/components/Skills";
 import Project from "@/components/ProjectShowcase";
 import { PROJECT_SHOWCASE } from "@/data/projects";
+import { siteMetadata } from "@/data/siteMetaData";
 
 export default function Home() {
   return (
@@ -13,8 +14,10 @@ export default function Home() {
         className="pointer-events-none fixed inset-0 -z-10 h-full w-full"
       />
       <PageSEO
-        title="Amit Chauhan | Home"
-        description="Homepage of Amit Chauhan's portfolio"
+        title="Amit Chauhan | Web developer"
+        description="Amit Chauhan's portfolio"
+        ogType="website"
+        ogImage={siteMetadata.image}
       />
       <Hero />
       <Skills />
