@@ -1,6 +1,16 @@
-This portfolio is made using [Next.js](https://nextjs.org/) project and [Tailwindcss](https://tailwindcss.com).
+# Portfolio
 
-## Development setup 🛠
+This portfolio is made using [Next.js](https://nextjs.org/) and [Tailwindcss](https://tailwindcss.com).
+
+## 🖥️ Technologies Used
+
+- [Nextjs.js](https://nextjs.org/) : React is a free and open-source front-end JavaScript library for building user interfaces based on UI components.
+- [Tailwind CSS](https://tailwindcss.com) : A utility-first CSS framework for rapid UI development.
+- [TypeScript](https://www.typescriptlang.org): A typed superset of JavaScript that provides enhanced tooling and developer productivity.
+- [Framer motion](https://www.framer.com/motion/): Animation library for React.
+- [Nodemailer](https://nodemailer.com/): Nodemailer is a module for Node.js applications to allow easy email sending.
+
+## 🛠️ Development setup
 
 Steps to locally setup development after cloning the project.
 
