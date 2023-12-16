@@ -22,7 +22,7 @@ export default function Home() {
           url: siteMetadata.siteUrl,
           title: "Amit Chauhan - React and Frontend Developer Portfolio",
           description:
-            "Dive into the world of web development with Your Name. Discover a React and Frontend Developer with 2 years of expertise, showcasing cutting-edge projects and a commitment to crafting exceptional user interfaces.",
+            "Dive into the world of web development with Amit Chauhan. Discover a React and Frontend Developer with 2 years of expertise, showcasing cutting-edge projects and a commitment to crafting exceptional user interfaces.",
           images: [
             {
               url: siteMetadata.twitterImage,

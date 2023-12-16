@@ -1,6 +1,14 @@
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+});
+
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig = withBundleAnalyzer({
   reactStrictMode: true,
+  pageExtensions: ["ts", "tsx", "js"],
+  eslint: {
+    dirs: ["src"],
+  },
   images: {
     domains: ["https://flagcdn.com"],
   },
@@ -15,6 +23,6 @@ const nextConfig = {
 
     return config;
   },
-};
+});
 
 module.exports = nextConfig;

@@ -20,7 +20,7 @@ export default function About() {
           url: `${siteMetadata.siteUrl}/about`,
           title: "Learn About Amit Chauhan - React and Frontend Developer",
           description:
-            "Dive into the story of Your Name, a React and Frontend Developer. Uncover the experiences, skills, and passion that fuel a commitment to delivering exceptional web solutions.",
+            "Dive into the story of Amit Chauhan, a React and Frontend Developer. Uncover the experiences, skills, and passion that fuel a commitment to delivering exceptional web solutions.",
           images: [
             {
               url: siteMetadata.twitterImage,

@@ -7,8 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "analyze": "cross-env ANALYZE=true next build",
     "format:check": "prettier --check \"src/**/*.{js,jsx,ts,tsx,mdx,css,json}\"",
-    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,mdx,css,json}\"",
+    "format:fix": "prettier --write \"src/**/*.{js,jsx,ts,tsx,mdx,css,json}\"",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -40,7 +41,9 @@
     "uuid": "^9.0.1"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^14.0.4",
     "@types/uuid": "^9.0.3",
+    "cross-env": "^7.0.3",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.2"
   }
