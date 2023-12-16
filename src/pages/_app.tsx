@@ -5,6 +5,7 @@ import MainLayout from "@/layout/MainLayout";
 import "@/styles/globals.css";
 import { useRouter } from "next/router";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -18,6 +19,7 @@ export default function App({ Component, pageProps }: AppProps) {
         </MainLayout>
       </ThemeProvider>
       <Analytics />
+      <SpeedInsights />
     </>
   );
 }
