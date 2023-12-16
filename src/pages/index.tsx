@@ -1,5 +1,4 @@
 import { NextSeo } from "next-seo";
-import { PageSEO } from "@/components/PageSEO";
 import CursorTrailCanvas from "@/components/CursorTrailCanvas";
 import Hero from "@/components/Hero";
 import Skills from "@/components/Skills";

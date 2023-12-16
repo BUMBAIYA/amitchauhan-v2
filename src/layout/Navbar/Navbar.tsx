@@ -10,11 +10,11 @@ import MenuLogo from "./MenuButton";
 import ThemeSwitch from "./ThemeSwitch";
 import { Dialog, Transition } from "@headlessui/react";
 
-type Navbar = {
+type TNavbar = {
   routes: NavbarRoutes;
 };
 
-export default function Navbar(props: Navbar) {
+export default function Navbar(props: TNavbar) {
   const pathName = usePathname();
   const router = useRouter();
 

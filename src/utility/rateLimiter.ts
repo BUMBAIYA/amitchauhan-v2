@@ -8,7 +8,7 @@ import { LRUCache } from "lru-cache";
 type options = {
   uniqueTokenPerInterval?: number;
   interval?: number;
-  getUserId: (req: NextApiRequest, res: NextApiResponse) => string;
+  getUserId: (req: NextApiRequest, res: NextApiResponse) => string; // eslint-disable-line no-unused-vars
 };
 
 export function rateLimiterApi(options?: options) {

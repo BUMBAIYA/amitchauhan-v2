@@ -1,7 +1,7 @@
 import { CSSProperties, ReactNode, useEffect, useRef } from "react";
 import { classNames } from "@/utility/classNames";
 
-export type Tooltip = {
+export type TTooltip = {
   className?: string;
   style?: CSSProperties;
   title: string;
@@ -9,7 +9,7 @@ export type Tooltip = {
   children: ReactNode;
 };
 
-export default function Tooltip(props: Tooltip) {
+export default function Tooltip(props: TTooltip) {
   const ref = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLElement>(null);
   function showTooltip() {

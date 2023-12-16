@@ -21,8 +21,6 @@ export function cursorTrail(props: CursorTrail) {
     y: 0,
   };
 
-  let cursorYOffset = 0;
-
   let running = true;
 
   class NewNode {
@@ -164,15 +162,6 @@ export function cursorTrail(props: CursorTrail) {
   function resizeCanvas() {
     ctx.canvas.width = window.innerWidth - 20;
     ctx.canvas.height = window.innerHeight;
-  }
-
-  // Only needed when canvas is not set to full screen height
-  function trackYScroll() {
-    let yOffet =
-      window.pageYOffset ||
-      (document.documentElement || document.body.parentNode || document.body)
-        .scrollTop;
-    cursorYOffset = Math.floor(yOffet);
   }
 
   function stopAnimation() {

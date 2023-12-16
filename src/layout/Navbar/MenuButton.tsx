@@ -10,12 +10,12 @@ const Path = (props: SVGMotionProps<SVGPathElement>) => (
   />
 );
 
-type MenuLogo = {
+type TMenuLogo = {
   open: boolean;
   toggle: () => void;
 };
 
-export default function MenuLogo(props: MenuLogo) {
+export default function MenuLogo(props: TMenuLogo) {
   return (
     <button
       aria-label="open menu"

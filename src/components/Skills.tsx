@@ -1,3 +1,4 @@
+import { JSX } from "react";
 import { AnimatePresence } from "framer-motion";
 import FadeRight from "@/animation/FadeRight";
 import {

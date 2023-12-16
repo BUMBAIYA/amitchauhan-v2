@@ -1,6 +1,6 @@
-import { ShowCaseListDetatils } from "@/components/ShowCaseList";
+import { TShowCaseListDetatils } from "@/components/ShowCaseList";
 
-export const EXPERIENCE: ShowCaseListDetatils[] = [
+export const EXPERIENCE: TShowCaseListDetatils[] = [
   {
     title: "Frontend Developer Intern",
     organisation: {

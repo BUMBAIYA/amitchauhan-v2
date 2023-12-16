@@ -2,11 +2,11 @@ import { RefObject, useRef } from "react";
 import Link from "next/link";
 import { motion, useScroll } from "framer-motion";
 
-type ShowCaseLiIcon = {
+type TShowCaseLiIcon = {
   iconRef: RefObject<HTMLElement>;
 };
 
-function ShowCaseLiIcon(props: ShowCaseLiIcon) {
+function ShowCaseLiIcon(props: TShowCaseLiIcon) {
   const { scrollYProgress } = useScroll({
     target: props.iconRef,
     offset: ["center end", "center center"],
@@ -41,7 +41,7 @@ function ShowCaseLiIcon(props: ShowCaseLiIcon) {
   );
 }
 
-export type ShowCaseListDetatils = {
+export type TShowCaseListDetatils = {
   title: string;
   organisation: {
     name: string;
@@ -52,7 +52,7 @@ export type ShowCaseListDetatils = {
   description: string;
 };
 
-export function ShowCaseListDetatils(props: ShowCaseListDetatils) {
+export function ShowCaseListDetatils(props: TShowCaseListDetatils) {
   const ref = useRef(null);
   return (
     <li ref={ref} className="mx-auto mb-14 flex w-[60%] flex-col gap-1">
@@ -84,12 +84,12 @@ export function ShowCaseListDetatils(props: ShowCaseListDetatils) {
   );
 }
 
-export type ShowCaseList = {
+export type TShowCaseList = {
   title: string;
-  details: ShowCaseListDetatils[];
+  details: TShowCaseListDetatils[];
 };
 
-export default function ShowCaseList(props: ShowCaseList) {
+export default function ShowCaseList(props: TShowCaseList) {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,

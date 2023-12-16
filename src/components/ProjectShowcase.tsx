@@ -11,11 +11,11 @@ const generateImageData = (proj: ProjectShowcaseListProps[]) => {
   return proj.map((p) => p.image);
 };
 
-type ProjectShowcase = {
+type TProjectShowcase = {
   projects: ProjectShowcaseListProps[];
 };
 
-export default function ProjectShowcase(props: ProjectShowcase) {
+export default function ProjectShowcase(props: TProjectShowcase) {
   const [currentImage, setCurrentImage] = useState<number>(0);
 
   const images = useMemo(() => {
@@ -82,7 +82,7 @@ export default function ProjectShowcase(props: ProjectShowcase) {
           ))}
         </div>
         <div className="flex flex-col gap-4 py-14 sm:gap-8 sm:py-20 md:gap-10 lg:hidden">
-          {props.projects.map((proj, index) => (
+          {props.projects.map((proj) => (
             <Link
               key={proj.title}
               href={proj.href}
