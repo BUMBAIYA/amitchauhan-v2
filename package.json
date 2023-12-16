@@ -25,6 +25,7 @@
     "framer-motion": "^10.12.16",
     "lru-cache": "^10.0.1",
     "next": "13.4.4",
+    "next-seo": "^6.4.0",
     "next-themes": "^0.2.1",
     "nodemailer": "^6.9.5",
     "postcss": "8.4.24",

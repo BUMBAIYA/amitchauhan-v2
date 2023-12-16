@@ -1,4 +1,4 @@
-import { PageSEO } from "@/components/PageSEO";
+import { NextSeo } from "next-seo";
 import ProjectCard from "@/components/ProjectCard";
 import { PROJECTS_CARD } from "@/data/projects";
 import { siteMetadata } from "@/data/siteMetaData";
@@ -6,11 +6,31 @@ import { siteMetadata } from "@/data/siteMetaData";
 export default function Projects() {
   return (
     <>
-      <PageSEO
-        title="Amit Chauhan | Projects"
-        description="Project showcase of Amit Chauhan's portfolio"
-        ogType="website"
-        ogImage={siteMetadata.image}
+      <NextSeo
+        title="Projects by Amit Chauhan - React and Frontend Developer Portfolio"
+        description="Explore a collection of projects by Amit Chauhan, a seasoned React and Frontend Developer. From innovative web applications to responsive interfaces, discover the depth and diversity of my work."
+        canonical={`${siteMetadata.siteUrl}/projects`}
+        openGraph={{
+          url: `${siteMetadata.siteUrl}/projects`,
+          title:
+            "Discover Projects by Amit Chauhan - React and Frontend Developer",
+          description:
+            "Explore a showcase of projects crafted by Amit Chauhan, a React and Frontend Developer. Witness the fusion of creativity and technology in web development.",
+          images: [
+            {
+              url: siteMetadata.twitterImage,
+            },
+          ],
+          siteName: siteMetadata.siteName,
+          type: "website",
+        }}
+        additionalMetaTags={[
+          {
+            property: "keywords",
+            content:
+              "Projects, Portfolio, React Developer, Frontend Developer, Web Development, JavaScript, HTML, CSS, UI/UX, Web Applications, Responsive Design",
+          },
+        ]}
       />
       <section className="mx-auto mb-40 mt-6 w-full gap-20 px-6 sm:mt-12 sm:px-14 md:px-20">
         <div className="mx-auto max-w-7xl">

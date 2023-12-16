@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { PageSEO } from "@/components/PageSEO";
+import { NextSeo } from "next-seo";
 import FadeRight from "@/animation/FadeRight";
 import FadeUp from "@/animation/FadeUp";
 import { AnimatePresence } from "framer-motion";
@@ -12,11 +12,30 @@ import { siteMetadata } from "@/data/siteMetaData";
 export default function About() {
   return (
     <>
-      <PageSEO
-        title="Amit Chauhan | About"
-        description="Know more about Amit Chauhan as a Web developer"
-        ogType="website"
-        ogImage={siteMetadata.image}
+      <NextSeo
+        title="About Amit Chauhan | React and Frontend Developer"
+        description="Learn more about Amit Chauhan, a dedicated React and Frontend Developer with 2 years of experience. Discover the journey, skills, and passion that drive me to create innovative and user-friendly web solutions."
+        canonical={`${siteMetadata.siteUrl}/about`}
+        openGraph={{
+          url: `${siteMetadata.siteUrl}/about`,
+          title: "Learn About Amit Chauhan - React and Frontend Developer",
+          description:
+            "Dive into the story of Your Name, a React and Frontend Developer. Uncover the experiences, skills, and passion that fuel a commitment to delivering exceptional web solutions.",
+          images: [
+            {
+              url: siteMetadata.twitterImage,
+            },
+          ],
+          siteName: siteMetadata.siteName,
+          type: "website",
+        }}
+        additionalMetaTags={[
+          {
+            property: "keywords",
+            content:
+              "About Me, React Developer, Frontend Developer, Web Developer, JavaScript, HTML, CSS, Professional Journey, Skills, Passion for Web Development",
+          },
+        ]}
       />
       <div className="mx-auto mt-0 flex max-w-7xl flex-col items-center gap-6 px-6 pt-20 text-center sm:px-14 md:mt-20 md:px-20 lg:mt-0 lg:flex-row lg:text-left">
         <div className="w-full sm:w-1/2 md:w-2/3 lg:inline-block lg:h-full lg:w-1/2">
