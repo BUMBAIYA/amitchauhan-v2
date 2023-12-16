@@ -1,10 +1,14 @@
+import dynamic from "next/dynamic";
 import { NextSeo } from "next-seo";
 import CursorTrailCanvas from "@/components/CursorTrailCanvas";
 import Hero from "@/components/Hero";
-import Skills from "@/components/Skills";
-import Project from "@/components/ProjectShowcase";
 import { PROJECT_SHOWCASE } from "@/data/projects";
 import { siteMetadata } from "@/data/siteMetaData";
+
+const Skills = dynamic(() => import("@/components/Skills"), { ssr: true });
+const Project = dynamic(() => import("@/components/ProjectShowcase"), {
+  ssr: true,
+});
 
 export default function Home() {
   return (
