@@ -25,7 +25,8 @@ export default function Home() {
             "Dive into the world of web development with Amit Chauhan. Discover a React and Frontend Developer with 2 years of expertise, showcasing cutting-edge projects and a commitment to crafting exceptional user interfaces.",
           images: [
             {
-              url: siteMetadata.twitterImage,
+              url: `${siteMetadata.siteUrl}${siteMetadata.twitterImage}`,
+              alt: "Amit Chauhan - Portfolio Image",
             },
           ],
           siteName: siteMetadata.siteName,

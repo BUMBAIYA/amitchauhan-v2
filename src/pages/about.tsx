@@ -23,7 +23,8 @@ export default function About() {
             "Dive into the story of Amit Chauhan, a React and Frontend Developer. Uncover the experiences, skills, and passion that fuel a commitment to delivering exceptional web solutions.",
           images: [
             {
-              url: siteMetadata.twitterImage,
+              url: `${siteMetadata.siteUrl}${siteMetadata.twitterImage}`,
+              alt: "Amit Chauhan - Portfolio Image",
             },
           ],
           siteName: siteMetadata.siteName,

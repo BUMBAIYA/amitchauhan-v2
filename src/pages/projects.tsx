@@ -18,7 +18,8 @@ export default function Projects() {
             "Explore a showcase of projects crafted by Amit Chauhan, a React and Frontend Developer. Witness the fusion of creativity and technology in web development.",
           images: [
             {
-              url: siteMetadata.twitterImage,
+              url: `${siteMetadata.siteUrl}${siteMetadata.twitterImage}`,
+              alt: "Amit Chauhan - Portfolio Image",
             },
           ],
           siteName: siteMetadata.siteName,
