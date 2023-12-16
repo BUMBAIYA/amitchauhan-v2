@@ -1,13 +1,15 @@
+import dynamic from "next/dynamic";
 import { ReactNode } from "react";
 import { Montserrat } from "next/font/google";
 import { classNames } from "@/utility/classNames";
-import Navbar from "./Navbar/Navbar";
+import Navbar from "@/layout/Navbar/Navbar";
 import { routes } from "@/routes/navigationRoutes";
-import Footer from "./Footer";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
 });
+
+const Footer = dynamic(() => import("@/layout/Footer"), { ssr: true });
 
 type MainLayoutProps = {
   children: ReactNode;
