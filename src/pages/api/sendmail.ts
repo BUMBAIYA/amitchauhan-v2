@@ -33,14 +33,70 @@ const limiter = rateLimiterApi({
     const userAgent = req.headers["user-agent"] || "";
     if (!userIp || !userAgent) {
       let userUuidToken = req.cookies.userUuid;
-      if (!userUuidToken) {
+      if (userUuidToken) {
+        const cookieExpiration = req.cookies.userUuid_expires;
+        if (cookieExpiration) {
+          const expirationDate = new Date(cookieExpiration);
+          if (expirationDate && expirationDate <= new Date()) {
+            // Cookie has expired, generate a new UUID
+            const newUuidToken = v4();
+            res.setHeader(
+              "Set-Cookie",
+              `userUuid=${newUuidToken}; Max-Age=${
+                60 * 60 * 24
+              }; SameSite=Strict`,
+            );
+
+            // Set a new expiration date (e.g., 24 hours from now)
+            const newExpirationDate = new Date();
+            newExpirationDate.setSeconds(
+              newExpirationDate.getSeconds() + 60 * 60 * 24,
+            );
+            res.setHeader(
+              "Set-Cookie",
+              `userUuid_expires=${newExpirationDate.toUTCString()}; Max-Age=${
+                60 * 60 * 24
+              }; SameSite=Strict`,
+            );
+
+            return newUuidToken;
+          }
+          return userUuidToken;
+        }
         userUuidToken = v4();
         res.setHeader(
           "Set-Cookie",
           `userUuid=${userUuidToken}; Max-Age=${60 * 60 * 24}; SameSite=Strict`,
         );
+        const newExpirationDate = new Date();
+        newExpirationDate.setSeconds(
+          newExpirationDate.getSeconds() + 60 * 60 * 24,
+        );
+        res.setHeader(
+          "Set-Cookie",
+          `userUuid_expires=${newExpirationDate.toUTCString()}; Max-Age=${
+            60 * 60 * 24
+          }; SameSite=Strict`,
+        );
+        return userUuidToken;
+      } else {
+        userUuidToken = v4();
+        res.setHeader(
+          "Set-Cookie",
+          `userUuid=${userUuidToken}; Max-Age=${60 * 60 * 24}; SameSite=Strict`,
+        );
+        const newExpirationDate = new Date();
+        newExpirationDate.setSeconds(
+          newExpirationDate.getSeconds() + 60 * 60 * 24,
+        );
+        res.setHeader(
+          "Set-Cookie",
+          `userUuid_expires=${newExpirationDate.toUTCString()}; Max-Age=${
+            60 * 60 * 24
+          }; SameSite=Strict`,
+        );
+        return userUuidToken;
       }
-      return userUuidToken;
     }
     const userId = `${userIp}-${userAgent}`;
     return userId;
