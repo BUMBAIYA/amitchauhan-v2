@@ -7,8 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "analyze": "cross-env ANALYZE=true next build",
     "format:check": "prettier --check \"src/**/*.{js,jsx,ts,tsx,mdx,css,json}\"",
-    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,mdx,css,json}\"",
+    "format:fix": "prettier --write \"src/**/*.{js,jsx,ts,tsx,mdx,css,json}\"",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -18,13 +19,15 @@
     "@types/nodemailer": "^6.4.10",
     "@types/react": "18.2.8",
     "@types/react-dom": "18.2.4",
-    "@vercel/analytics": "^1.0.1",
+    "@vercel/analytics": "^1.1.1",
+    "@vercel/speed-insights": "^1.0.2",
     "autoprefixer": "10.4.14",
     "eslint": "8.42.0",
     "eslint-config-next": "13.4.4",
     "framer-motion": "^10.12.16",
     "lru-cache": "^10.0.1",
     "next": "13.4.4",
+    "next-seo": "^6.4.0",
     "next-themes": "^0.2.1",
     "nodemailer": "^6.9.5",
     "postcss": "8.4.24",
@@ -39,7 +42,9 @@
     "uuid": "^9.0.1"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^14.0.4",
     "@types/uuid": "^9.0.3",
+    "cross-env": "^7.0.3",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.2"
   }
