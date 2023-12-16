@@ -25,6 +25,9 @@ export default function Projects() {
           siteName: siteMetadata.siteName,
           type: "website",
         }}
+        twitter={{
+          cardType: "summary_large_image",
+        }}
         additionalMetaTags={[
           {
             property: "keywords",
