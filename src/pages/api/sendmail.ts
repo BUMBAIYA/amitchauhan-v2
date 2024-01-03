@@ -121,7 +121,7 @@ const sendMail = async function (
 
   if (!user && !pass) {
     return new Promise((resolve) =>
-      resolve({ status: 500, message: "Invalid credentials" }),
+      resolve({ status: 500, message: "Internal server error" }),
     );
   }
 
@@ -186,7 +186,7 @@ const handler = async (
     switch (method) {
       case "POST": {
         const data = await sendMail(name, email, subject, message);
-        res.status(200).send(data);
+        res.status(data.status).send(data);
         break;
       }
       default: {
