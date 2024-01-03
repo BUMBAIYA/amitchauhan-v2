@@ -5,10 +5,16 @@ import { useRouter } from "next/router";
 import { AnimatePresence, motion } from "framer-motion";
 import { AnimatedLogo } from "@/animation/AnimatedLogo";
 import { classNames } from "@/utility/classNames";
-import { NavbarRoutes } from "@/routes/navigationRoutes";
-import MenuLogo from "./MenuButton";
-import ThemeSwitch from "./ThemeSwitch";
+import MenuLogo from "@/layout/Navbar/MenuButton";
+import ThemeSwitch from "@/layout/Navbar/ThemeSwitch";
 import { Dialog, Transition } from "@headlessui/react";
+
+export type NavbarRoute = {
+  title: string;
+  href: string;
+};
+
+export type NavbarRoutes = NavbarRoute[];
 
 type TNavbar = {
   routes: NavbarRoutes;

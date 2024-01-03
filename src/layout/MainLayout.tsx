@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 import { Montserrat } from "next/font/google";
 import { classNames } from "@/utility/classNames";
 import Navbar from "@/layout/Navbar/Navbar";
-import { routes } from "@/routes/navigationRoutes";
+import { routes } from "@/data/navigationRoutes";
 
 const montserrat = Montserrat({
   subsets: ["latin"],

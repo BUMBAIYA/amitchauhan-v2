@@ -1,9 +1,4 @@
-export type NavbarRoute = {
-  title: string;
-  href: string;
-};
-
-export type NavbarRoutes = NavbarRoute[];
+import { NavbarRoutes } from "@/layout/Navbar/Navbar";
 
 export const routes: NavbarRoutes = [
   { title: "Home", href: "/" },
