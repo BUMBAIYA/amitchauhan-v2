@@ -1,5 +1,6 @@
 import { ContactForm } from "@/components/ContactForm";
 import { GithubIcon, LinkedinIcon, TwitterIcon } from "@/components/Icons";
+import { siteMetadata } from "@/data/siteMetaData";
 
 export default function Footer() {
   return (
@@ -11,7 +12,7 @@ export default function Footer() {
           </span>
         </div>
         <a
-          href="mailto:amitchauhan263871@gmail.com"
+          href={`mailto:${siteMetadata.email}`}
           target="_blank"
           className="mb-6 cursor-pointer text-center text-2xl font-bold underline sm:text-4xl lg:text-7xl"
         >
@@ -25,7 +26,7 @@ export default function Footer() {
         <span>©2023 Amit Chauhan</span>
         <div className="flex gap-8">
           <a
-            href="https://github.com/BUMBAIYA"
+            href={siteMetadata.github}
             target="_blank"
             className="h-6 w-6"
             aria-label="link to Github"
@@ -33,7 +34,7 @@ export default function Footer() {
             <GithubIcon className="text-teal-600 transition-colors duration-150 hover:text-tera-500 dark:text-teal-400 dark:hover:text-white" />
           </a>
           <a
-            href="https://twitter.com/amitcha2638"
+            href={siteMetadata.twitter}
             target="_blank"
             className="h-6 w-6"
             aria-label="link to Twitter"
@@ -41,7 +42,7 @@ export default function Footer() {
             <TwitterIcon className="text-teal-600 transition-colors duration-150 hover:text-tera-500 dark:text-teal-400 dark:hover:text-white" />
           </a>
           <a
-            href="https://www.linkedin.com/in/amit-chauhan-b2579b223/"
+            href={siteMetadata.linkedin}
             target="_blank"
             className="h-6 w-6"
             aria-label="link to Linkedin"

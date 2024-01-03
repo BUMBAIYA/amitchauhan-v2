@@ -3,7 +3,7 @@ import { globby } from "globby";
 import prettier from "prettier";
 
 const siteMetadata = {
-  siteUrl: "https://amitchauhan.vercel.app",
+  siteUrl: "https://amitchauhan.me",
 };
 
 async function generateSitemap() {
@@ -49,6 +49,11 @@ async function generateSitemap() {
   });
 
   writeFileSync("public/sitemap.xml", formatted);
+  writeFileSync("public/robots.txt", robotsTxt);
 }
+
+const robotsTxt = `User-agent: *
+Allow: /
+Sitemap: ${siteMetadata.siteUrl}/sitemap.xml`;
 
 generateSitemap();

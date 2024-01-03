@@ -1,6 +1,6 @@
 # Portfolio
 
-This portfolio is made using [Next.js](https://nextjs.org/) and [Tailwindcss](https://tailwindcss.com).
+This portfolio is made using [Next.js](https://nextjs.org/)
 
 ## 🖥️ Technologies Used
 
@@ -8,7 +8,13 @@ This portfolio is made using [Next.js](https://nextjs.org/) and [Tailwindcss](ht
 - [Tailwind CSS](https://tailwindcss.com) : A utility-first CSS framework for rapid UI development.
 - [TypeScript](https://www.typescriptlang.org): A typed superset of JavaScript that provides enhanced tooling and developer productivity.
 - [Framer motion](https://www.framer.com/motion/): Animation library for React.
-- [Nodemailer](https://nodemailer.com/): Nodemailer is a module for Node.js applications to allow easy email sending.
+- [Nodemailer](https://nodemailer.com/): Nodemailer is a Node.js library for sending emails, making email integration easy with features like attachment handling, HTML content, and support for various email services.
+
+## 🌐 Open Source
+
+Feel free to use it as a template for your own portfolio or any other projects. You are granted the freedom to modify, distribute, and use the code for any purpose, unleashing your creativity without any restrictions.
+
+If you have any improvements, ideas or find any bugs, don't hesitate to submit a pull request or open an issue.
 
 ## 🛠️ Development setup
 
@@ -31,13 +37,13 @@ cd amitchauhan-v2
 ```
 
 ```bash
-npm install
+pnpm install
 ```
 
 ### Step 2 - Run the development server
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the portfolio.
