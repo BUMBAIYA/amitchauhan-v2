@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && pnpm run postbuild",
-    "postbuild": "pnpm run sitemap",
+    "build": "next build && npm run postbuild",
+    "postbuild": "npm run sitemap",
     "start": "next start",
     "lint": "next lint",
     "sitemap": "cross-env NODE_OPTIONS='--experimental-json-modules' node ./src/scripts/generateSitemap.mjs",
