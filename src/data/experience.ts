@@ -2,6 +2,27 @@ import { TShowCaseListDetatils } from "@/components/ShowCaseList";
 
 export const EXPERIENCE: TShowCaseListDetatils[] = [
   {
+    title: "Reactjs Frontend Developer",
+    organisation: {
+      name: "Skima",
+      href: "https://skima.ai/",
+    },
+    date: "Oct 2023 - Present",
+    location: "Mumbai",
+    description: "Reactjs and Nextjs app development",
+  },
+  {
+    title: "Engineering Trainee",
+    organisation: {
+      name: "Hexaware",
+      href: "https://hexaware.com/",
+    },
+    date: "July 2023 - Sep 2023",
+    location: "Remote",
+    description:
+      "Learned to work we monorepo and got to learn application architecture, scalling and build tooling to improve CI/CD of micro services.",
+  },
+  {
     title: "Frontend Developer Intern",
     organisation: {
       name: "Master Infotech",
@@ -11,16 +32,5 @@ export const EXPERIENCE: TShowCaseListDetatils[] = [
     location: "Remote",
     description:
       "Worked on a team responsible for developing new features and updating old codebases to latest technologies. Learned alot about web development and CI/CD development cycle.",
-  },
-  {
-    title: "3D Asset Developer",
-    organisation: {
-      name: "Nodding Head Games",
-      href: "https://www.noddingheadsgames.com/",
-    },
-    date: "2019",
-    location: "Remote",
-    description:
-      "Worked on a Indie game Raji: The ancient epic as an asset designer. Learned computer graphics and OpenGL to build and render models using in house custom renderer writen in C++.",
   },
 ];
