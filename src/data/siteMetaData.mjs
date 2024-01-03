@@ -17,4 +17,5 @@ export const siteMetadata = {
   twitter: "https://twitter.com/amitcha2638",
   linkedin: "https://www.linkedin.com/in/amitchauhan-dev",
   locale: "en-US",
-} as const;
+  googleSiteVerification: "_YJlO90eSoye2AQOhbkRAzNbejzCGiTgAD4RNR3NtHc",
+};

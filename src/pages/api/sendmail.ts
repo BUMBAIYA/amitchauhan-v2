@@ -116,11 +116,20 @@ const sendMail = async function (
   subject: string,
   message: string,
 ): Promise<{ status: number; message: string }> {
+  const user = process.env.NODEMAILER_USER;
+  const pass = process.env.NODEMAILER_PASS;
+
+  if (!user && !pass) {
+    return new Promise((resolve) =>
+      resolve({ status: 500, message: "Invalid credentials" }),
+    );
+  }
+
   const transporter = createTransport({
     service: "gmail",
     auth: {
-      user: process.env.NODEMAILER_USER,
-      pass: process.env.NODEMAILER_PASS,
+      user,
+      pass,
     },
   });
 

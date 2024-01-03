@@ -1,9 +1,10 @@
 import dynamic from "next/dynamic";
+import Head from "next/head";
 import { NextSeo } from "next-seo";
 import CursorTrailCanvas from "@/components/CursorTrailCanvas";
 import Hero from "@/components/Hero";
 import { PROJECT_SHOWCASE } from "@/data/projects";
-import { siteMetadata } from "@/data/siteMetaData";
+import { siteMetadata } from "@/data/siteMetaData.mjs";
 
 const Skills = dynamic(() => import("@/components/Skills"), { ssr: true });
 const Project = dynamic(() => import("@/components/ProjectShowcase"), {
@@ -46,6 +47,14 @@ export default function Home() {
           },
         ]}
       />
+      <Head>
+        {siteMetadata.googleSiteVerification && (
+          <meta
+            name="google-site-verification"
+            content={siteMetadata.googleSiteVerification}
+          />
+        )}
+      </Head>
       <Hero />
       <Skills />
       <Project projects={PROJECT_SHOWCASE} />

@@ -1,6 +1,6 @@
 import { ProjectCardProps } from "@/components/ProjectCard";
 import { ProjectShowcaseListProps } from "@/components/ProjectShowcaseList";
-import { siteMetadata } from "@/data/siteMetaData";
+import { siteMetadata } from "@/data/siteMetaData.mjs";
 
 export const PROJECT_SHOWCASE: ProjectShowcaseListProps[] = [
   {
