@@ -1,5 +1,6 @@
 import { ProjectCardProps } from "@/components/ProjectCard";
 import { ProjectShowcaseListProps } from "@/components/ProjectShowcaseList";
+import { siteMetadata } from "@/data/siteMetaData";
 
 export const PROJECT_SHOWCASE: ProjectShowcaseListProps[] = [
   {
@@ -93,7 +94,7 @@ export const PROJECTS_CARD: ProjectCardProps[] = [
     description:
       "My personal portfolio website made using Nextjs, tailwindcss and framer motion.",
     sourceCodeHref: "https://github.com/BUMBAIYA/amitchauhan-v2",
-    liveWebsiteHref: "https://amitchauhan.vercel.app",
+    liveWebsiteHref: siteMetadata.siteUrl,
   },
   {
     name: "Covid Tracker",
