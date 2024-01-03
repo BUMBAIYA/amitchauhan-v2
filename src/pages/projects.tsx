@@ -57,7 +57,7 @@ export default function Projects() {
             <p className="mt-10 text-base md:text-xl">
               Visit my github to see some of the latest projects{" "}
               <a
-                href="https://github.com/BUMBAIYA?tab=repositories"
+                href={`${siteMetadata.github}?tab=repositories`}
                 target="_blank"
                 className="font-medium text-tera-500 underline underline-offset-2 hover:text-teal-600 dark:text-teal-400"
               >

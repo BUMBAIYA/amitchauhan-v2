@@ -15,6 +15,6 @@ export const siteMetadata = {
   email: "amitchauhan263871@gmail.com",
   github: "https://github.com/BUMBAIYA",
   twitter: "https://twitter.com/amitcha2638",
-  linkedin: "https://www.linkedin.com/in/amit-chauhan-b2579b223",
+  linkedin: "https://www.linkedin.com/in/amitchauhan-dev",
   locale: "en-US",
 } as const;
