@@ -2,7 +2,8 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { createTransport } from "nodemailer";
 import { v4 } from "uuid";
 import { rateLimiterApi } from "@/utility/rateLimiter";
-import { verifyEmailAddress } from "@/utility/verifyEmail";
+import { ValidationError } from "yup";
+import { mailValidationSchema } from "@/components/ContactForm";
 
 const REQUEST_PER_HOUR = 5 as const;
 const RATELIMIT_DURATION = 3600000 as const;
@@ -162,26 +163,18 @@ const handler = async (
     const isRateLimited = await limiter.check(res, req, REQUEST_PER_HOUR);
     if (isRateLimited.status !== 200) return;
 
-    if (!data.name || !data.email || !data.subject || !data.message) {
-      // Validate json body
-      res.status(400).json({
-        status: 400,
-        message: "Fill the entire form",
-      });
+    try {
+      await mailValidationSchema.validate(data, { abortEarly: false });
+    } catch (validationError) {
+      if (validationError instanceof ValidationError)
+        res.status(400).json({
+          status: 400,
+          message: validationError.errors[0],
+        });
       return;
     }
 
     const { name, email, subject, message } = data;
-
-    // Verify email
-    // !!!IMPORTANT: This verification strategy is not standard it can reject some valid email address
-    if (!verifyEmailAddress(email)) {
-      res.status(400).json({
-        status: 400,
-        message: "Invalid Email address",
-      });
-      return;
-    }
 
     switch (method) {
       case "POST": {
