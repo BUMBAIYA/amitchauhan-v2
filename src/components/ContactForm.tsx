@@ -1,50 +1,17 @@
-import {
-  Fragment,
-  useRef,
-  useState,
-  MouseEvent as RMouseEvent,
-  useEffect,
-} from "react";
-import { Transition, Dialog } from "@headlessui/react";
-import { useAutosizeTextArea } from "@/hooks/useAutoSizeTextarea";
+import { Fragment, useEffect, useRef, useState } from "react";
+import { Dialog, Transition } from "@headlessui/react";
+import { Field, Form, Formik, FieldInputProps, FieldMetaProps } from "formik";
+import * as Yup from "yup";
 import { CheckIcon, DangerIcon, MailIcon } from "@/components/Icons";
-import { verifyEmailAddress } from "@/utility/verifyEmail";
 import { Toast } from "@/components/Toast";
 import { classNames } from "@/utility/classNames";
 
-type ContactFormData = {
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
-};
-
-type ContactFormError = {
-  name: boolean;
-  email: boolean | "invalid";
-  subject: boolean;
-  message: boolean;
-};
-
-const initialError: ContactFormError = {
-  name: false,
-  email: false,
-  subject: false,
-  message: false,
-};
-
-const initialFormData: ContactFormData = {
-  name: "",
-  email: "",
-  subject: "",
-  message: "",
-};
-
-type Fields = "name" | "email" | "subject" | "message";
-
-const fields: Fields[] = ["name", "email", "subject", "message"];
-
-type ToastType = "PASS" | "FAIL" | "RATE_LIMIT" | null;
+export const mailValidationSchema = Yup.object({
+  email: Yup.string().email("Invalid email").required("Email required"),
+  name: Yup.string().required("Name required"),
+  subject: Yup.string().required("Subject required"),
+  message: Yup.string().required("Message required"),
+});
 
 const options = {
   root: null,
@@ -52,114 +19,67 @@ const options = {
   threshold: 0.1,
 };
 
+type ToastType = "PASS" | "FAIL" | "RATE_LIMIT" | null;
+
+export type FormiKInputFieldProps<Value> = {
+  field: FieldInputProps<Value>;
+  meta: FieldMetaProps<Value>;
+};
+
+type FormValues = Yup.InferType<typeof mailValidationSchema>;
+
 export function ContactForm() {
-  const refTextArea = useRef<HTMLTextAreaElement>(null);
+  const initialFormValues: FormValues = {
+    email: "",
+    name: "",
+    message: "",
+    subject: "",
+  };
+
   const refSendBtn = useRef<HTMLButtonElement>(null);
-  const abortController = useRef<AbortController | null>(null);
-  const [formData, setFormData] = useState<ContactFormData>(initialFormData);
-  const [isBtnVisible, setIsBtnVisible] = useState<boolean>(false);
-  const [showToast, setShowToast] = useState<{
-    type: ToastType;
-    value: boolean;
-  }>({ type: null, value: false });
-  useAutosizeTextArea(refTextArea, formData.message, "128px");
+
+  const [isBtnVisible, setIsBtnVisible] = useState(false);
 
   const [isSendingMail, setIsSendingMail] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
 
-  const [errors, setErrors] = useState<ContactFormError>(initialError);
+  const [showToast, setShowToast] = useState<{
+    type: ToastType;
+    value: boolean;
+  }>({ type: null, value: false });
 
   const observerCallback = (entries: IntersectionObserverEntry[]) => {
     const [entry] = entries;
     setIsBtnVisible(!entry.isIntersecting);
   };
 
-  const handleOpenModal = () => {
-    setIsOpenModal(true);
-  };
-
-  const handleCloseModal = () => {
-    if (abortController.current) {
-      abortController.current.abort();
-    }
-    setIsOpenModal(false);
-    setErrors(initialError);
-    setFormData(initialFormData);
-    setIsSendingMail(false);
-  };
-
-  const handleValidation = () => {
-    const newErrors = { ...errors };
-    fields.forEach((field) => {
-      if (!formData[field]) {
-        newErrors[field] = true;
-      } else {
-        newErrors[field] = false;
-      }
-    });
-    return newErrors;
-  };
-
   const handleSubmit = async (
-    e: RMouseEvent<HTMLButtonElement, MouseEvent>,
+    values: Yup.InferType<typeof mailValidationSchema>,
   ) => {
-    e.preventDefault();
-    setErrors(handleValidation());
-    if (
-      formData.name !== "" &&
-      formData.email !== "" &&
-      formData.subject !== "" &&
-      formData.message
-    ) {
-      if (verifyEmailAddress(formData.email)) {
-        setIsSendingMail(true);
+    setIsSendingMail(true);
+    try {
+      const response = await fetch("/api/sendmail", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
 
-        const newAbortController = new AbortController();
-        abortController.current = newAbortController;
-
-        try {
-          const response = await fetch("/api/sendmail", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(formData),
-            signal: newAbortController.signal,
-          });
-
-          if (response.ok) {
-            setErrors(initialError);
-            setFormData(initialFormData);
-            setIsSendingMail(false);
-            setShowToast({ type: "PASS", value: true });
-            setIsOpenModal(false);
-          } else {
-            setIsSendingMail(false);
-            setShowToast({
-              type: response.status === 429 ? "RATE_LIMIT" : "FAIL",
-              value: true,
-            });
-          }
-        } catch (error) {
-          if (error instanceof DOMException && error.name === "AbortError") {
-            // eslint-disable-next-line
-            console.warn("Aborted sending mail");
-          } else {
-            // eslint-disable-next-line
-            console.error("[Error]: Unable to send mail");
-            setShowToast({
-              type: "FAIL",
-              value: true,
-            });
-          }
-        }
+      if (response.ok) {
+        setShowToast({ type: "PASS", value: true });
+        setIsOpenModal(false);
       } else {
-        setErrors((prev) => ({ ...prev, email: "invalid" }));
+        setShowToast({
+          type: response.status === 429 ? "RATE_LIMIT" : "FAIL",
+          value: true,
+        });
       }
+    } catch {
+      setShowToast({
+        type: "FAIL",
+        value: true,
+      });
     }
-  };
-
-  const handleValueChange = (value: string, key: Fields) => {
-    setFormData((prev) => ({ ...prev, [key]: value }));
-    setErrors(initialError);
+    setIsSendingMail(false);
   };
 
   useEffect(() => {
@@ -170,15 +90,6 @@ export function ContactForm() {
       if (btn) observer.unobserve(btn);
     };
   }, [refSendBtn]);
-
-  useEffect(() => {
-    return () => {
-      const controller = abortController.current;
-      if (controller) {
-        controller.abort();
-      }
-    };
-  }, []);
 
   return (
     <>
@@ -229,7 +140,7 @@ export function ContactForm() {
         <button
           ref={refSendBtn}
           className="inline-flex items-center gap-2 rounded-md bg-zinc-100 px-3 py-2 text-teal-600 transition-transform duration-150 focus-within:scale-[1.05] hover:scale-[1.05] hover:bg-white"
-          onClick={handleOpenModal}
+          onClick={() => setIsOpenModal(true)}
         >
           <span className="block h-6 w-6 sm:h-7 sm:w-7 lg:h-9 lg:w-9">
             <MailIcon />
@@ -240,7 +151,11 @@ export function ContactForm() {
         </button>
       </div>
       <Transition show={isOpenModal} as={Fragment}>
-        <Dialog as="div" className="z-10" onClose={handleCloseModal}>
+        <Dialog
+          as="div"
+          className="z-[999999]"
+          onClose={() => setIsOpenModal(false)}
+        >
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -250,19 +165,19 @@ export function ContactForm() {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 backdrop-blur-sm" />
+            <div className="fixed inset-0 bg-zinc-600/30 backdrop-blur-md" />
           </Transition.Child>
-          <div className="fixed inset-0 flex items-center justify-center">
+          <div className="fixed inset-0 z-[9999] flex items-center justify-center">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
               enterFrom="opacity-0 top-full"
-              enterTo="opacity-100 top-32"
+              enterTo="opacity-100 top-16"
               leave="ease-in duration-200"
-              leaveFrom="opacity-100 top-32"
+              leaveFrom="opacity-100 top-16"
               leaveTo="opacity-0 top-full"
             >
-              <Dialog.Panel className="absolute m-4 max-h-[calc(100vh-128px)] w-[95%] max-w-xl overflow-y-auto rounded-2xl border-2 border-teal-100/20 bg-teal-600 px-6 py-8 shadow-lg shadow-teal-200/10 dark:bg-teal-700 md:px-10 md:py-16">
+              <Dialog.Panel className="absolute m-4 w-[95%] max-w-xl overflow-y-auto rounded-2xl border-2 border-teal-100/20 bg-teal-600 px-6 py-8 shadow-lg shadow-teal-200/10 dark:bg-teal-700 md:px-10 md:py-16">
                 <div className="flex items-center justify-between">
                   <Dialog.Title className="flex items-center gap-1 text-2xl font-semibold text-zinc-100 sm:gap-2 md:text-4xl">
                     <span className="inline-block h-8 w-8 sm:h-12 sm:w-12">
@@ -272,7 +187,7 @@ export function ContactForm() {
                   </Dialog.Title>
                   <button
                     className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-teal-600 bg-teal-50 p-2 text-sm text-teal-600 transition-transform hover:scale-[1.05] hover:bg-teal-100"
-                    onClick={handleCloseModal}
+                    onClick={() => setIsOpenModal(false)}
                   >
                     <svg
                       width="100%"
@@ -302,113 +217,177 @@ export function ContactForm() {
                     </svg>
                   </button>
                 </div>
-                <form className="mt-6 flex flex-col gap-4">
-                  <div className="relative flex flex-col">
-                    <input
-                      type="text"
-                      placeholder="Name"
-                      className="w-full rounded-lg border-none bg-teal-50 font-semibold text-teal-800 focus-within:border-2 focus-within:border-teal-600  focus-within:ring-teal-600"
-                      value={formData.name}
-                      onChange={(e) =>
-                        handleValueChange(e.target.value, "name")
-                      }
-                    />
-                    {errors.name && (
-                      <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-bold text-red-400 md:text-sm">
-                        Required
-                      </span>
-                    )}
-                  </div>
-                  <div className="relative flex flex-col">
-                    <input
-                      type="text"
-                      placeholder="Email"
-                      className="w-full rounded-lg border-none bg-teal-50 font-semibold text-teal-800 focus-within:border-2 focus-within:border-teal-600  focus-within:ring-teal-600"
-                      value={formData.email}
-                      onChange={(e) =>
-                        handleValueChange(e.target.value, "email")
-                      }
-                    />
-                    {errors.email && (
-                      <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-bold text-red-400 md:text-sm">
-                        {errors.email === "invalid"
-                          ? "Invalid mail"
-                          : "Required"}
-                      </span>
-                    )}
-                  </div>
-                  <div className="relative flex flex-col">
-                    <input
-                      type="text"
-                      placeholder="Subject"
-                      className="w-full rounded-lg border-none bg-teal-50 font-semibold text-teal-800 focus-within:border-2 focus-within:border-teal-600  focus-within:ring-teal-600"
-                      value={formData.subject}
-                      onChange={(e) =>
-                        handleValueChange(e.target.value, "subject")
-                      }
-                    />
-                    {errors.subject && (
-                      <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-bold text-red-400 md:text-sm">
-                        Required
-                      </span>
-                    )}
-                  </div>
-                  <div className="relative flex flex-col">
-                    <textarea
-                      ref={refTextArea}
-                      placeholder="Message"
-                      className="h-32 w-full rounded-lg border-none bg-teal-50 font-semibold text-teal-800 focus-within:border-2 focus-within:border-teal-600 focus-within:ring-teal-600"
-                      value={formData.message}
-                      onChange={(e) =>
-                        handleValueChange(e.target.value, "message")
-                      }
-                    />
-                    {errors.message && (
-                      <span className="absolute right-4 top-4 text-xs font-bold text-red-400 md:text-sm">
-                        Required
-                      </span>
-                    )}
-                  </div>
-
-                  <button
-                    aria-label="open send mail modal"
-                    type="submit"
-                    className="mt-4 w-full rounded-full bg-teal-50 px-4 py-3 text-center text-lg font-semibold text-teal-900 transition-colors duration-150 hover:bg-teal-100"
-                    onClick={handleSubmit}
-                    disabled={isSendingMail}
-                  >
-                    {isSendingMail ? (
-                      <div className="inline-flex items-center gap-4">
-                        <span className="h-4 w-4">
-                          <svg
-                            stroke="currentColor"
-                            fill="currentColor"
-                            strokeWidth="0"
-                            viewBox="0 0 24 24"
-                            height="100%"
-                            width="100%"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path d="M12 22c5.421 0 10-4.579 10-10h-2c0 4.337-3.663 8-8 8s-8-3.663-8-8c0-4.336 3.663-8 8-8V2C6.579 2 2 6.58 2 12c0 5.421 4.579 10 10 10z">
-                              <animateTransform
-                                attributeName="transform"
-                                attributeType="XML"
-                                type="rotate"
-                                dur="1s"
-                                from="0 12 12"
-                                to="360 12 12"
-                                repeatCount="indefinite"
-                              />
-                            </path>
-                          </svg>
-                        </span>
-                        <span>Sending</span>
+                <Formik
+                  initialValues={initialFormValues}
+                  validationSchema={mailValidationSchema}
+                  onSubmit={handleSubmit}
+                  validateOnChange
+                >
+                  {({ isValid }) => (
+                    <Form className="mt-6 flex flex-col gap-3">
+                      <div className="flex flex-col gap-1">
+                        <label
+                          htmlFor="email"
+                          className="font-medium text-white"
+                        >
+                          Email
+                        </label>
+                        <div className="relative">
+                          <Field name="email">
+                            {({
+                              field,
+                              meta,
+                            }: FormiKInputFieldProps<string>) => (
+                              <>
+                                <input
+                                  id="email"
+                                  {...field}
+                                  type="text"
+                                  placeholder="Email"
+                                  className="w-full rounded-lg border-none bg-teal-50 font-semibold text-teal-800 placeholder:font-normal placeholder:text-zinc-400 focus-within:border-2 focus-within:border-teal-600 focus-within:ring-teal-600"
+                                />
+                                {Boolean(meta.touched && meta.error) && (
+                                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-bold text-red-400 md:text-sm">
+                                    {meta.error}
+                                  </span>
+                                )}
+                              </>
+                            )}
+                          </Field>
+                        </div>
                       </div>
-                    ) : (
-                      "Submit"
-                    )}
-                  </button>
-                </form>
+                      <div className="flex flex-col gap-1">
+                        <label
+                          htmlFor="name"
+                          className="font-medium text-white"
+                        >
+                          Name
+                        </label>
+                        <div className="relative">
+                          <Field name="name">
+                            {({
+                              field,
+                              meta,
+                            }: FormiKInputFieldProps<string>) => (
+                              <>
+                                <input
+                                  id="name"
+                                  {...field}
+                                  type="text"
+                                  placeholder="Name"
+                                  className="w-full rounded-lg border-none bg-teal-50 font-semibold text-teal-800 placeholder:font-normal placeholder:text-zinc-400 focus-within:border-2 focus-within:border-teal-600 focus-within:ring-teal-600"
+                                />
+                                {Boolean(meta.touched && meta.error) && (
+                                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-bold text-red-400 md:text-sm">
+                                    {meta.error}
+                                  </span>
+                                )}
+                              </>
+                            )}
+                          </Field>
+                        </div>
+                      </div>
+                      <div className="flex flex-col gap-1">
+                        <label
+                          htmlFor="subject"
+                          className="font-medium text-white"
+                        >
+                          Subject
+                        </label>
+                        <div className="relative">
+                          <Field name="subject">
+                            {({
+                              field,
+                              meta,
+                            }: FormiKInputFieldProps<string>) => (
+                              <>
+                                <input
+                                  id="subject"
+                                  {...field}
+                                  type="text"
+                                  placeholder="Subject"
+                                  className="w-full rounded-lg border-none bg-teal-50 font-semibold text-teal-800 placeholder:font-normal placeholder:text-zinc-400 focus-within:border-2 focus-within:border-teal-600 focus-within:ring-teal-600"
+                                />
+                                {Boolean(meta.touched && meta.error) && (
+                                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-bold text-red-400 md:text-sm">
+                                    {meta.error}
+                                  </span>
+                                )}
+                              </>
+                            )}
+                          </Field>
+                        </div>
+                      </div>
+                      <div className="flex flex-col gap-1">
+                        <label
+                          htmlFor="message"
+                          className="font-medium text-white"
+                        >
+                          Message
+                        </label>
+                        <div className="relative">
+                          <Field name="message">
+                            {({
+                              field,
+                              meta,
+                            }: FormiKInputFieldProps<string>) => (
+                              <>
+                                <textarea
+                                  id="message"
+                                  {...field}
+                                  placeholder="Message"
+                                  className="w-full rounded-lg border-none bg-teal-50 font-semibold text-teal-800 placeholder:font-normal placeholder:text-zinc-400 focus-within:border-2 focus-within:border-teal-600 focus-within:ring-teal-600"
+                                />
+                                {Boolean(meta.touched && meta.error) && (
+                                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-bold text-red-400 md:text-sm">
+                                    {meta.error}
+                                  </span>
+                                )}
+                              </>
+                            )}
+                          </Field>
+                        </div>
+                      </div>
+                      <button
+                        aria-label="open send mail modal"
+                        type="submit"
+                        className="mt-4 w-full rounded-full bg-teal-50 px-4 py-3 text-center text-lg font-semibold text-teal-900 transition-colors duration-150 hover:bg-teal-100"
+                        disabled={!isValid}
+                      >
+                        {isSendingMail ? (
+                          <div className="inline-flex items-center gap-4">
+                            <span className="h-4 w-4">
+                              <svg
+                                stroke="currentColor"
+                                fill="currentColor"
+                                strokeWidth="0"
+                                viewBox="0 0 24 24"
+                                height="100%"
+                                width="100%"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path d="M12 22c5.421 0 10-4.579 10-10h-2c0 4.337-3.663 8-8 8s-8-3.663-8-8c0-4.336 3.663-8 8-8V2C6.579 2 2 6.58 2 12c0 5.421 4.579 10 10 10z">
+                                  <animateTransform
+                                    attributeName="transform"
+                                    attributeType="XML"
+                                    type="rotate"
+                                    dur="1s"
+                                    from="0 12 12"
+                                    to="360 12 12"
+                                    repeatCount="indefinite"
+                                  />
+                                </path>
+                              </svg>
+                            </span>
+                            <span>Sending</span>
+                          </div>
+                        ) : (
+                          "Submit"
+                        )}
+                      </button>
+                    </Form>
+                  )}
+                </Formik>
               </Dialog.Panel>
             </Transition.Child>
           </div>
