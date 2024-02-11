@@ -28,9 +28,10 @@ If you have any improvements, ideas or find any bugs, don't hesitate to submit a
 1. Go to your Google Mail app or any other Google App.
 2. Click on your `Profile`
 3. Click on `Manage your Google Account`
-4. Click on `2-Step Verification` under How you sign in Google
-5. Under 2-Step Verification go to `App passwords`
-6. Create an app (e.g., portfolio-nodemailer), and copy the generated password securely. Use it as the value for the `NODEMAILER_PASS` variable and your email as the value for `NODEMAILER_USER` variable in `.env` file. [Note: Passwords are not visible once closed; if forgotten, delete the old app and create a new one.]
+4. Go to `Security`
+5. Under `How you sign in Google` go to `2-Step Verification`
+6. Under `2-Step Verification` go to `App passwords`
+7. Create an app (e.g., portfolio-nodemailer), and copy the generated password securely. Use it as the value for the `NODEMAILER_PASS` variable and your email as the value for `NODEMAILER_USER` variable in `.env` file. [Note: Passwords are not visible once closed; if forgotten, delete the old app and create a new one.]
 
 ### ✨ Seo
 
