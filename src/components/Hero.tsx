@@ -31,11 +31,11 @@ export default function Hero() {
       }}
       transition={{ type: "spring", stiffness: 100 }}
       ref={ref}
-      className="pointer-events-none relative flex max-h-[1000px] min-h-[calc(100vh-200px)] items-center px-6 sm:px-14 md:h-[calc(100vh-200px)] md:min-h-max md:px-20"
+      className="pointer-events-none relative flex max-h-[800px] min-h-[calc(100vh-200px)] items-center px-6 pt-16 sm:px-14 md:h-[calc(100vh-200px)] md:min-h-max md:px-20"
     >
       <CursorTrailCanvas
         color="hsla(183, 64%, 27%, 0.4)"
-        className="pointer-events-none absolute inset-0 left-0 top-0 -z-10 h-full w-full"
+        className="pointer-events-none absolute inset-0 left-0 top-0 -z-10 mx-auto h-full w-full max-w-screen-2xl"
       />
       <div className="-mt-[112px] w-full">
         <div className="mx-auto max-w-7xl">

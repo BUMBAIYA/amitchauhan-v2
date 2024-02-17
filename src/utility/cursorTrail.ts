@@ -21,6 +21,8 @@ export function cursorTrail(props: CursorTrail) {
     y: 0,
   };
 
+  let cursorYOffset = 0;
+
   let running = true;
 
   class NewNode {
@@ -129,7 +131,7 @@ export function cursorTrail(props: CursorTrail) {
       ? ((cursorPosition.x = event.touches[0].pageX),
         (cursorPosition.y = event.touches[0].pageY))
       : ((cursorPosition.x = event.clientX),
-        (cursorPosition.y = event.clientY));
+        (cursorPosition.y = event.clientY + cursorYOffset));
     event.preventDefault();
   }
 
@@ -164,6 +166,15 @@ export function cursorTrail(props: CursorTrail) {
     ctx.canvas.height = window.innerHeight;
   }
 
+  // Only needed when canvas is not set to full screen height
+  function trackYScroll() {
+    let yOffet =
+      window.pageYOffset ||
+      (document.documentElement || document.body.parentNode || document.body)
+        .scrollTop;
+    cursorYOffset = Math.floor(yOffet);
+  }
+
   function stopAnimation() {
     running = false;
   }
@@ -180,7 +191,8 @@ export function cursorTrail(props: CursorTrail) {
     document.addEventListener("touchstart", onMouseMove);
     window.addEventListener("orientationchange", resizeCanvas);
     window.addEventListener("resize", resizeCanvas);
-    // window.addEventListener("scroll", trackYScroll);
+    // Only needed when canvas is not set to full screen height
+    window.addEventListener("scroll", trackYScroll);
     window.addEventListener("focus", startAnimation);
     window.addEventListener("blur", stopAnimation);
     resizeCanvas();
@@ -194,7 +206,8 @@ export function cursorTrail(props: CursorTrail) {
     document.removeEventListener("touchstart", onMouseMove);
     window.removeEventListener("orientationchange", resizeCanvas);
     window.removeEventListener("resize", resizeCanvas);
-    // window.removeEventListener("scroll", trackYScroll);
+    // Only needed when canvas is not set to full screen height
+    window.removeEventListener("scroll", trackYScroll);
     window.removeEventListener("focus", startAnimation);
     window.removeEventListener("blur", stopAnimation);
   }
