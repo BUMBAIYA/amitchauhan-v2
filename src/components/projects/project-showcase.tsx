@@ -1,21 +1,23 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
-import { ArrowTopRight } from "@/components/Icons";
-import ProjectShowcaseList, {
-  ProjectShowcaseListProps,
-} from "@/components/ProjectShowcaseList";
 
-const generateImageData = (proj: ProjectShowcaseListProps[]) => {
+import { AnimatePresence, motion } from "framer-motion";
+
+import { ArrowTopRight } from "@/components/icons";
+import ProjectShowcaseList, {
+  type ProjectShowcaseListItem,
+} from "@/components/projects/project-showcase-list";
+
+const generateImageData = (proj: ProjectShowcaseListItem[]) => {
   return proj.map((p) => p.image);
 };
 
-type TProjectShowcase = {
-  projects: ProjectShowcaseListProps[];
-};
+interface ProjectShowcaseProps {
+  projects: ProjectShowcaseListItem[];
+}
 
-export default function ProjectShowcase(props: TProjectShowcase) {
+export default function ProjectShowcase(props: ProjectShowcaseProps) {
   const [currentImage, setCurrentImage] = useState<number>(0);
 
   const images = useMemo(() => {
@@ -70,7 +72,9 @@ export default function ProjectShowcase(props: TProjectShowcase) {
             </motion.div>
           </AnimatePresence>
         </div>
-        <h2 className="text-xl font-semibold sm:text-3xl">My projects</h2>
+        <h2 className="text-xl font-semibold text-accent sm:text-3xl">
+          My projects
+        </h2>
         <div className="hidden flex-col gap-6 py-14 sm:gap-8 sm:py-20 md:gap-10 lg:flex">
           {props.projects.map((proj, index) => (
             <ProjectShowcaseList

@@ -2,12 +2,14 @@ import { Fragment, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/router";
+
 import { AnimatePresence, motion } from "framer-motion";
-import { AnimatedLogo } from "@/animation/AnimatedLogo";
-import { classNames } from "@/utility/classNames";
-import MenuLogo from "@/layout/Navbar/MenuButton";
-import ThemeSwitch from "@/layout/Navbar/ThemeSwitch";
 import { Dialog, Transition } from "@headlessui/react";
+
+import MenuLogo from "@/layout/navbar/menu-button";
+import ThemeSwitch from "@/layout/navbar/theme-switch";
+import AnimatedLogo from "@/animation/animated-logo";
+import { classNames } from "@/utility/classNames";
 
 export type NavbarRoute = {
   title: string;
@@ -16,11 +18,11 @@ export type NavbarRoute = {
 
 export type NavbarRoutes = NavbarRoute[];
 
-type TNavbar = {
+export interface NavbarProps {
   routes: NavbarRoutes;
-};
+}
 
-export default function Navbar(props: TNavbar) {
+export default function Navbar(props: NavbarProps) {
   const pathName = usePathname();
   const router = useRouter();
 
@@ -40,7 +42,7 @@ export default function Navbar(props: TNavbar) {
       <div className="mx-auto flex items-center justify-between lg:max-w-7xl">
         <Link
           href="/"
-          className="flex items-center justify-center drop-shadow-teralight"
+          className="drop-shadow-teralight flex items-center justify-center"
           aria-label="Return to home page"
         >
           <div className="relative h-12 w-12 sm:h-14 sm:w-14">

@@ -1,9 +1,9 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 
-type ThemeSwitchProps = {
+export interface ThemeSwitchProps {
   setClose?: Dispatch<SetStateAction<boolean>>;
-};
+}
 
 export default function ThemeSwitch(props: ThemeSwitchProps) {
   const [mounted, setMounted] = useState(false);

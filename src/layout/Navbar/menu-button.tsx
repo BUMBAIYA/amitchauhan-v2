@@ -1,5 +1,6 @@
-import { classNames } from "@/utility/classNames";
 import { SVGMotionProps, motion } from "framer-motion";
+
+import { classNames } from "@/utility/classNames";
 
 const Path = (props: SVGMotionProps<SVGPathElement>) => (
   <motion.path
@@ -10,12 +11,12 @@ const Path = (props: SVGMotionProps<SVGPathElement>) => (
   />
 );
 
-type TMenuLogo = {
+export interface MenuLogoProps {
   open: boolean;
   toggle: () => void;
-};
+}
 
-export default function MenuLogo(props: TMenuLogo) {
+export default function MenuLogo(props: MenuLogoProps) {
   return (
     <button
       aria-label="open menu"

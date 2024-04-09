@@ -1,21 +1,21 @@
 import { ReactNode, useEffect } from "react";
 import { createPortal } from "react-dom";
 
-type ToastProps = {
+interface CustomToastProps {
   children: ReactNode;
   duration: number;
   open: boolean;
   onClose: () => void;
   className?: string;
-};
+}
 
-export function Toast({
+export default function CustomToast({
   children,
   duration = 3000,
   open,
   onClose,
   className,
-}: ToastProps) {
+}: CustomToastProps) {
   useEffect(() => {
     const timer = setTimeout(() => {
       onClose();

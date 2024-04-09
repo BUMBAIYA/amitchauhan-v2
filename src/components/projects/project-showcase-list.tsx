@@ -1,8 +1,10 @@
 import Link from "next/link";
+
 import { motion } from "framer-motion";
+
 import { classNames } from "@/utility/classNames";
 
-export type ProjectShowcaseListProps = {
+export type ProjectShowcaseListItem = {
   index: number;
   title: string;
   href: string;
@@ -13,13 +15,13 @@ export type ProjectShowcaseListProps = {
   };
 };
 
-export type ProjectList = {
-  data: ProjectShowcaseListProps;
+export interface ProjectShowcaseListProps {
+  data: ProjectShowcaseListItem;
   activeProject: number;
   toggleList: (index: number) => void; //eslint-disable-line no-unused-vars
-};
+}
 
-export default function ProjectShowcaseList(props: ProjectList) {
+export default function ProjectShowcaseList(props: ProjectShowcaseListProps) {
   return (
     <motion.div
       className={classNames("group flex gap-4 ")}
@@ -46,7 +48,7 @@ export default function ProjectShowcaseList(props: ProjectList) {
               "hidden text-6xl font-semibold transition-colors duration-300 lg:block",
               props.activeProject === props.data.index
                 ? "text-accent"
-                : "text-accent/30",
+                : "text-accent/70",
             )}
           >
             {props.data.title}
@@ -61,7 +63,7 @@ export default function ProjectShowcaseList(props: ProjectList) {
             )}
           ></span>
         </Link>
-        <p className="max-w-xl text-base font-semibold text-zinc-800 dark:text-zinc-100 sm:text-lg">
+        <p className="max-w-xl text-base font-semibold text-muted-foreground sm:text-lg">
           {props.data.tags.map((tag) => `#${tag} `)}
         </p>
       </div>

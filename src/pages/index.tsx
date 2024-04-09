@@ -1,15 +1,27 @@
 import dynamic from "next/dynamic";
 import Head from "next/head";
+
 import { NextSeo } from "next-seo";
-import CursorTrailCanvas from "@/components/CursorTrailCanvas";
-import Hero from "@/components/Hero";
+
+import LandingHero from "@/components/landing-hero";
+import CursorTrailCanvas from "@/components/cursor-trail-canvas";
 import { PROJECT_SHOWCASE } from "@/data/projects";
+import { SKILLS_DATA } from "@/data/skills";
 import { siteMetadata } from "@/data/siteMetaData.mjs";
 
-const Skills = dynamic(() => import("@/components/Skills"), { ssr: true });
-const Project = dynamic(() => import("@/components/ProjectShowcase"), {
-  ssr: true,
-});
+const SkillsShowcase = dynamic(
+  () => import("@/components/skills/skills-showcase"),
+  {
+    ssr: true,
+  },
+);
+
+const ProjectShowcase = dynamic(
+  () => import("@/components/projects/project-showcase"),
+  {
+    ssr: true,
+  },
+);
 
 export default function Home() {
   return (
@@ -52,9 +64,9 @@ export default function Home() {
           />
         )}
       </Head>
-      <Hero />
-      <Skills />
-      <Project projects={PROJECT_SHOWCASE} />
+      <LandingHero />
+      <SkillsShowcase skills={SKILLS_DATA} />
+      <ProjectShowcase projects={PROJECT_SHOWCASE} />
     </>
   );
 }

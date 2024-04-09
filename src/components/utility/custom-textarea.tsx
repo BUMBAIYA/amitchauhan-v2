@@ -5,7 +5,7 @@ import { classNames } from "@/utility/classNames";
 export interface TextareaProps
   extends InputHTMLAttributes<HTMLTextAreaElement> {}
 
-const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
+const CustomTextarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ className, ...props }, ref) => {
     return (
       <textarea
@@ -20,6 +20,6 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   },
 );
 
-Textarea.displayName = "CustomTextarea";
+CustomTextarea.displayName = "CustomTextarea";
 
-export default Textarea;
+export default CustomTextarea;

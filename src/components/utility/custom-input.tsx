@@ -4,7 +4,7 @@ import { classNames } from "@/utility/classNames";
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {}
 
-const Input = forwardRef<HTMLInputElement, InputProps>(
+const CustomInput = forwardRef<HTMLInputElement, InputProps>(
   ({ className, ...props }, ref) => {
     return (
       <input
@@ -19,6 +19,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
   },
 );
 
-Input.displayName = "CustomInput";
+CustomInput.displayName = "CustomInput";
 
-export default Input;
+export default CustomInput;

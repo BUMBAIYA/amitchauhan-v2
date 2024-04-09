@@ -1,12 +1,13 @@
 import { RefObject, useRef } from "react";
 import Link from "next/link";
+
 import { motion, useScroll } from "framer-motion";
 
-type TShowCaseLiIcon = {
+export interface ExperienceListIconProps {
   iconRef: RefObject<HTMLElement>;
-};
+}
 
-function ShowCaseLiIcon(props: TShowCaseLiIcon) {
+function ShowCaseLiIcon(props: ExperienceListIconProps) {
   const { scrollYProgress } = useScroll({
     target: props.iconRef,
     offset: ["center end", "center center"],
@@ -36,7 +37,7 @@ function ShowCaseLiIcon(props: TShowCaseLiIcon) {
   );
 }
 
-export type TShowCaseListDetatils = {
+export interface ExperienceShowcaseListItemProps {
   title: string;
   organisation: {
     name: string;
@@ -45,9 +46,11 @@ export type TShowCaseListDetatils = {
   date: string;
   location: string;
   description: string;
-};
+}
 
-export function ShowCaseListDetatils(props: TShowCaseListDetatils) {
+export default function ExperienceShowcaseListItem(
+  props: ExperienceShowcaseListItemProps,
+) {
   const ref = useRef(null);
   return (
     <li ref={ref} className="mx-auto mb-14 flex w-[60%] flex-col gap-1">
@@ -78,36 +81,5 @@ export function ShowCaseListDetatils(props: TShowCaseListDetatils) {
         </p>
       </motion.div>
     </li>
-  );
-}
-
-export type TShowCaseList = {
-  title: string;
-  details: TShowCaseListDetatils[];
-};
-
-export default function ShowCaseList(props: TShowCaseList) {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "center start"],
-  });
-  return (
-    <div className="mx-auto my-40 max-w-7xl px-6 sm:px-14 md:my-60 md:px-20">
-      <h2 className="md:mb-30 mb-16 w-full bg-gradient-to-r from-accent/70 to-accent bg-clip-text text-center text-3xl font-bold text-transparent xs:text-4xl sm:text-6xl md:text-8xl">
-        {props.title}
-      </h2>
-      <div ref={ref} className="relative w-full md:mx-auto md:w-[80%]">
-        <motion.div
-          style={{ scaleY: scrollYProgress }}
-          className="absolute left-9 top-5 h-full w-[5px] origin-top rounded-lg bg-accent"
-        ></motion.div>
-        <ul className="ml-4 w-full items-center">
-          {props.details.map((_details, index) => (
-            <ShowCaseListDetatils key={index} {..._details} />
-          ))}
-        </ul>
-      </div>
-    </div>
   );
 }

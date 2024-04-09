@@ -1,6 +1,8 @@
 import { useState } from "react";
+
 import { AnimatePresence, AnimationProps, motion, wrap } from "framer-motion";
 import { BiSolidLeftArrow } from "react-icons/bi";
+
 import { classNames } from "@/utility/classNames";
 
 const variant: AnimationProps["variants"] = {
@@ -87,7 +89,7 @@ export default function Corosel({ aspectRatio = 1, images }: CoroselProps) {
             className={classNames(
               "h-2 w-2 rounded-full",
               index === imageIndex
-                ? "bg-teal-400"
+                ? "bg-accent"
                 : "bg-zinc-700 dark:bg-zinc-400",
             )}
           ></span>

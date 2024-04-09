@@ -1,6 +1,6 @@
 import { AnimatePresence, Variants, motion } from "framer-motion";
 
-export function AnimatedLogo() {
+export default function AnimatedLogo() {
   const iconVariant: Variants = {
     hidden: {
       pathLength: 0,
@@ -8,6 +8,7 @@ export function AnimatedLogo() {
     },
     visible: {
       pathLength: 1,
+      // Set fill as per your theme
       fill: "#156165",
     },
   };
