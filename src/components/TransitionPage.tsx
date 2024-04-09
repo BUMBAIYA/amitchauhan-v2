@@ -4,7 +4,7 @@ export default function TransitionPage() {
   return (
     <>
       <motion.div
-        className="fixed bottom-0 right-full top-0 z-50 flex h-full w-screen items-center justify-center bg-teal-600 dark:bg-teal-400"
+        className="fixed bottom-0 right-full top-0 z-50 flex h-full w-screen items-center justify-center bg-accent"
         initial={{ x: "100%", width: "100%" }}
         animate={{ x: "0%", width: "0%" }}
         transition={{ duration: 0.6, ease: "easeInOut" }}
@@ -23,7 +23,7 @@ export default function TransitionPage() {
         </div>
       </motion.div>
       <motion.div
-        className="fixed bottom-0 right-full top-0 z-50 flex h-full w-screen items-center justify-center bg-teal-600 dark:bg-teal-400"
+        className="fixed bottom-0 right-full top-0 z-50 flex h-full w-screen items-center justify-center bg-accent"
         initial={{ x: "100%", width: "100%" }}
         animate={{ x: "0%", width: "0%" }}
         transition={{ delay: 0.2, duration: 0.6, ease: "easeInOut" }}

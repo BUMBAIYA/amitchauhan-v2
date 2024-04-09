@@ -14,10 +14,7 @@ const Project = dynamic(() => import("@/components/ProjectShowcase"), {
 export default function Home() {
   return (
     <>
-      <CursorTrailCanvas
-        color="hsla(183, 64%, 27%, 0.4)"
-        className="pointer-events-none fixed inset-0 -z-10 h-full w-full"
-      />
+      <CursorTrailCanvas className="pointer-events-none fixed inset-0 -z-10 h-full w-full" />
       <NextSeo
         title="Amit Chauhan | React and Frontend Developer"
         description="Explore the professional portfolio of Amit Chauhan, a skilled React and Frontend Developer with 2 years of hands-on experience. Discover innovative projects, expertise in modern web technologies, and a passion for creating seamless user experiences."

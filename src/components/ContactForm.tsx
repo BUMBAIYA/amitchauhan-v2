@@ -5,6 +5,8 @@ import * as Yup from "yup";
 import { CheckIcon, DangerIcon, MailIcon } from "@/components/Icons";
 import { Toast } from "@/components/Toast";
 import { classNames } from "@/utility/classNames";
+import Input from "./utility/Input";
+import Textarea from "./utility/Textarea";
 
 export const mailValidationSchema = Yup.object({
   email: Yup.string().email("Invalid email").required("Email required"),
@@ -99,7 +101,7 @@ export function ContactForm() {
           duration={3000}
           onClose={() => setShowToast((prev) => ({ ...prev, value: false }))}
           className={classNames(
-            "fixed right-4 top-6 z-[9999] rounded-lg bg-teal-500 px-4 py-2 font-semibold text-white shadow-xl",
+            "fixed right-4 top-6 z-[9999] rounded-lg bg-accent px-4 py-2 font-semibold text-white shadow-xl",
             showToast.type === "PASS"
               ? "bg-teal-500"
               : showToast.type === "RATE_LIMIT"
@@ -129,7 +131,7 @@ export function ContactForm() {
         <button
           aria-label="open send mail modal"
           type="button"
-          className="fixed bottom-4 right-4 flex h-12 w-12 items-center justify-center rounded-full bg-teal-600 p-2 text-white transition-colors duration-150 hover:bg-teal-500 sm:bottom-8 sm:right-8 sm:h-14 sm:w-14 sm:p-3 lg:h-16 lg:w-16"
+          className="fixed bottom-4 right-4 flex h-12 w-12 items-center justify-center rounded-full bg-accent p-2 text-background transition-colors duration-150 hover:bg-accent/80 sm:bottom-8 sm:right-8 sm:h-14 sm:w-14 sm:p-3 lg:h-16 lg:w-16"
           onClick={() => setIsOpenModal(true)}
         >
           <MailIcon />
@@ -139,7 +141,7 @@ export function ContactForm() {
       <div className="text-center">
         <button
           ref={refSendBtn}
-          className="inline-flex items-center gap-2 rounded-md bg-zinc-100 px-3 py-2 text-teal-600 transition-transform duration-150 focus-within:scale-[1.05] hover:scale-[1.05] hover:bg-white"
+          className="inline-flex items-center gap-2 rounded-md bg-background px-3 py-2 text-accent transition-transform duration-150 focus-within:scale-[1.05] hover:scale-[1.05] hover:bg-foreground hover:text-background"
           onClick={() => setIsOpenModal(true)}
         >
           <span className="block h-6 w-6 sm:h-7 sm:w-7 lg:h-9 lg:w-9">
@@ -177,23 +179,23 @@ export function ContactForm() {
               leaveFrom="opacity-100 top-16"
               leaveTo="opacity-0 top-full"
             >
-              <Dialog.Panel className="absolute m-4 w-[95%] max-w-xl overflow-y-auto rounded-2xl border-2 border-teal-100/20 bg-teal-600 px-6 py-8 shadow-lg shadow-teal-200/10 dark:bg-teal-700 md:px-10 md:py-16">
+              <Dialog.Panel className="absolute m-4 w-[95%] max-w-xl overflow-y-auto rounded-2xl border-2 border-accent/20 bg-accent px-6 py-8 shadow-lg shadow-accent/10 md:px-10 md:py-16">
                 <div className="flex items-center justify-between">
-                  <Dialog.Title className="flex items-center gap-1 text-2xl font-semibold text-zinc-100 sm:gap-2 md:text-4xl">
+                  <Dialog.Title className="flex items-center gap-1 text-2xl font-semibold text-background sm:gap-2 md:text-4xl">
                     <span className="inline-block h-8 w-8 sm:h-12 sm:w-12">
                       <MailIcon />
                     </span>
                     <span>Send Message</span>
                   </Dialog.Title>
                   <button
-                    className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-teal-600 bg-teal-50 p-2 text-sm text-teal-600 transition-transform hover:scale-[1.05] hover:bg-teal-100"
+                    className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-accent bg-background p-2 text-sm text-accent transition-transform hover:scale-[1.05] hover:bg-background"
                     onClick={() => setIsOpenModal(false)}
                   >
                     <svg
                       width="100%"
                       height="100%"
                       viewBox="0 0 23 23"
-                      className="ml-[1px] mt-1 stroke-tera-500 dark:stroke-teal-600"
+                      className="ml-[1px] mt-1 stroke-accent"
                     >
                       <path
                         fill="transparent"
@@ -226,12 +228,14 @@ export function ContactForm() {
                   {({ isValid }) => (
                     <Form className="mt-6 flex flex-col gap-3">
                       <div className="flex flex-col gap-1">
-                        <label
-                          htmlFor="email"
-                          className="font-medium text-white"
-                        >
-                          Email
-                        </label>
+                        <div>
+                          <label
+                            htmlFor="email"
+                            className="inline font-medium text-background"
+                          >
+                            Email
+                          </label>
+                        </div>
                         <div className="relative">
                           <Field name="email">
                             {({
@@ -239,12 +243,11 @@ export function ContactForm() {
                               meta,
                             }: FormiKInputFieldProps<string>) => (
                               <>
-                                <input
+                                <Input
                                   id="email"
                                   {...field}
                                   type="text"
                                   placeholder="Email"
-                                  className="w-full rounded-lg border-none bg-teal-50 font-semibold text-teal-800 placeholder:font-normal placeholder:text-zinc-400 focus-within:border-2 focus-within:border-teal-600 focus-within:ring-teal-600"
                                 />
                                 {Boolean(meta.touched && meta.error) && (
                                   <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-bold text-red-400 md:text-sm">
@@ -257,12 +260,14 @@ export function ContactForm() {
                         </div>
                       </div>
                       <div className="flex flex-col gap-1">
-                        <label
-                          htmlFor="name"
-                          className="font-medium text-white"
-                        >
-                          Name
-                        </label>
+                        <div>
+                          <label
+                            htmlFor="name"
+                            className="inline font-medium text-background"
+                          >
+                            Name
+                          </label>
+                        </div>
                         <div className="relative">
                           <Field name="name">
                             {({
@@ -270,12 +275,11 @@ export function ContactForm() {
                               meta,
                             }: FormiKInputFieldProps<string>) => (
                               <>
-                                <input
+                                <Input
                                   id="name"
                                   {...field}
                                   type="text"
                                   placeholder="Name"
-                                  className="w-full rounded-lg border-none bg-teal-50 font-semibold text-teal-800 placeholder:font-normal placeholder:text-zinc-400 focus-within:border-2 focus-within:border-teal-600 focus-within:ring-teal-600"
                                 />
                                 {Boolean(meta.touched && meta.error) && (
                                   <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-bold text-red-400 md:text-sm">
@@ -288,12 +292,14 @@ export function ContactForm() {
                         </div>
                       </div>
                       <div className="flex flex-col gap-1">
-                        <label
-                          htmlFor="subject"
-                          className="font-medium text-white"
-                        >
-                          Subject
-                        </label>
+                        <div>
+                          <label
+                            htmlFor="subject"
+                            className="inline font-medium text-background"
+                          >
+                            Subject
+                          </label>
+                        </div>
                         <div className="relative">
                           <Field name="subject">
                             {({
@@ -301,12 +307,11 @@ export function ContactForm() {
                               meta,
                             }: FormiKInputFieldProps<string>) => (
                               <>
-                                <input
+                                <Input
                                   id="subject"
                                   {...field}
                                   type="text"
                                   placeholder="Subject"
-                                  className="w-full rounded-lg border-none bg-teal-50 font-semibold text-teal-800 placeholder:font-normal placeholder:text-zinc-400 focus-within:border-2 focus-within:border-teal-600 focus-within:ring-teal-600"
                                 />
                                 {Boolean(meta.touched && meta.error) && (
                                   <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-bold text-red-400 md:text-sm">
@@ -319,12 +324,14 @@ export function ContactForm() {
                         </div>
                       </div>
                       <div className="flex flex-col gap-1">
-                        <label
-                          htmlFor="message"
-                          className="font-medium text-white"
-                        >
-                          Message
-                        </label>
+                        <div>
+                          <label
+                            htmlFor="message"
+                            className="inline font-medium text-background"
+                          >
+                            Message
+                          </label>
+                        </div>
                         <div className="relative">
                           <Field name="message">
                             {({
@@ -332,11 +339,10 @@ export function ContactForm() {
                               meta,
                             }: FormiKInputFieldProps<string>) => (
                               <>
-                                <textarea
+                                <Textarea
                                   id="message"
                                   {...field}
                                   placeholder="Message"
-                                  className="w-full rounded-lg border-none bg-teal-50 font-semibold text-teal-800 placeholder:font-normal placeholder:text-zinc-400 focus-within:border-2 focus-within:border-teal-600 focus-within:ring-teal-600"
                                 />
                                 {Boolean(meta.touched && meta.error) && (
                                   <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-bold text-red-400 md:text-sm">
@@ -351,7 +357,7 @@ export function ContactForm() {
                       <button
                         aria-label="open send mail modal"
                         type="submit"
-                        className="mt-4 w-full rounded-full bg-teal-50 px-4 py-3 text-center text-lg font-semibold text-teal-900 transition-colors duration-150 hover:bg-teal-100"
+                        className="mt-4 w-full rounded-full bg-background px-4 py-3 text-center text-lg font-semibold text-accent transition-colors duration-150 hover:bg-background/90"
                         disabled={!isValid}
                       >
                         {isSendingMail ? (

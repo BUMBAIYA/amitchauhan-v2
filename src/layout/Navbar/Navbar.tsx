@@ -47,7 +47,7 @@ export default function Navbar(props: TNavbar) {
             <AnimatedLogo />
           </div>
         </Link>
-        <nav className="hidden items-center gap-2 rounded-full px-2 py-2 shadow-md ring-1 ring-zinc-200 backdrop-blur-md dark:ring-teal-600/50 md:flex">
+        <nav className="hidden items-center gap-2 rounded-full px-2 py-2 shadow-md ring-1 ring-zinc-200 backdrop-blur-md dark:ring-accent/50 md:flex">
           <ul className="flex gap-2 text-sm font-medium">
             {props.routes.map((_link, index) => {
               return (
@@ -59,8 +59,8 @@ export default function Navbar(props: TNavbar) {
                     href={_link.href}
                     className={classNames(
                       pathName === _link.href
-                        ? "font-semibold text-white dark:text-zinc-900 dark:hover:text-white"
-                        : "",
+                        ? "font-semibold text-background dark:hover:text-foreground"
+                        : "text-foreground",
                       "group relative mx-3 rounded-full px-3 py-2 transition-colors duration-200",
                     )}
                   >
@@ -76,7 +76,7 @@ export default function Navbar(props: TNavbar) {
                             },
                           },
                         }}
-                        className="absolute inset-0 -z-10 rounded-full bg-tera-500 group-hover:bg-tera-500/80 dark:bg-teal-400 dark:group-hover:bg-teal-500"
+                        className="absolute inset-0 -z-10 rounded-full bg-accent group-hover:bg-accent/80"
                       ></motion.span>
                     )}
                     {_link.title}
@@ -104,7 +104,7 @@ export default function Navbar(props: TNavbar) {
               leaveFrom="opacity-100 bottom-[15%]"
               leaveTo="opacity-0 bottom-full"
             >
-              <Dialog.Panel className="pointer-events-none absolute flex min-h-[85%] w-full flex-col items-center justify-center overflow-y-auto rounded-b-2xl border-2 border-teal-100/20 border-teal-600 bg-zinc-100 px-6 py-8 text-teal-600 shadow-lg shadow-teal-200/10 dark:bg-teal-700 dark:text-zinc-100 md:px-10 md:py-16">
+              <Dialog.Panel className="pointer-events-none absolute flex min-h-[85%] w-full flex-col items-center justify-center overflow-y-auto rounded-b-2xl border-2 border-accent/20 bg-background px-6 py-8 text-accent shadow-lg shadow-accent/10 md:px-10 md:py-16">
                 <div className="pointer-events-auto flex flex-col items-center gap-6 text-center">
                   {props.routes.map((link, i) => (
                     <button
@@ -115,7 +115,7 @@ export default function Navbar(props: TNavbar) {
                       <span
                         className={classNames(
                           pathName === link.href ? "w-full" : "w-0",
-                          "absolute -bottom-1 left-0 h-1 rounded-lg bg-teal-600 transition-[width] duration-300 group-hover:w-full dark:bg-zinc-100",
+                          "absolute -bottom-1 left-0 h-1 rounded-lg bg-accent transition-[width] duration-300 group-hover:w-full",
                         )}
                       ></span>
                       {link.title}

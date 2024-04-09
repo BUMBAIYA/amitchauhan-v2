@@ -49,7 +49,7 @@ export default function Projects() {
               <ProjectCard key={index} {...card} />
             ))}
           </div>
-          <div className="mx-auto mt-16 max-w-5xl text-center md:mt-28">
+          <div className="mx-auto mt-16 max-w-5xl text-center text-foreground md:mt-28">
             <span className="text-xl font-bold md:text-2xl">
               I am currently building new projects and learning backend
               development to expand my skill set beyond frontend.
@@ -59,7 +59,7 @@ export default function Projects() {
               <a
                 href={`${siteMetadata.github}?tab=repositories`}
                 target="_blank"
-                className="font-medium text-tera-500 underline underline-offset-2 hover:text-teal-600 dark:text-teal-400"
+                className="font-semibold text-accent underline underline-offset-2 hover:text-accent/70"
               >
                 Github
               </a>

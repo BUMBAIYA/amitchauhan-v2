@@ -59,7 +59,7 @@ export default function About() {
         <div className="sm:1/2 mt-10 w-full lg:w-1/2">
           <AnimatePresence>
             <FadeUp key="title-greeting" duration={0.6}>
-              <h1 className="bg-gradient-to-r from-teal-500 to-tera-500 bg-clip-text text-6xl font-bold text-transparent dark:from-teal-200 dark:to-teal-500 sm:text-7xl md:text-6xl lg:text-5xl xl:text-7xl">
+              <h1 className="text-6xl font-bold text-accent sm:text-7xl md:text-6xl lg:text-5xl xl:text-7xl">
                 Hi, I&apos;m Amit Chauhan
               </h1>
             </FadeUp>
@@ -92,7 +92,9 @@ export default function About() {
                   height={15}
                 />
               </div>
-              <span className="text-lg font-medium">Mumbai, India</span>
+              <span className="text-lg font-medium text-foreground">
+                Mumbai, India
+              </span>
             </FadeRight>
           </AnimatePresence>
         </div>
