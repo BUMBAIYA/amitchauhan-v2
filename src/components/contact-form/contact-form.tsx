@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 
@@ -9,7 +11,6 @@ import {
   type FormiKInputFieldProps,
 } from "@/utility/types";
 import { type MailSentToastState } from "@/components/contact-form/contact-mail-toast";
-import { useState } from "react";
 
 export const mailValidationSchema = Yup.object({
   email: Yup.string().email("Invalid email").required("Email required"),
