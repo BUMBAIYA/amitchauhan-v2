@@ -1,8 +1,8 @@
-import { ProjectCardProps } from "@/components/ProjectCard";
-import { ProjectShowcaseListProps } from "@/components/ProjectShowcaseList";
+import { type ProjectCardProps } from "@/components/projects/project-card";
+import { type ProjectShowcaseListItem } from "@/components/projects/project-showcase-list";
 import { siteMetadata } from "@/data/siteMetaData.mjs";
 
-export const PROJECT_SHOWCASE: ProjectShowcaseListProps[] = [
+export const PROJECT_SHOWCASE: ProjectShowcaseListItem[] = [
   {
     index: 0,
     title: "Json Tree",

@@ -1,5 +1,6 @@
-import { classNames } from "@/utility/classNames";
 import { SVGMotionProps, motion } from "framer-motion";
+
+import { classNames } from "@/utility/classNames";
 
 const Path = (props: SVGMotionProps<SVGPathElement>) => (
   <motion.path
@@ -10,18 +11,18 @@ const Path = (props: SVGMotionProps<SVGPathElement>) => (
   />
 );
 
-type TMenuLogo = {
+export interface MenuLogoProps {
   open: boolean;
   toggle: () => void;
-};
+}
 
-export default function MenuLogo(props: TMenuLogo) {
+export default function MenuLogo(props: MenuLogoProps) {
   return (
     <button
       aria-label="open menu"
       onClick={props.toggle}
       className={classNames(
-        "relative z-50 flex h-12 w-12 select-none items-center gap-1 rounded-full p-3 py-1 font-semibold shadow-md ring-1 ring-zinc-200 backdrop-blur-md dark:ring-teal-600/50 md:hidden",
+        "relative z-50 flex h-12 w-12 select-none items-center gap-1 rounded-full p-3 py-1 font-semibold shadow-md ring-1 ring-zinc-200 backdrop-blur-md dark:ring-accent/50 md:hidden",
         props.open ? "hidden" : "bg-zinc-100 dark:bg-zinc-900",
       )}
     >
@@ -31,9 +32,7 @@ export default function MenuLogo(props: TMenuLogo) {
         viewBox="0 0 23 23"
         className={classNames(
           "mt-1 ",
-          props.open
-            ? "stroke-zinc-100 dark:stroke-teal-600"
-            : "stroke-tera-500 dark:stroke-teal-400",
+          props.open ? "stroke-zinc-100 dark:stroke-accent" : "stroke-accent",
         )}
         animate={props.open ? "open" : "close"}
       >

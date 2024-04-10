@@ -1,22 +1,25 @@
 import { ReactNode } from "react";
+
 import { motion } from "framer-motion";
 
-interface Props {
+export interface FadeRightProps {
   children: ReactNode;
   duration: number;
   delay?: number;
+  className?: string;
   whileInView?: boolean;
 }
 
-export default function FadeUp({
+export default function FadeRight({
   children,
   duration,
   delay,
+  className,
   whileInView = false,
-}: Props) {
+}: FadeRightProps) {
   const animation = {
     opacity: 1,
-    y: 0,
+    x: 0,
     transition: {
       duration,
       ease: "easeInOut",
@@ -25,9 +28,10 @@ export default function FadeUp({
   };
   return (
     <motion.div
-      initial={{ y: 200, opacity: 0 }}
-      whileInView={whileInView ? animation : {}}
-      animate={!whileInView ? animation : {}}
+      initial={{ x: -100, opacity: 0 }}
+      whileInView={whileInView ? animation : undefined}
+      animate={!whileInView ? animation : undefined}
+      className={className}
     >
       {children}
     </motion.div>

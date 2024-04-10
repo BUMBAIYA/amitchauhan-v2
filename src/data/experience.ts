@@ -1,6 +1,6 @@
-import { TShowCaseListDetatils } from "@/components/ShowCaseList";
+import { type ExperienceShowcaseListItemProps } from "@/components/experience/experience-showcase-list-item";
 
-export const EXPERIENCE: TShowCaseListDetatils[] = [
+export const EXPERIENCE: ExperienceShowcaseListItemProps[] = [
   {
     title: "Reactjs Frontend Developer",
     organisation: {

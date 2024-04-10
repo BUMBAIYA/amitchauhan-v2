@@ -1,9 +1,11 @@
 import { NextApiRequest, NextApiResponse } from "next";
+
 import { createTransport } from "nodemailer";
 import { v4 } from "uuid";
-import { rateLimiterApi } from "@/utility/rateLimiter";
 import { ValidationError } from "yup";
-import { mailValidationSchema } from "@/components/ContactForm";
+
+import { rateLimiterApi } from "@/utility/rate-limiter";
+import { mailValidationSchema } from "@/components/contact-form/contact-form";
 
 const REQUEST_PER_HOUR = 5 as const;
 const RATELIMIT_DURATION = 3600000 as const;

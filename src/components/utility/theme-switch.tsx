@@ -1,9 +1,9 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 
-type ThemeSwitchProps = {
+export interface ThemeSwitchProps {
   setClose?: Dispatch<SetStateAction<boolean>>;
-};
+}
 
 export default function ThemeSwitch(props: ThemeSwitchProps) {
   const [mounted, setMounted] = useState(false);
@@ -22,7 +22,7 @@ export default function ThemeSwitch(props: ThemeSwitchProps) {
     <button
       type="button"
       aria-label="toggle theme"
-      className="mt-8 h-10 w-10 rounded-full text-teal-600 transition-[scale] duration-200 hover:scale-[1.1] dark:text-white md:mr-4 md:mt-0 md:h-6 md:w-6 md:text-tera-500 md:dark:text-teal-400"
+      className="mt-8 h-10 w-10 rounded-full text-accent transition-[scale] duration-200 hover:scale-[1.1] md:mr-4 md:mt-0 md:h-6 md:w-6"
       onClick={handleThemeChange}
     >
       {mounted &&

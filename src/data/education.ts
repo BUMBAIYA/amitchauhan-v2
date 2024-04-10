@@ -1,6 +1,6 @@
-import { TShowCaseListDetatils } from "@/components/ShowCaseList";
+import { type ExperienceShowcaseListItemProps } from "@/components/experience/experience-showcase-list-item";
 
-export const EDUCATION: TShowCaseListDetatils[] = [
+export const EDUCATION: ExperienceShowcaseListItemProps[] = [
   {
     title: "Bachelor Of Engineering in Electronics and Telecommunication",
     organisation: {
