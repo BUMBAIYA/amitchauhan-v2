@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import FadeUp from "@/animation/FadeUp";
 
-export default function Hero() {
+import { AnimatePresence, motion } from "framer-motion";
+
+import FadeUp from "@/animation/fade-up";
+
+export default function LandingHero() {
   const [scrollY, setScrollY] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -36,7 +38,7 @@ export default function Hero() {
         <div className="mx-auto max-w-7xl">
           <AnimatePresence>
             <FadeUp key="title-main" duration={0.6}>
-              <h1 className="bg-gradient-to-r from-teal-500 to-tera-500 bg-clip-text py-2 text-5xl font-bold text-transparent dark:from-teal-200 dark:to-teal-500 sm:text-6xl md:text-7xl xl:text-8xl">
+              <h1 className="bg-accent bg-clip-text py-2 text-5xl font-bold text-transparent sm:text-6xl md:text-7xl xl:text-8xl">
                 Amit Chauhan
               </h1>
               <span className="text-xl font-semibold text-zinc-900 dark:text-zinc-100 md:text-3xl">
@@ -45,15 +47,10 @@ export default function Hero() {
             </FadeUp>
             <FadeUp key="description" duration={0.6} delay={0.2}>
               <div className="mt-8 max-w-3xl text-base font-semibold text-zinc-900 dark:text-zinc-200 sm:text-base md:text-2xl">
-                <span className="text-xl text-teal-600 dark:text-teal-300 sm:text-3xl">
-                  Hi
-                </span>
-                , I&apos;m
-                <span className="text-teal-600 dark:text-teal-300">
-                  {" "}
-                  Amit Chauhan
-                </span>{" "}
-                , I turn vision into reality with code and design.
+                <span className="text-xl text-accent sm:text-3xl">Hi</span>,
+                I&apos;m
+                <span className="text-accent"> Amit Chauhan</span> , I turn
+                vision into reality with code and design.
               </div>
             </FadeUp>
           </AnimatePresence>

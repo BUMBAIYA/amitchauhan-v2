@@ -1,17 +1,19 @@
 import Image from "next/image";
-import Corosel from "@/components/Corosel";
-import { FiExternalLink } from "react-icons/fi";
-import { GithubIcon } from "@/components/Icons";
-import { motion } from "framer-motion";
 
-export type ProjectCardProps = {
+import { motion } from "framer-motion";
+import { FiExternalLink } from "react-icons/fi";
+
+import Corosel from "@/components/utility/corosel";
+import { GithubIcon } from "@/components/icons";
+
+export interface ProjectCardProps {
   name: string;
   favicon: string;
   imageUrl: string[];
   description: string;
   sourceCodeHref: string;
   liveWebsiteHref?: string;
-};
+}
 
 export default function ProjectCard(props: ProjectCardProps) {
   return (
@@ -22,10 +24,10 @@ export default function ProjectCard(props: ProjectCardProps) {
         type: "spring",
         duration: 0.4,
       }}
-      className="w-full overflow-hidden rounded-lg border border-zinc-500/30 bg-white transition-shadow duration-150 hover:shadow-md dark:border-teal-200/10 dark:bg-zinc-800 dark:hover:shadow-sm dark:hover:shadow-teal-200/50"
+      className="w-full overflow-hidden rounded-lg border border-accent/20 bg-background shadow-md transition-shadow duration-150 hover:shadow-md hover:shadow-accent/20 dark:bg-zinc-800 dark:hover:shadow-lg"
     >
       <Corosel images={props.imageUrl} aspectRatio={2.1} />
-      <div className="p-3 sm:p-4">
+      <div className="p-3 text-foreground sm:p-4">
         <div className="flex items-center gap-3">
           <span className="relative h-5 w-5">
             <Image src={props.favicon} alt="logo" fill />

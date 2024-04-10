@@ -1,11 +1,12 @@
 import { CSSProperties, useEffect, useRef } from "react";
-import { cursorTrail } from "@/utility/cursorTrail";
 
-export type CursorTrailCanvasProps = {
-  color: string;
+import { cursorTrail } from "@/utility/cursor-trail";
+
+export interface CursorTrailCanvasProps {
+  color?: string;
   className?: string;
   style?: CSSProperties;
-};
+}
 
 export default function CursorTrailCanvas(props: CursorTrailCanvasProps) {
   const refCanvas = useRef<HTMLCanvasElement>(null);

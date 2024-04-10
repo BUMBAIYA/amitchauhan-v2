@@ -6,7 +6,13 @@ export type CursorTrail = {
 };
 
 export function cursorTrail(props: CursorTrail) {
-  const { ref, color = "rgba(0, 0, 0, 0.5)" } = props;
+  const colorRaw = getComputedStyle(document.documentElement).getPropertyValue(
+    "--accent",
+  );
+  const accentColor = `hsla(${
+    colorRaw ? colorRaw.split(" ").join(",") : "0, 0%, 0%"
+  }, 0.35)`;
+  const { ref, color } = props;
   const ctx = ref.current?.getContext("2d")!;
   let AnimationFeature = {
     friction: 0.5,
@@ -109,7 +115,7 @@ export function cursorTrail(props: CursorTrail) {
       ctx.globalCompositeOperation = "source-over";
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
       ctx.globalCompositeOperation = "lighter";
-      ctx.strokeStyle = color;
+      ctx.strokeStyle = color || accentColor;
       ctx.lineWidth = 1;
       for (let x: Line, t = 0; t < AnimationFeature.trails; t++) {
         if (newLines[t] !== undefined) {
