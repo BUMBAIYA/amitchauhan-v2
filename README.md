@@ -21,6 +21,17 @@ If you have any improvements, ideas or find any bugs, don't hesitate to submit a
 1. **Do not push your Nodemailer pass on Github** as it can give access to your google email. Use `.env` file
 2. Use [Nextjs api routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) for nodemailer transporters and send mail function as they only run on server and cannot expose your google app variables to client.
 
+## 🌟 Customizable theme
+
+### There are some premade themes that I have made for this portfolio inside `theme-examples.css` file. Just copy paste the styles to globals.css after that you are good to go or Create your own theme by editing the css variables
+
+#### Note
+
+1. When creating custom theme the css variables only take hsl value seperated by space
+2. Theme color for Animated Logo have to be hard coded.
+
+#### Eg. Some Premade themes
+
 ## ✉️ Setup Nodemailer
 
 ### Create Nodemailer User and Password
