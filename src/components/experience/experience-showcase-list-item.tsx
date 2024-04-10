@@ -69,6 +69,7 @@ export default function ExperienceShowcaseListItem(
             href={props.organisation.href}
             className="cursor-pointer text-accent"
             target="_blank"
+            rel="nofollow"
           >
             @{props.organisation.name}
           </Link>
