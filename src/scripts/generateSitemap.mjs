@@ -1,4 +1,4 @@
-import { writeFileSync, statSync } from "fs";
+import { writeFileSync } from "fs";
 import { globby } from "globby";
 import prettier from "prettier";
 import { siteMetadata } from "../data/siteMetaData.mjs";
@@ -25,8 +25,6 @@ async function generateSitemap() {
                   .replace("src/pages/", "/")
                   .replace("/index", "");
 
-                const modDate = getFileModificationDate(page);
-
                 // exclude dynamic routes
                 if (path.includes("[") || path.includes("]")) {
                   return "";
@@ -35,7 +33,6 @@ async function generateSitemap() {
                 return `
                         <url>
                             <loc>${siteMetadata.siteUrl}${path}</loc>
-                            <lastmod>${modDate}</lastmod>
                         </url>
                     `;
               })
@@ -54,44 +51,6 @@ async function generateSitemap() {
   console.log(
     "Successfully generated\n-> Sitemap at public/sitemap.xml\n-> Robots.txt at public/robots.txt",
   );
-}
-
-/**
- * Get File Modification Date Strategy.
- *
- * This function provides a quick and dirty solution to retrieve the modification date of a file.
- * While it works perfectly for basic use cases, it has some limitations and may not be suitable for
- * tracking file changes in multiple Git branches or in service applications.
- *
- * @param {string} filePath - The path to the file for which to retrieve the modification date.
- * @returns {string} - The modification date of the file in ISO format (e.g., "2024-01-03T12:30:00.000Z").
- *                    If an error occurs during the process, the current date is returned.
- *
- * @throws {Error} If an error occurs while getting the file stats.
- *
- * @description
- * Points to consider:
- * - File changes include any change in file content; this method may not be useful for tracking
- *   file changes in multiple Git branches.
- * - A major issue with this method is that if you edit a file and later decide to undo the changes,
- *   the file modification date will reflect the undo file change event. This occurs even if the
- *   page content remains unchanged but the modification date has been updated.
- *
- * @example
- * const filePath = '/path/to/file.txt';
- * const modificationDate = getFileModificationDate(filePath);
- * console.log(`Modification Date: ${modificationDate}`);
- */
-function getFileModificationDate(filePath) {
-  try {
-    const stats = statSync(filePath);
-    return stats.mtime.toISOString();
-  } catch (error) {
-    console.error(
-      `Error getting modification date for file ${filePath}: ${error.message}`,
-    );
-    return new Date().toISOString(); // Return current date if an error occurs
-  }
 }
 
 const robotsTxt = `User-agent: *
