@@ -26,7 +26,6 @@ export function rateLimiterApi(options?: options) {
       new Promise<{ status: number; message: string }>((resolve, reject) => {
         try {
           const userId = options?.getUserId(req, res);
-          console.log(userId);
           if (!userId) {
             reject({ status: 400, message: "Token missing" });
             return;
