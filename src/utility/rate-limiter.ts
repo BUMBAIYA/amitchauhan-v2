@@ -4,6 +4,10 @@
 
 import { NextApiResponse, NextApiRequest } from "next";
 import { LRUCache } from "lru-cache";
+import { nanoid } from "nanoid";
+
+const RATE_LIMITER_USER_ID_COOKIE_NAME = "userUuid" as const;
+const RATE_LIMITER_EXPIRY_DATE_COOKIE_NAME = "userUuid_expires" as const;
 
 type options = {
   uniqueTokenPerInterval?: number;
@@ -22,6 +26,7 @@ export function rateLimiterApi(options?: options) {
       new Promise<{ status: number; message: string }>((resolve, reject) => {
         try {
           const userId = options?.getUserId(req, res);
+          console.log(userId);
           if (!userId) {
             reject({ status: 400, message: "Token missing" });
             return;
@@ -53,3 +58,59 @@ export function rateLimiterApi(options?: options) {
       }),
   };
 }
+
+export const getUserId = (req: NextApiRequest, res: NextApiResponse) => {
+  const userIp =
+    req.headers["x-forwarded-for"] || req.socket.remoteAddress || "";
+  const userAgent = req.headers["user-agent"] || "";
+
+  // If User has an userIp and userAgent return that
+  // No need to set cookies as the userIp and userAgent are sufficient to rateLimit
+  if (userIp && userAgent) {
+    return `${userIp}-${userAgent}`;
+  }
+
+  // If userId and expiry date cookie are present and we are unable to get userIp and userAgent of user.
+  if (
+    req.cookies[RATE_LIMITER_USER_ID_COOKIE_NAME] &&
+    req.cookies[RATE_LIMITER_EXPIRY_DATE_COOKIE_NAME]
+  ) {
+    const expiryDate = new Date(
+      req.cookies[RATE_LIMITER_EXPIRY_DATE_COOKIE_NAME],
+    );
+    // If user id have expired set new expiry date cookie
+    if (expiryDate <= new Date()) {
+      // If expired give user a new Id and expiry date
+      // TODO: keep the userUuid same and update only the expiry date + updating the LRU cache
+      setTokenExpiryCookie(res);
+      return setUserTokenCookie(res);
+    }
+    return req.cookies[RATE_LIMITER_USER_ID_COOKIE_NAME];
+  }
+
+  // If no userIp, userAgent and cookies can be found set the cookies
+  setTokenExpiryCookie(res);
+  return setUserTokenCookie(res);
+};
+
+const setUserTokenCookie = (res: NextApiResponse) => {
+  const userUuidToken = nanoid(20);
+  res.setHeader(
+    "Set-Cookie",
+    `${RATE_LIMITER_USER_ID_COOKIE_NAME}=${userUuidToken}; Max-Age=${
+      60 * 60 * 24
+    }; SameSite=Strict`,
+  );
+  return userUuidToken;
+};
+
+const setTokenExpiryCookie = (res: NextApiResponse) => {
+  const newExpirationDate = new Date();
+  newExpirationDate.setSeconds(newExpirationDate.getSeconds() + 60 * 60 * 24);
+  res.setHeader(
+    "Set-Cookie",
+    `${RATE_LIMITER_EXPIRY_DATE_COOKIE_NAME}=${newExpirationDate.toUTCString()}; Max-Age=${
+      60 * 60 * 24
+    }; SameSite=Strict`,
+  );
+};
