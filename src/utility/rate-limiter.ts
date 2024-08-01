@@ -9,20 +9,41 @@ import { nanoid } from "nanoid";
 const RATE_LIMITER_USER_ID_COOKIE_NAME = "userUuid" as const;
 const RATE_LIMITER_EXPIRY_DATE_COOKIE_NAME = "userUuid_expires" as const;
 
-type options = {
+export type rateLimiterApiOptions = {
   uniqueTokenPerInterval?: number;
   interval?: number;
   getUserId: (req: NextApiRequest, res: NextApiResponse) => string; // eslint-disable-line no-unused-vars
 };
 
-export function rateLimiterApi(options?: options) {
+/**
+ * Creates a rate limiter API.
+ *
+ * @param {Object} [options={}] - Configuration options.
+ * @param {number} [options.interval=60000] - Duration for the rate limiting window in milliseconds. Default is 60000 ms.
+ * @param {number} [options.uniqueTokenPerInterval=50] - Maximum number of unique tokens allowed per interval. Default is 50.
+ * @param {Function} [options.getUserId] - Function to extract the user ID from the request.
+ * @returns {Object} An object with a `check` method to enforce rate limiting.
+ */
+export function rateLimiterApi(options?: rateLimiterApiOptions) {
   const tokenCache = new LRUCache({
     max: options?.uniqueTokenPerInterval || 50,
     ttl: options?.interval || 60000,
   });
 
   return {
-    check: (res: NextApiResponse, req: NextApiRequest, limit: number) =>
+    /**
+     * Checks the rate limit for a request.
+     *
+     * @param {NextApiResponse} res - Nextjs response object.
+     * @param {NextApiRequest} req - Nextjs request object.
+     * @param {number} limitPerHour - Allowed number of requests (Per hour).
+     * @returns {Promise<{status: number, message: string}>} A promise that could `resolve` or `reject` to an object with status and message.
+     */
+    check: (
+      res: NextApiResponse,
+      req: NextApiRequest,
+      limitPerHour: number,
+    ): Promise<{ status: number; message: string }> =>
       new Promise<{ status: number; message: string }>((resolve, reject) => {
         try {
           const userId = options?.getUserId(req, res);
@@ -39,11 +60,11 @@ export function rateLimiterApi(options?: options) {
           tokenCount[0] += 1;
 
           const currentUsage = tokenCount[0];
-          const isRateLimited = currentUsage >= limit;
-          res.setHeader("X-RateLimit-Limit", limit);
+          const isRateLimited = currentUsage >= limitPerHour;
+          res.setHeader("X-RateLimit-Limit", limitPerHour);
           res.setHeader(
             "X-RateLimit-Remaining",
-            isRateLimited ? 0 : limit - currentUsage,
+            isRateLimited ? 0 : limitPerHour - currentUsage,
           );
 
           if (isRateLimited) {
