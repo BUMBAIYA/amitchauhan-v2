@@ -47,9 +47,9 @@ const handler = async (
   try {
     const { method } = req;
     if (method !== "POST") {
-      res.status(400).json({
+      res.status(405).json({
         status: 405,
-        message: `[${method}] is not allowed`,
+        message: `Method not allowed`,
       });
       return;
     }
@@ -84,7 +84,7 @@ const handler = async (
       res.status(429).json({ status: 429, message: "Rate limit exceeded" });
     } else {
       res.status(error.status || 500).json({
-        status: 500,
+        status: error.status || 500,
         message: error.message || "Internal server error",
       });
     }

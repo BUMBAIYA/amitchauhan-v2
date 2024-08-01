@@ -1,6 +1,7 @@
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 
+import { Analytics } from "@vercel/analytics/next";
 import { ThemeProvider } from "next-themes";
 import { AnimatePresence } from "framer-motion";
 
@@ -16,6 +17,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <Component key={router.asPath} {...pageProps} />
         </AnimatePresence>
       </MainLayout>
+      <Analytics />
     </ThemeProvider>
   );
 }

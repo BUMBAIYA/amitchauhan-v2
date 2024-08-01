@@ -30,8 +30,7 @@ async function generateSitemap() {
                   return "";
                 }
 
-                return `
-                        <url>
+                return `<url>
                             <loc>${siteMetadata.siteUrl}${path}</loc>
                         </url>
                     `;
