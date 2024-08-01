@@ -1,7 +1,7 @@
 import { ReactNode, useEffect } from "react";
 import { createPortal } from "react-dom";
 
-interface CustomToastProps {
+export interface CustomToastProps {
   children: ReactNode;
   duration: number;
   open: boolean;

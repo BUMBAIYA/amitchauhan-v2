@@ -230,9 +230,7 @@ export default function ContactForm() {
           </Form>
         )}
       </Formik>
-      {toastState && (
-        <ContactMailToast toastState={toastState} showToast={setToastState} />
-      )}
+      <ContactMailToast toastState={toastState} showToast={setToastState} />
     </>
   );
 }

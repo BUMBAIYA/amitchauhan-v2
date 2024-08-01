@@ -20,7 +20,7 @@ export default function ContactMailToast({
   toastState,
   showToast,
 }: MailSentToastProps) {
-  return (
+  return toastState.value ? (
     <CustomToast
       open={toastState.value}
       duration={3000}
@@ -50,5 +50,5 @@ export default function ContactMailToast({
         </span>
       </div>
     </CustomToast>
-  );
+  ) : null;
 }
