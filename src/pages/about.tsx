@@ -10,14 +10,14 @@ export default function About() {
   return (
     <>
       <NextSeo
-        title="About Amit Chauhan | React and Frontend Developer"
-        description="Learn more about Amit Chauhan, a dedicated React and Frontend Developer with 2 years of experience. Discover the journey, skills, and passion that drive me to create innovative and user-friendly web solutions."
+        title="About Amit Chauhan | Software Developer"
+        description="Learn more about Amit Chauhan, a dedicated Software Developer with 2 years of experience. Discover the journey, skills, and passion that drive me to create innovative and user-friendly web solutions."
         canonical={`${siteMetadata.siteUrl}/about`}
         openGraph={{
           url: `${siteMetadata.siteUrl}/about`,
-          title: "Learn About Amit Chauhan - React and Frontend Developer",
+          title: "Learn About Amit Chauhan - Software Developer",
           description:
-            "Dive into the story of Amit Chauhan, a React and Frontend Developer. Uncover the experiences, skills, and passion that fuel a commitment to delivering exceptional web solutions.",
+            "Dive into the story of Amit Chauhan, a Software Developer. Uncover the experiences, skills, and passion that fuel a commitment to delivering exceptional web solutions.",
           images: [
             {
               url: `${siteMetadata.siteUrl}${siteMetadata.twitterImage}`,
@@ -34,7 +34,7 @@ export default function About() {
           {
             property: "keywords",
             content:
-              "About Me, React Developer, Frontend Developer, Web Developer, JavaScript, HTML, CSS, Professional Journey, Skills, Passion for Web Development",
+              "Software Developer portfolio, Software Developer, React Developer, Frontend Developer, Web Developer, JavaScript, HTML, CSS, Professional Journey, Skills, Passion for Web Development",
           },
         ]}
       />
