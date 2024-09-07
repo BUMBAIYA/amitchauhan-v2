@@ -42,15 +42,22 @@ export default function LandingHero() {
                 Amit Chauhan
               </h1>
               <span className="text-xl font-semibold text-zinc-900 dark:text-zinc-100 md:text-3xl">
-                Frontend and React.js developer
+                Software developer
               </span>
             </FadeUp>
             <FadeUp key="description" duration={0.6} delay={0.2}>
-              <div className="mt-8 max-w-3xl text-base font-semibold text-zinc-900 dark:text-zinc-200 sm:text-base md:text-2xl">
-                <span className="text-xl text-accent sm:text-3xl">Hi</span>,
-                I&apos;m
-                <span className="text-accent"> Amit Chauhan</span> , I turn
-                vision into reality with code and design.
+              <div className="mt-8 max-w-3xl text-base font-semibold text-zinc-900 dark:text-zinc-200 sm:text-base md:text-xl">
+                I am a software developer with 2 years of experience,
+                specializing in building high-performance, user-focused web
+                applications. Skilled in{" "}
+                <span className="font-semibold text-accent">ReactJS</span>,{" "}
+                <span className="font-semibold text-accent">NextJS</span>,{" "}
+                <span className="font-semibold text-accent">SolidJS</span>, and
+                an expert in{" "}
+                <span className="font-semibold text-accent">JavaScript</span>,{" "}
+                <span className="font-semibold text-accent">Html</span> and{" "}
+                <span className="font-semibold text-accent">CSS</span>,{" "}
+                transform ideas into seamless, functional designs.
               </div>
             </FadeUp>
           </AnimatePresence>

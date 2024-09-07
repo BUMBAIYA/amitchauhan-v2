@@ -2,7 +2,7 @@ import { type ExperienceShowcaseListItemProps } from "@/components/experience/ex
 
 export const EXPERIENCE: ExperienceShowcaseListItemProps[] = [
   {
-    title: "Reactjs Frontend Developer",
+    title: "Software Developer",
     organisation: {
       name: "Skima",
       href: "https://skima.ai/",
