@@ -9,7 +9,7 @@ export default function AnimatedLogo() {
     visible: {
       pathLength: 1,
       // Set fill as per your theme
-      fill: "#156165",
+      fill: "#1f8d93",
     },
   };
 

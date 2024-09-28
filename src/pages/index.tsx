@@ -5,7 +5,6 @@ import { NextSeo } from "next-seo";
 import LandingHero from "@/components/landing-hero";
 import SkillsShowcase from "@/components/skills/skills-showcase";
 import ProjectShowcase from "@/components/projects/project-showcase";
-import CursorTrailCanvas from "@/components/cursor-trail-canvas";
 import { PROJECT_SHOWCASE } from "@/data/projects";
 import { SKILLS_DATA } from "@/data/skills";
 import { siteMetadata } from "@/data/siteMetaData.mjs";
@@ -13,7 +12,6 @@ import { siteMetadata } from "@/data/siteMetaData.mjs";
 export default function Home() {
   return (
     <>
-      <CursorTrailCanvas className="pointer-events-none fixed inset-0 -z-10 h-full w-full" />
       <NextSeo
         title="Amit Chauhan | Software Developer"
         description="Explore the professional portfolio of Amit Chauhan, a skilled Software Developer with 2 years of hands-on experience. Discover innovative projects, expertise in modern web technologies, and a passion for creating seamless user experiences."
@@ -39,7 +37,7 @@ export default function Home() {
           {
             property: "keywords",
             content:
-              "React Developer, Frontend Developer, Web Developer, JavaScript, HTML, CSS, Portfolio, UI/UX, React.js, Frontend Development, Web Development, JavaScript Developer, Responsive Design",
+              "React Developer, Software Developer, Frontend Developer, Web Developer, JavaScript, HTML, CSS, Portfolio, UI/UX, React.js, Frontend Development, Web Development, JavaScript Developer, Responsive Design",
           },
         ]}
       />

@@ -14,7 +14,7 @@ export default function Footer() {
         <a
           href={`mailto:${siteMetadata.email}`}
           target="_blank"
-          className="mb-6 cursor-pointer text-center text-2xl font-bold underline sm:text-4xl lg:text-7xl"
+          className="mb-6 cursor-pointer text-center text-2xl font-bold underline sm:text-4xl lg:text-6xl"
         >
           <span>amitchauhan263871@</span>
           <br />
