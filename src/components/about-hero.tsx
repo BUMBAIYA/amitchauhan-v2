@@ -6,7 +6,7 @@ import { AnimatePresence } from "framer-motion";
 import FadeUp from "@/animation/fade-up";
 import FadeRight from "@/animation/fade-right";
 import heroProfileImg from "@/public/images/heroProfile.png";
-import DuotoneImage from "./DuotoneImage";
+import DuotoneImage from "./duotone-image";
 
 export default function AboutHero() {
   return (
@@ -14,14 +14,6 @@ export default function AboutHero() {
       <div className="w-full sm:w-1/2 md:w-2/3 lg:inline-block lg:h-full lg:w-1/2">
         <AnimatePresence>
           <FadeUp key="hero-image" duration={0.6}>
-            {/* <Image
-              src={heroProfileImg}
-              width={100}
-              height={100}
-              className="h-auto w-full px-0 xl:px-16"
-              alt="hero image"
-              unoptimized
-            /> */}
             <DuotoneImage
               src={heroProfileImg}
               width={100}
