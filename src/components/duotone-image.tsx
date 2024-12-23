@@ -115,7 +115,14 @@ const DuotoneImage: React.FC<DuotoneImageProps> = ({
         URL.revokeObjectURL(processedImageUrl);
       }
     };
-  }, [src, lightColor, darkColor, contrastFactor, sharpnessFactor]);
+  }, [
+    src,
+    lightColor,
+    darkColor,
+    contrastFactor,
+    sharpnessFactor,
+    processedImageUrl,
+  ]);
 
   const hexToRgb = (hex: string) => {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
